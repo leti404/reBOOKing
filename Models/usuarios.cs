@@ -1,0 +1,8 @@
+public class usuarios{
+public int id {get; set;}
+public string nombre_usuario {get; set;}
+public string contraseña {get; set;}
+public DateTime fecha_nacimiento {get; set;}
+public int publicaciones {get; set;}
+
+}

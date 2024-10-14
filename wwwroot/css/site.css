@@ -1,22 +1,35 @@
-html {
-  font-size: 14px;
+.card {
+    position: relative;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: #ff0000;
+    cursor: pointer;
+    outline: none;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.favorite-btn i {
+    pointer-events: none;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.favorite-btn:hover {
+    color: #cc0000;
 }
 
-body {
-  margin-bottom: 60px;
+.col-sm-8, .col-sm-4{
+    font-size: larger;
+    display: flex;
+    align-items: center;
+}
+
+.col-sm-8 img, .col-sm-4 img{
+    width: 500px;
+    height: auto;
+    border-radius: 25px;
 }

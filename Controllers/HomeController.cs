@@ -17,6 +17,35 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult SobreNosotros()
+    {
+        return View();
+    }
+    public IActionResult Donar()
+    {
+        return View();
+    }
+    
+    public IActionResult CrearPublicacion()
+    {
+        return View();
+    }
+    public IActionResult TusFavoritos()
+    {
+        return View();
+    }
+
+    public IActionResult TusPublicaciones()
+    {
+        return View();
+    }
+
+    public IActionResult TusReviews()
+    {
+        return View();
+    }
+
+
 
     public IActionResult Privacy()
     {

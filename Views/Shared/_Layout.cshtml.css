@@ -17,7 +17,7 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: relative;
   padding-top: .5rem;
-  padding-bottom: .5rem;
+  margin-bottom: 20px;
 }
 
 .navbar-logo {
@@ -145,23 +145,23 @@ body {
 }
 
 footer {
-  background-color: #e5e5e5;
+  background-color: #f3edfc; 
   padding: 20px 0;
+  margin-top: 20px;
 }
 
 .footer-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.footer-logo img{
-  display: flex;
-  align-items: center;
-  width: 20%;
+.footer-logo img {
+  width: 150px;
 }
-
 
 .footer-links {
   display: flex;
@@ -186,7 +186,7 @@ footer {
 }
 
 .footer-contacto {
-  text-align: center;
+  text-align: right;
 }
 
 .footer-contacto p {
