@@ -14,6 +14,8 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
      
     }
+
+    public static List<publicaciones> _ListadoPublicaciones = new List<publicaciones>();
     public static List<publicaciones> ListarPublicaciones()
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
