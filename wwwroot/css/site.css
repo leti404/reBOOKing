@@ -33,3 +33,172 @@
     height: auto;
     border-radius: 25px;
 }
+
+.container {
+    background-color: #ffeecd;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+}
+
+.container p {
+    font-size: 18px;
+    color: #333;
+}
+
+.container img {
+    max-width: 150px;
+    height: auto;
+}
+
+.filters {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f0ebf8;
+    border-radius: 10px;
+}
+
+.form-select {
+    margin-right: 10px;
+    width: 150px;
+    display: inline-block;
+}
+
+button.btn-primary {
+    background-color: #d3b4f5;
+    border-color: #d3b4f5;
+    font-size: 14px;
+}
+
+/* Tarjetas de publicaciones */
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    max-height: 250px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+    background-color: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-text {
+    font-size: 16px;
+    color: #666;
+}
+
+.text-primary {
+    color: #6c63ff !important;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        text-align: center;
+    }
+
+    .container img {
+        display: block;
+        margin: 0 auto 20px;
+    }
+
+    .filters {
+        text-align: center;
+    }
+
+    .form-select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button.btn-primary {
+        display: block;
+        width: 100%;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+}
+
+.book-detail {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-detail img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+}
+
+.book-detail h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.price {
+    font-size: 22px;
+    color: #0066ff;
+    font-weight: bold;
+}
+
+.estado {
+    color: #00cc00;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #d3b4f5;
+    border-color: #d3b4f5;
+}
+
+.btn-outline-secondary {
+    border-color: #333;
+    color: #333;
+}
+
+.btn-outline-secondary .bi-cart {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .book-detail {
+        text-align: center;
+    }
+    
+    .book-detail img {
+        margin-bottom: 20px;
+    }
+}

@@ -15,6 +15,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        ViewBag.listaPublicaciones = BD.ListarPublicaciones();
         return View();
     }
     public IActionResult SobreNosotros()

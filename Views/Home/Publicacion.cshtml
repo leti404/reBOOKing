@@ -1,13 +1,25 @@
 @{
     ViewData["Title"] = "Donar";
 }
-<div class="contenedor-producto">
-    <div class="contenedor-imagen">
-        <img src="@ViewBag.Foto" alt="descFoto">
-    </div>
-    <div class="contenedor-detalles">
-        <h2>@ViewBag.Titulo</h2>
-        <p>@ViewBag.Descripcion</p>
-        <button class="boton-comprar">COMPRAR</button>
+
+<div class="container book-detail">
+    <div class="row align-items-center">
+        <div class="col-md-4">
+            <img class="img-fluid" src="@Model.ImagenUrl" alt="@Model.Titulo" />
+        </div>
+        <div class="col-md-8">
+            <h2>@Model.Titulo</h2>
+            <p class="price text-primary">@Model.Precio.ToString("C")</p>
+            <p><strong>Estado:</strong> <span class="estado">Excelente</span></p>
+            <p><strong>Materia:</strong> @Model.Materia</p>
+            <p>@Model.Descripcion</p>
+            
+            <div class="d-flex">
+                <button class="btn btn-primary me-2">COMPRAR</button>
+                <button class="btn btn-outline-secondary">
+                    <i class="bi bi-cart"></i> Agregar al carrito
+                </button>
+            </div>
+        </div>
     </div>
 </div>

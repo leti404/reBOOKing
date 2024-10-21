@@ -3,19 +3,69 @@
 }
 <h3>PUBLICACIONES</h3>
 
-<!--INICIO PUBLICACIONES
 
-    @foreach(publicaciones pub in ViewBag.Listado){
-    <div class="card" style="width: 18rem; position: relative;">
-        <img src="/img/@pub.Foto" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">@pub.Nombre</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Sobre Nosotros</h2>
+            <p>
+                Somos reBOOKing, una compañía que busca facilitar la compra de libros
+                con precios accesibles a estudiantes de ORT para que puedan tener una educación de calidad. <a href='@Url.Action("VerDetalleDeportista", "Home"'>Conoce más sobre nosotros.</a>
+            </p>
+
         </div>
-        <button class="favorite-btn">
-            <i class="fa fa-heart"></i>
-        </button>
+        <div class="col text-right">
+            <img src="~/images/libros.png" alt="Libros" />
+        </div>
     </div>
-    }
-FIN PUBLICACIONES-->
+
+    <div class="filters">
+        <form asp-action="Index" method="get">
+            <select name="estado" class="form-select">
+                <option value="">Estado</option>
+                <option value="Nuevo">Excelente</option>
+                <option value="Usado">Muy Bueno</option>
+                <option value="Usado">Con uso</option>
+                <option value="Usado">Mucho uso</option>
+                <option value="Usado">Muy usado</option>
+            </select>
+            <select name="materia" class="form-select">
+                <option value="">Materia</option>
+                <option value="Historia">Historia</option>
+                <option value="Literatura">Literatura</option>
+                <option value="Civica">Cívica</option>
+            </select>
+            <select name="precio" class="form-select">
+                <option value="">Precio</option>
+                <option value="5000">Hasta $5000</option>
+                <option value="10000">Hasta $10000</option>
+            </select>
+            <select name="anio" class="form-select">
+                <option value="">Año</option>
+                <option value="1">1er año</option>
+                <option value="2">2do año</option>
+                <option value="3">3er año</option>
+                <option value="5">4to año</option>
+                <option value="5">5to año</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </form>
+    </div>
+
+    <div class="row">
+        @foreach (publicacion publicacion in ViewBag.listaPublicaciones)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="@publicacion.ImagenUrl" alt="@publicacion.Titulo" />
+                    <div class="card-body">
+                        <h5 class="card-title">@publicacion.Titulo</h5>
+                        <p class="card-text text-primary">@publicacion.Precio.ToString("C")</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
 
