@@ -24,16 +24,31 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoPublicaciones;
     }
 
-        public static void AgregarPublicacion(publicaciones publi)
+    public static void AgregarPublicacion(int idLibro, int precioLibro, int UsuarioId, DateTime Fecha)
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "exec AgregarPublicacion idLib, p";
-            TP_REBOOKING.Execute(sql, new{nombre = publi.libro, Preci = publi.precio}); 
-            List<publicaciones> listaCategorias = TP_REBOOKING.Query<publicaciones>(sql).ToList();
+            string sql = "exec AgregarPublicacion @idLib, @precio, @usuaId, @fecha";
+            TP_REBOOKING.Execute(sql, new{idLib = idLibro, precio = precioLibro, usuaId = UsuarioId, fecha = Fecha}); 
         }
-     
     }
 
+    public static void AgregarPublicacionAFavoritos(int UsuarioID, int PublicacionID)
+    {
+        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "exec AgregarPublicacionFavoritos @UsuarioId, @PublicacionId";
+            TP_REBOOKING.Execute(sql, new{UsuarioId = UsuarioID, PublicacionId = PublicacionID}); 
+        }
+    }
+
+        public static void EliminarPublicacion(int UsuarioID, int PublicacionID)
+    {
+        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "exec AgregarPublicacionFavoritos @UsuarioId, @PublicacionId";
+            TP_REBOOKING.Execute(sql, new{UsuarioId = UsuarioID, PublicacionId = PublicacionID}); 
+        }
+    }
 
 }
