@@ -1,28 +1,24 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
-<h3>PUBLICACIONES</h3>
-
-
-<div class="container">
-    <div class="row">
+<div class="container-rebooking">
+    <div class="row sobre-nosotros">
         <div class="col">
             <h2>Sobre Nosotros</h2>
-       <p>
-    Somos reBOOKing, una compañía que busca facilitar la compra de libros
-    con precios accesibles a estudiantes de ORT para que puedan tener una educación de calidad. <a href='@Url.Action("ConoceMas", "Home")'>Conoce más sobre nosotros.</a>
-    </p>
-
-
+            <p>
+                Somos reBOOKing, una compañía que busca facilitar la compra de libros
+                con precios accesibles a estudiantes de ORT para que puedan tener una educación de calidad.
+                <a href='@Url.Action("ConoceMas", "Home")'>Conoce más sobre nosotros.</a>
+            </p>
         </div>
         <div class="col text-right">
-            <img src="~/images/libros.png" alt="Libros" />
+            <img src="~/images/libros.png" alt="Libros" class="img-libro"/>
         </div>
     </div>
-
-    <div class="filters">
+    
+    <div class="filters-rebooking">
         <form asp-action="Index" method="get">
-            <select name="estado" class="form-select">
+            <select name="estado" class="form-select-rebooking">
                 <option value="">Estado</option>
                 <option value="Nuevo">Excelente</option>
                 <option value="Usado">Muy Bueno</option>
@@ -30,43 +26,41 @@
                 <option value="Usado">Mucho uso</option>
                 <option value="Usado">Muy usado</option>
             </select>
-            <select name="materia" class="form-select">
+            <select name="materia" class="form-select-rebooking">
                 <option value="">Materia</option>
                 <option value="Historia">Historia</option>
                 <option value="Literatura">Literatura</option>
                 <option value="Civica">Cívica</option>
             </select>
-            <select name="precio" class="form-select">
+            <select name="precio" class="form-select-rebooking">
                 <option value="">Precio</option>
                 <option value="5000">Hasta $5000</option>
                 <option value="10000">Hasta $10000</option>
             </select>
-            <select name="anio" class="form-select">
+            <select name="anio" class="form-select-rebooking">
                 <option value="">Año</option>
                 <option value="1">1er año</option>
                 <option value="2">2do año</option>
                 <option value="3">3er año</option>
-                <option value="5">4to año</option>
+                <option value="4">4to año</option>
                 <option value="5">5to año</option>
             </select>
-            <button type="submit" class="btn btn-primary">Filtrar</button>
+            <button type="submit" class="btn-filter-rebooking">Filtrar</button>
         </form>
     </div>
 
-    <div class="row">
+    <div class="row publicaciones-row">
         @foreach (publicaciones Publicacion in ViewBag.listaPublicaciones)
         {
             <div class="col-md-4">
-                <div class="card">
-                    <img class="card-img-top" src="@Publicacion.imagen" alt="@Publicacion.libro" />
-                    <div class="card-body">
-                        <h5 class="card-title"> @Publicacion.libro</h5>
-                        <p class="card-text text-primary"> @Publicacion.precio.ToString("C")</p>
+                <div class="card-rebooking">
+                    <img class="card-img-top-rebooking" src="@Publicacion.imagen" alt="@Publicacion.libro" />
+                    <div class="card-body-rebooking">
+                        <h5 class="card-title-rebooking"> @Publicacion.libro</h5>
+                        <p class="card-price-rebooking"> @Publicacion.precio.ToString("C")</p>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
-
-

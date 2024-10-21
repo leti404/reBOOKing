@@ -1,204 +1,110 @@
-.card {
-    position: relative;
-}
-
-.favorite-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 24px;
-    color: #ff0000;
-    cursor: pointer;
-    outline: none;
-}
-
-.favorite-btn i {
-    pointer-events: none;
-}
-
-.favorite-btn:hover {
-    color: #cc0000;
-}
-
-.col-sm-8, .col-sm-4{
-    font-size: larger;
-    display: flex;
-    align-items: center;
-}
-
-.col-sm-8 img, .col-sm-4 img{
-    width: 500px;
-    height: auto;
-    border-radius: 25px;
-}
-
-.container {
-    background-color: #ffeecd;
+.container-rebooking {
+    background-color: transparent; 
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
-.container h2 {
+.sobre-nosotros {
+    margin-bottom: 20px;
+    background-color: #ffeecd; 
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.sobre-nosotros h2 {
     font-size: 24px;
     font-weight: bold;
     color: #000;
 }
 
-.container p {
+.sobre-nosotros p {
     font-size: 18px;
     color: #333;
 }
 
-.container img {
+.img-libro {
     max-width: 150px;
     height: auto;
+    display: block;
 }
 
-.filters {
+.filters-rebooking {
     margin-bottom: 20px;
+    background-color: rgb(240, 235, 248);
     padding: 10px;
-    background-color: #f0ebf8;
     border-radius: 10px;
 }
+.form-select-rebooking {
+    width: 10%;
+    padding: .375rem 1.25rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    border: 1px solid #ced4da; /* Gris claro */
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
 
-.form-select {
-    margin-right: 10px;
-    width: 150px;
+.btn-filter-rebooking {
     display: inline-block;
-}
-
-button.btn-primary {
+    padding: .375rem 1.25rem;
+    height: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
     background-color: #d3b4f5;
-    border-color: #d3b4f5;
-    font-size: 14px;
+    border: 1px solid #ced4da; /* Gris claro */
+    color: white;
+    border-radius: .25rem;
+    transition: background-color .3s ease-in-out, transform .3s;
+    cursor: pointer;
 }
 
-/* Tarjetas de publicaciones */
-.card {
+.btn-filter-rebooking:hover {
+    background-color: #b3a0e6;
+    transform: scale(1.05);
+}
+
+
+
+.publicaciones-row {
+    margin-top: 20px;
+}
+
+.card-rebooking {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: 10px;
     margin-bottom: 20px;
     transition: transform 0.3s ease-in-out;
+    background-color: white;
 }
 
-.card:hover {
+.card-rebooking:hover {
     transform: scale(1.05);
 }
 
-.card-img-top {
+.card-img-top-rebooking {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     max-height: 250px;
     object-fit: cover;
 }
 
-.card-body {
+.card-body-rebooking {
     padding: 15px;
     background-color: #fff;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
-.card-title {
+.card-title-rebooking {
     font-size: 18px;
     font-weight: bold;
     color: #333;
 }
 
-.card-text {
-    font-size: 16px;
-    color: #666;
-}
-
-.text-primary {
-    color: #6c63ff !important;
-    font-weight: bold;
+.card-price-rebooking {
     font-size: 18px;
-}
-
-@media (max-width: 768px) {
-    .container {
-        text-align: center;
-    }
-
-    .container img {
-        display: block;
-        margin: 0 auto 20px;
-    }
-
-    .filters {
-        text-align: center;
-    }
-
-    .form-select {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    button.btn-primary {
-        display: block;
-        width: 100%;
-    }
-
-    .card {
-        margin-bottom: 20px;
-    }
-}
-
-.book-detail {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.book-detail img {
-    border-radius: 10px;
-    max-width: 100%;
-    height: auto;
-}
-
-.book-detail h2 {
-    font-size: 24px;
+    color: #6c63ff;
     font-weight: bold;
-    color: #333;
-}
-
-.price {
-    font-size: 22px;
-    color: #0066ff;
-    font-weight: bold;
-}
-
-.estado {
-    color: #00cc00;
-    font-weight: bold;
-}
-
-.btn-primary {
-    background-color: #d3b4f5;
-    border-color: #d3b4f5;
-}
-
-.btn-outline-secondary {
-    border-color: #333;
-    color: #333;
-}
-
-.btn-outline-secondary .bi-cart {
-    margin-right: 5px;
-}
-
-@media (max-width: 768px) {
-    .book-detail {
-        text-align: center;
-    }
-    
-    .book-detail img {
-        margin-bottom: 20px;
-    }
 }
