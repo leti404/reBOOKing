@@ -53,4 +53,14 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
     }
 
+    public static string ObtenerNombreLibroPorPublicacion(int publicacionID)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "exec ObtenerNombreLibroPorPublicacionID @PublicacionID";
+            string nombreLibro = TP_REBOOKING.QueryFirstOrDefault<string>(sql, new { PublicacionID = publicacionID });
+            return nombreLibro;
+        }
+    }
+
 }
