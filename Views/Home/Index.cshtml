@@ -8,10 +8,11 @@
     <div class="row">
         <div class="col">
             <h2>Sobre Nosotros</h2>
-            <p>
-                Somos reBOOKing, una compañía que busca facilitar la compra de libros
-                con precios accesibles a estudiantes de ORT para que puedan tener una educación de calidad. <a href='@Url.Action("VerDetalleDeportista", "Home"'>Conoce más sobre nosotros.</a>
-            </p>
+       <p>
+    Somos reBOOKing, una compañía que busca facilitar la compra de libros
+    con precios accesibles a estudiantes de ORT para que puedan tener una educación de calidad. <a href='@Url.Action("ConoceMas", "Home")'>Conoce más sobre nosotros.</a>
+    </p>
+
 
         </div>
         <div class="col text-right">
@@ -53,14 +54,14 @@
     </div>
 
     <div class="row">
-        @foreach (publicacion publicacion in ViewBag.listaPublicaciones)
+        @foreach (publicaciones Publicacion in ViewBag.listaPublicaciones)
         {
             <div class="col-md-4">
                 <div class="card">
-                    <img class="card-img-top" src="@publicacion.ImagenUrl" alt="@publicacion.Titulo" />
+                    <img class="card-img-top" src="@Publicacion.ImagenUrl" alt="@Publicacion.Titulo" />
                     <div class="card-body">
-                        <h5 class="card-title">@publicacion.Titulo</h5>
-                        <p class="card-text text-primary">@publicacion.Precio.ToString("C")</p>
+                        <h5 class="card-title"> @Publicacion.Titulo</h5>
+                        <p class="card-text text-primary"> @Publicacion.Precio.ToString("C")</p>
                     </div>
                 </div>
             </div>
