@@ -79,6 +79,7 @@
     margin-bottom: 20px;
     transition: transform 0.3s ease-in-out;
     background-color: white;
+    text-decoration: none;
 }
 
 .card-rebooking:hover {
@@ -89,7 +90,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     object-fit: cover;
-    height: 450px; /* altura img */
+    height: 450px;
     width: 100%;
 }
 
@@ -104,10 +105,12 @@
     font-size: 18px;
     font-weight: bold;
     color: #333;
+    margin: 3px;
 }
 
 .card-price-rebooking {
     font-size: 18px;
     color: #6c63ff;
     font-weight: bold;
+    margin: 3px;
 }
