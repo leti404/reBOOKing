@@ -1,3 +1,9 @@
+@media (min-width: 768px) {
+    .col-md-3 {
+        flex: 0 0 auto;
+        width: 20%;
+    }
+}
 .container-rebooking {
     background-color: transparent; 
     padding: 20px;
