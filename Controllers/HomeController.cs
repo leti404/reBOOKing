@@ -18,6 +18,12 @@ public class HomeController : Controller
         ViewBag.listaPublicaciones = BD.ListarPublicaciones();
         return View();
     }
+
+    public IActionResult Publicacion()
+    {
+        
+        return View();
+    }
     public IActionResult SobreNosotros()
     {
         return View();
