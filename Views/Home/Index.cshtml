@@ -56,7 +56,7 @@
                 <div class="card-rebooking">
                     <img class="card-img-top-rebooking" src="@Publicacion.imagen" alt="@Publicacion.libro" />
                     <div class="card-body-rebooking">
-                        <h5 class="card-title-rebooking"> @Publicacion.libro</h5>
+                        <h5 class="card-title-rebooking"> @BD.ObtenerNombreLibroPorPublicacion(int.Parse(Publicacion.libro)) </h5>
                         <p class="card-price-rebooking"> @Publicacion.precio.ToString("C")</p>
                     </div>
                 </div>
