@@ -5,14 +5,14 @@
 <div class="container book-detail">
     <div class="row align-items-center">
         <div class="col-md-4">
-            <img class="img-fluid" src="@Model.ImagenUrl" alt="@Model.Titulo" />
+            <img class="img-fluid" src="@ViewBag.imagen" alt="@ViewBag.nombreLibro" />
         </div>
         <div class="col-md-8">
-            <h2>@Model.Titulo</h2>
-            <p class="price text-primary">@Model.Precio.ToString("C")</p>
+            <h2>@ViewBag.nombreLibro</h2>
+            <p class="price text-primary">@ViewBag.precio.ToString("C")</p>
             <p><strong>Estado:</strong> <span class="estado">Excelente</span></p>
-            <p><strong>Materia:</strong> @Model.Materia</p>
-            <p>@Model.Descripcion</p>
+            <p><strong>Usuario:</strong> @ViewBag.usuario</p>
+            <p><strong>Fecha:</strong> @ViewBag.fecha</p>
             
             <div class="d-flex">
                 <button class="btn btn-primary me-2">COMPRAR</button>
