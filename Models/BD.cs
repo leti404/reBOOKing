@@ -134,4 +134,12 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
                 TP_REBOOKING.Execute(sql, new { PublicacionID = publicacionID, EtiquetaID = etiquetaID });
             }
         }
+        public static void FiltrarLibros(int materia, int año, int precioMin, int precioMax, int etiqueta)
+        {
+            using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+            {
+                string sql = "exec FiltrarLibros @Materia, @Año, @PrecioMin, @PrecioMax, @Etiqueta";
+                TP_REBOOKING.Execute(sql, new { Materia = materia, Año = año, PrecioMin = precioMin, PrecioMax = precioMax, Etiqueta = etiqueta});
+            }
+        }
 }

@@ -1,4 +1,4 @@
-public class categorias{
+public class materias{
 public int id {get; set;}
 public string nombre {get; set;}
 }
