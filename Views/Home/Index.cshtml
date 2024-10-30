@@ -19,15 +19,15 @@
     <div class="filters-rebooking">
         <form asp-action="Index" method="get">
             <select name="estado" class="form-select-rebooking">
-                <option value="NULL">Estado</option>
+                <option value="">Estado</option>
                 <option value="5">Excelente</option>
                 <option value="4">Muy Bueno</option>
                 <option value="3">Bueno</option>
-                <option value="4">Regular</option>
-                <option value="5">Muy usado</option>
+                <option value="2">Regular</option>
+                <option value="1">Muy usado</option>
             </select>
             <select name="materia" class="form-select-rebooking">
-                <option value="NULL">Materia</option>
+                <option value="">Materia</option>
                 <option value="1">Historia</option>
                 <option value="2">Literatura</option>
                 <option value="3">Lengua</option>
@@ -36,21 +36,21 @@
                 <option value="6">Cómic</option>
             </select>
             <select name="precio" class="form-select-rebooking">
-                <option value="NULL">Precio</option>
+                <option value="">Precio</option>
                 <option value="5000">Hasta $5.000</option>
                 <option value="10000">Hasta $10.000</option>
                 <option value="15000">Hasta $15.000</option>
                 <option value="20000">Hasta $20.000</option>
             </select>
             <select name="anio" class="form-select-rebooking">
-                <option value="NULL">Año</option>
+                <option value="">Año</option>
                 <option value="1">1er año</option>
                 <option value="2">2do año</option>
                 <option value="3">3er año</option>
                 <option value="4">4to año</option>
                 <option value="5">5to año</option>
             </select>
-            <button type="submit" class="btn-filter-rebooking">Filtrar <a href='@Url.Action("Publicacion", "Home")'> </button>
+            <button type="submit" class="btn-filter-rebooking">Filtrar</button>
         </form>
     </div>
 

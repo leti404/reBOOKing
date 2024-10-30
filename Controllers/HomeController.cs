@@ -13,9 +13,27 @@ public class HomeController : Controller
         _logger = logger;
     }
     //HACER QUE EL BUTTON DE FILTROS TE TRAIGA ACA(A UNA VIEW NUEVA), AGARRE LOS FILTROS Y LO LLEVE A LA VIEW
-    public IActionResult Index()
+
+    public IActionResult Index(int? materia, int? año, int? precio, int? estado)
     {
-        ViewBag.listaPublicaciones = BD.ListarPublicaciones();
+        decimal precioMin = 0m;
+        decimal precioMax = precio.HasValue ? Convert.ToDecimal(precio.Value.ToString("F2")) : decimal.MaxValue;
+
+        if (materia.HasValue || año.HasValue || estado.HasValue || precio.HasValue)
+        {
+            ViewBag.listaPublicaciones = BD.FiltrarLibros(
+                materia ?? 0,
+                año ?? 0,
+                precioMin,
+                precioMax,
+                estado ?? 0
+            );
+        }
+        else
+        {
+            ViewBag.listaPublicaciones = BD.ListarPublicaciones();
+        }
+
         return View();
     }
 

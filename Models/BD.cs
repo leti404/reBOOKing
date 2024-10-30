@@ -134,12 +134,15 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
                 TP_REBOOKING.Execute(sql, new { PublicacionID = publicacionID, EtiquetaID = etiquetaID });
             }
         }
-        public static void FiltrarLibros(int materia, int año, int precioMin, int precioMax, int etiqueta)
+        public static List<publicaciones> FiltrarLibros(int materia, int año, decimal precioMin, decimal precioMax, int etiqueta)
         {
+            List<publicaciones> Filtrado = null;
             using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
             {
-                string sql = "exec FiltrarLibros @Materia, @Año, @PrecioMin, @PrecioMax, @Etiqueta";
-                TP_REBOOKING.Execute(sql, new { Materia = materia, Año = año, PrecioMin = precioMin, PrecioMax = precioMax, Etiqueta = etiqueta});
+                string sql = "FiltrarLibros";
+                Filtrado = TP_REBOOKING.Query<publicaciones>(sql, new { Materia = materia, Año = año, PrecioMin = precioMin, PrecioMax = precioMax, Etiqueta = etiqueta }, commandType: System.CommandType.StoredProcedure).ToList();
             }
+
+            return Filtrado;
         }
 }
