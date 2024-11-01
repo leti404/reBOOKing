@@ -19,10 +19,11 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Publicacion(int id)
+    public IActionResult Publicacion()
     {
-        List<publicaciones> listaPublicaciones = BD.ListarPublicaciones();
-        publicaciones publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
+        //Console.WriteLine(id);
+        //List<publicaciones> listaPublicaciones = BD.ListarPublicaciones();
+        //publicaciones publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
 
         ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(id);
         ViewBag.precio = publicacion.precio;
