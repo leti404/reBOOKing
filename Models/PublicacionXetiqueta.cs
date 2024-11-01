@@ -1,4 +1,4 @@
 public class PublicacionXetiqueta{
-public int publicacion_id {get; set;}
-public string etiqueta_id {get; set;}
+public int id_publicacion {get; set;}
+public string id_etiqueta {get; set;}
 }
