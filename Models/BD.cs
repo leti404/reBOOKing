@@ -9,7 +9,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM publicaciones";
+            string sql = "SELECT * FROM Publicacion";
             TP_REBOOKING.Execute(sql, new{nombre = publi.id_libro, Preci = publi.precio}); 
             List<Publicacion> listaCategorias = TP_REBOOKING.Query<Publicacion>(sql).ToList();
         }
@@ -21,7 +21,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM publicaciones";
+            string sql = "SELECT * FROM Publicacion";
             _ListadoPublicaciones = TP_REBOOKING.Query<Publicacion>(sql).ToList(); 
         }
         return _ListadoPublicaciones;
