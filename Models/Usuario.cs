@@ -1,4 +1,4 @@
-public class usuarios{
+public class Usuario{
 public int id {get; set;}
 public string nombre_usuario {get; set;}
 public string contraseña {get; set;}

@@ -1,4 +1,4 @@
-public class publicaciones{
+public class Publicacion{
 public int id {get; set;}
 public string libro {get; set;}
 public int precio {get; set;}
