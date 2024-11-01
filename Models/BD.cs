@@ -1,6 +1,7 @@
 using System.Data.SqlClient;
 using System;
 using Dapper;
+using System.Data;
 public class BD{
 private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOKING;Trusted_Connection=True;";
 
@@ -43,8 +44,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
             TP_REBOOKING.Execute(sql, new{UsuarioId = UsuarioID, PublicacionId = PublicacionID}); 
         }
     }
-
-        public static void EliminarPublicacion(int UsuarioID, int PublicacionID)
+    public static void EliminarPublicacion(int UsuarioID, int PublicacionID)
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
@@ -52,7 +52,6 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
             TP_REBOOKING.Execute(sql, new{UsuarioId = UsuarioID, PublicacionId = PublicacionID}); 
         }
     }
-
     public static string ObtenerNombreLibroPorPublicacion(int publicacionID)
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
@@ -62,87 +61,78 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
             return nombreLibro;
         }
     }
-
-        public static void AgregarLibro(string nombre, string materia, string descripcion, int anio, int autorId, int editorialId, int categoriaId)
+    public static void AgregarLibro(string nombre, string materia, string descripcion, int anio, int autorId, int editorialId, int categoriaId)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
-            {
-                string sql = "exec AgregarLibro @Nombre, @Materia, @Descripcion, @Anio, @AutorID, @EditorialID, @CategoriaID";
-                TP_REBOOKING.Execute(sql, new { Nombre = nombre, Materia = materia, Descripcion = descripcion, Anio = anio, AutorID = autorId, EditorialID = editorialId, CategoriaID = categoriaId });
-            }
+            string sql = "exec AgregarLibro @Nombre, @Materia, @Descripcion, @Anio, @AutorID, @EditorialID, @CategoriaID";
+            TP_REBOOKING.Execute(sql, new { Nombre = nombre, Materia = materia, Descripcion = descripcion, Anio = anio, AutorID = autorId, EditorialID = editorialId, CategoriaID = categoriaId });
         }
-
-        public static void AgregarAutor(string nombre)
+    }
+    public static void AgregarAutor(string nombre)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
-            {
-                string sql = "exec AgregarAutor @Nombre";
-                TP_REBOOKING.Execute(sql, new { Nombre = nombre });
-            }
+            string sql = "exec AgregarAutor @Nombre";
+            TP_REBOOKING.Execute(sql, new { Nombre = nombre });
         }
-
-        public static void AgregarCategoria(string nombre)
+    }
+    public static void AgregarCategoria(string nombre)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
-            {
-                string sql = "exec AgregarCategoria @Nombre";
-                TP_REBOOKING.Execute(sql, new { Nombre = nombre });
-            }
+            string sql = "exec AgregarCategoria @Nombre";
+            TP_REBOOKING.Execute(sql, new { Nombre = nombre });
         }
-
-        public static void AgregarEditorial(string nombre)
+    }
+    public static void AgregarEditorial(string nombre)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
-            {
-                string sql = "exec AgregarEditorial @Nombre";
-                TP_REBOOKING.Execute(sql, new { Nombre = nombre });
-            }
+            string sql = "exec AgregarEditorial @Nombre";
+            TP_REBOOKING.Execute(sql, new { Nombre = nombre });
         }
-
-        public static void AgregarPublicacion(int libroID, decimal precio, int usuarioID, DateTime fecha)
+    }
+    public static void AgregarPublicacion(int libroID, decimal precio, int usuarioID, DateTime fecha)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
-            {
-                string sql = "exec AgregarPublicacion @LibroID, @Precio, @UsuarioID, @Fecha";
-                TP_REBOOKING.Execute(sql, new { LibroID = libroID, Precio = precio, UsuarioID = usuarioID, Fecha = fecha });
-            }
+            string sql = "exec AgregarPublicacion @LibroID, @Precio, @UsuarioID, @Fecha";
+            TP_REBOOKING.Execute(sql, new { LibroID = libroID, Precio = precio, UsuarioID = usuarioID, Fecha = fecha });
         }
-
-        public static void EliminarPublicacion(int publicacionID)
+    }
+    public static void EliminarPublicacion(int publicacionID)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
-            {
-                string sql = "exec EliminarPublicacion @PublicacionID";
-                TP_REBOOKING.Execute(sql, new { PublicacionID = publicacionID });
-            }
+            string sql = "exec EliminarPublicacion @PublicacionID";
+            TP_REBOOKING.Execute(sql, new { PublicacionID = publicacionID });
         }
-
-        public static void AgregarReview(int publicacionID, int usuarioEscritor, int usuarioRecibidor, int estrellas, string descripcion)
+    }
+    public static void AgregarReview(int publicacionID, int usuarioEscritor, int usuarioRecibidor, int estrellas, string descripcion)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
-            {
-                string sql = "exec AgregarReview @PublicacionID, @UsuarioEscritor, @UsuarioRecibidor, @Estrellas, @Descripcion";
-                TP_REBOOKING.Execute(sql, new { PublicacionID = publicacionID, UsuarioEscritor = usuarioEscritor, UsuarioRecibidor = usuarioRecibidor, Estrellas = estrellas, Descripcion = descripcion });
-            }
+            string sql = "exec AgregarReview @PublicacionID, @UsuarioEscritor, @UsuarioRecibidor, @Estrellas, @Descripcion";
+            TP_REBOOKING.Execute(sql, new { PublicacionID = publicacionID, UsuarioEscritor = usuarioEscritor, UsuarioRecibidor = usuarioRecibidor, Estrellas = estrellas, Descripcion = descripcion });
         }
-
-        public static void AgregarEtiquetaAUnaPublicacion(int publicacionID, int etiquetaID)
+    }
+    public static void AgregarEtiquetaAUnaPublicacion(int publicacionID, int etiquetaID)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
-            {
-                string sql = "exec AgregarEtiquetaAUnaPublicacion @PublicacionID, @EtiquetaID";
-                TP_REBOOKING.Execute(sql, new { PublicacionID = publicacionID, EtiquetaID = etiquetaID });
-            }
+            string sql = "exec AgregarEtiquetaAUnaPublicacion @PublicacionID, @EtiquetaID";
+            TP_REBOOKING.Execute(sql, new { PublicacionID = publicacionID, EtiquetaID = etiquetaID });
         }
-        public static List<publicaciones> FiltrarLibros(int materia, int año, decimal precioMin, decimal precioMax, int etiqueta)
+    }
+    public static List<publicaciones> FiltrarLibros(int materia, int año, int precioMin, int precioMax, int etiqueta)
+    {
+        List<publicaciones> Filtrado = null;
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            List<publicaciones> Filtrado = null;
-            using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
-            {
-                string sql = "FiltrarLibros";
-                Filtrado = TP_REBOOKING.Query<publicaciones>(sql, new { Materia = materia, Año = año, PrecioMin = precioMin, PrecioMax = precioMax, Etiqueta = etiqueta }, commandType: System.CommandType.StoredProcedure).ToList();
-            }
-
-            return Filtrado;
+            string sql = "FiltrarLibros";
+            Filtrado = TP_REBOOKING.Query<publicaciones>(sql, new {  MateriaId = materia, Anio = año, PrecioMin = precioMin, PrecioMax = precioMax, EtiquetaId = etiqueta}, commandType: CommandType.StoredProcedure).ToList();
         }
+        return Filtrado;
+    }
 }

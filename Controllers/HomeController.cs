@@ -14,10 +14,10 @@ public class HomeController : Controller
     }
     //HACER QUE EL BUTTON DE FILTROS TE TRAIGA ACA(A UNA VIEW NUEVA), AGARRE LOS FILTROS Y LO LLEVE A LA VIEW
 
-    public IActionResult Index(int? materia, int? año, int? precio, int? estado)
+   public IActionResult Index(int? materia, int? año, int? precio, int? estado)
     {
-        decimal precioMin = 0m;
-        decimal precioMax = precio.HasValue ? Convert.ToDecimal(precio.Value.ToString("F2")) : decimal.MaxValue;
+        int precioMin = 0;
+        int precioMax = precio.HasValue ? precio.Value : int.MaxValue;
 
         if (materia.HasValue || año.HasValue || estado.HasValue || precio.HasValue)
         {
@@ -36,6 +36,7 @@ public class HomeController : Controller
 
         return View();
     }
+
 
     public IActionResult Publicacion(int id)
     {
