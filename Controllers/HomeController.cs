@@ -40,12 +40,12 @@ public class HomeController : Controller
 
     public IActionResult Publicacion(int id)
     {
-        List<publicaciones> listaPublicaciones = BD.ListarPublicaciones();
-        publicaciones publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
+        List<Publicacion> listaPublicaciones = BD.ListarPublicaciones();
+        Publicacion publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
 
         ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(id);
         ViewBag.precio = publicacion.precio;
-        ViewBag.usuario = publicacion.usuario;
+        ViewBag.usuario = publicacion.id_usuario;
         ViewBag.fecha = publicacion.fecha;
         ViewBag.imagen = publicacion.imagen;
 

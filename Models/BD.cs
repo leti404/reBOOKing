@@ -5,24 +5,24 @@ using System.Data;
 public class BD{
 private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOKING;Trusted_Connection=True;";
 
-    public static void ObtenerCategorias(publicaciones publi)
+    public static void ObtenerCategorias(Publicacion publi)
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
             string sql = "SELECT * FROM publicaciones";
-            TP_REBOOKING.Execute(sql, new{nombre = publi.libro, Preci = publi.precio}); 
-            List<publicaciones> listaCategorias = TP_REBOOKING.Query<publicaciones>(sql).ToList();
+            TP_REBOOKING.Execute(sql, new{nombre = publi.id_libro, Preci = publi.precio}); 
+            List<Publicacion> listaCategorias = TP_REBOOKING.Query<Publicacion>(sql).ToList();
         }
      
     }
 
-    public static List<publicaciones> _ListadoPublicaciones = new List<publicaciones>();
-    public static List<publicaciones> ListarPublicaciones()
+    public static List<Publicacion> _ListadoPublicaciones = new List<Publicacion>();
+    public static List<Publicacion> ListarPublicaciones()
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
             string sql = "SELECT * FROM publicaciones";
-            _ListadoPublicaciones = TP_REBOOKING.Query<publicaciones>(sql).ToList(); 
+            _ListadoPublicaciones = TP_REBOOKING.Query<Publicacion>(sql).ToList(); 
         }
         return _ListadoPublicaciones;
     }
@@ -125,13 +125,13 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
             TP_REBOOKING.Execute(sql, new { PublicacionID = publicacionID, EtiquetaID = etiquetaID });
         }
     }
-    public static List<publicaciones> FiltrarLibros(int materia, int año, int precioMin, int precioMax, int etiqueta)
+    public static List<Publicacion> FiltrarLibros(int materia, int año, int precioMin, int precioMax, int etiqueta)
     {
-        List<publicaciones> Filtrado = null;
+        List<Publicacion> Filtrado = null;
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
             string sql = "FiltrarLibros";
-            Filtrado = TP_REBOOKING.Query<publicaciones>(sql, new {  MateriaId = materia, Anio = año, PrecioMin = precioMin, PrecioMax = precioMax, EtiquetaId = etiqueta}, commandType: CommandType.StoredProcedure).ToList();
+            Filtrado = TP_REBOOKING.Query<Publicacion>(sql, new {  MateriaId = materia, Anio = año, PrecioMin = precioMin, PrecioMax = precioMax, EtiquetaId = etiqueta}, commandType: CommandType.StoredProcedure).ToList();
         }
         return Filtrado;
     }
