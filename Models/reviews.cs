@@ -1,4 +1,4 @@
-public class reviews{
+public class Review{
 public int id {get; set;}
 public int publicacion_id {get; set;}
 public int usuario_escritor {get; set;}
