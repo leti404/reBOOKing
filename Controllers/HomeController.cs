@@ -27,6 +27,7 @@ public class HomeController : Controller
                 precioMin,
                 precioMax,
                 estado ?? 0
+                
             );
         }
         else

@@ -145,14 +145,15 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
             TP_REBOOKING.Execute(sql, new { PublicacionID = publicacionID, EtiquetaID = etiquetaID });
         }
     }
+
+    public static List<Publicacion> _ListadoPublicacionesConFiltro = new List<Publicacion>();
     public static List<Publicacion> FiltrarLibros(int materia, int año, int precioMin, int precioMax, int etiqueta)
     {
-        List<Publicacion> Filtrado = null;
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "FiltrarLibros";
-            Filtrado = TP_REBOOKING.Query<Publicacion>(sql, new {  MateriaId = materia, Anio = año, PrecioMin = precioMin, PrecioMax = precioMax, EtiquetaId = etiqueta}, commandType: CommandType.StoredProcedure).ToList();
+            string sql = "exec FiltrarLibros @MateriaID, @Anio, @PrecioMin, @PrecioMax, @EtiquetaId";
+            _ListadoPublicacionesConFiltro = TP_REBOOKING.Query<Publicacion>(sql, new {  MateriaId = materia, Anio = año, PrecioMin = precioMin, PrecioMax = precioMax, EtiquetaId = etiqueta}).ToList();
         }
-        return Filtrado;
+        return _ListadoPublicacionesConFiltro;
     }
 }
