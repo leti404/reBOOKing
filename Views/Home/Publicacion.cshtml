@@ -1,18 +1,39 @@
 @{
-    ViewData["Title"] = "Donar";
+    ViewData["Title"] = "Publicacion";
 }
 
 <div class="container book-detail">
-    <div class="row align-items-center">
+    <div class="row align-items-flex-start">
         <div class="col-md-4">
-            <img class="img-fluid" src="@ViewBag.publicacion.imagen" alt="@ViewBag.nombreLibro" />
+            <img class="card-img-top-rebooking2" src="@ViewBag.publicacion.imagen" alt="@ViewBag.nombreLibro" />
         </div>
         <div class="col-md-8">
-            <h2>@ViewBag.nombreLibro</h2>
-            <p class="price text-primary">$@ViewBag.publicacion.precio</p>
-            <p><strong>Estado:</strong> <span class="estado">Excelente</span></p>
-            <p><strong>Usuario:</strong> @ViewBag.publicacion.id_usuario</p>
-            <p><strong>Fecha:</strong> @ViewBag.publicacion.fecha</p>
+        <div class= "informacionLibro">
+            <h1>@ViewBag.nombreLibro</h1>
+            <p class="price text-primary" class= "datos">$@ViewBag.publicacion.precio</p>
+            @switch(@ViewBag.estado){
+                case "Excelente":
+                 <p class= "datos">Estado: <span class="estado1">@ViewBag.estado</span></p>
+                break;
+
+                case "Muy Bueno":
+                <p class= "datos">Estado: <span class="estado2">@ViewBag.estado</span></p>
+                break;
+
+                case "Bueno":
+                <p class= "datos">Estado: <span class="estado3">@ViewBag.estado</span></p>
+                break;
+
+                case "Regular":
+                <p class= "datos">Estado: <span class="estado4">@ViewBag.estado</span></p>
+                break;
+
+                case "Muy Usado":
+                <p class= "datos">Estado: <span class="estado5">@ViewBag.estado</span></p>
+                break;                
+            }
+            <p class= "datos">Usuario: <span class="informacion"> @ViewBag.publicacion.id_usuario</span></p>
+            <p class="datos">Fecha: <span class="informacion">@ViewBag.publicacion.fecha.ToString("dd/MM/yyyy")</span></p>
             
             <div class="d-flex">
                 <button class="btn btn-primary me-2">COMPRAR</button>
@@ -20,6 +41,8 @@
                     <i class="bi bi-cart"></i> Agregar al carrito
                 </button>
             </div>
+        </div>
+
         </div>
     </div>
 </div>
