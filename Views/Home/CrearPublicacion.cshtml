@@ -1,3 +1,116 @@
 @{
     ViewData["Title"] = "Crear Publicación";
 }
+
+<h2>Crear publicación</h2>
+
+<div class="upload-container">
+    <label class="upload-label">
+        <div class="image-placeholder">
+            <span>📷</span>
+        </div>
+        <input type="file" class="image-upload" style="display: none;">
+        <button type="button">Cargar Imagen</button>
+    </label>
+</div>
+
+<label for="enBD">¿El libro está en nuestra biblioteca?</label>
+<select id="enBD" onchange="toggleForm()">
+    <option value="" selected>Seleccione una opción</option>
+    <option value="Sí">Sí</option>
+    <option value="No">No</option>
+</select>
+
+<!-- Additional question for selecting the book if the answer is "Sí" -->
+<div id="bookSelection" style="display: none; margin-top: 10px;">
+    <label for="selectBook">¿Cuál es el libro?</label>
+    <select id="selectBook">
+        <option value="" selected>Seleccione un libro</option>
+        <option value="Libro1">Libro 1</option>
+        <option value="Libro2">Libro 2</option>
+        <option value="Libro3">Libro 3</option>
+        <!-- Add more book options as needed -->
+    </select>
+</div>
+
+<!-- Form that appears if the answer is "No" -->
+<div id="bookForm" style="display: none; margin-top: 10px;">
+    <form method="post" action="/Publicaciones/Crear">
+        <div>
+            <label for="nombreLibro">Nombre del libro:</label>
+            <input type="text" id="nombreLibro" placeholder="Texto Previo Ingreso">
+        </div>
+        <div>
+            <label for="anio">Año:</label>
+            <select id="anio">
+                <option value="" selected>Seleccione año</option>
+                <option>Primer año</option>
+                <option>Segundo año</option>
+                <option>Tercer año</option>
+                <option>Cuarto año</option>
+                <option>Quinto año</option>
+            </select>
+        </div>
+        <div>
+            <label for="precio">Ingrese precio:</label>
+            <input type="number" id="precio" placeholder="$">
+        </div>
+        <div>
+            <label for="estado">Estado:</label>
+            <select id="estado">
+                <option value="" selected>Seleccione estado</option>
+                <option>Excelente</option>
+                <option>Muy bueno</option>
+                <option>Bueno</option>
+                <option>Regular</option>
+                <option>Muy usado</option>
+            </select>
+        </div>
+        <div>
+            <label for="materia">Materia:</label>
+            <select id="materia">
+                <option value="" selected>Seleccione materia</option>
+                <option>Historia</option>
+                <option>Literatura</option>
+                <option>Lengua</option>
+                <option>Ciencias Sociales</option>
+                <option>Ficción</option>
+                <option>Cómic</option>
+            </select>
+        </div>
+        <button type="submit" class="publish-button">PUBLICAR</button>
+    </form>
+</div>
+
+<footer>
+    <nav>
+        <a href="/Publicaciones">Publicaciones</a>
+        <a href="/CrearCuenta">Crear Cuenta</a>
+        <a href="/IniciarSesion">Iniciar Sesión</a>
+    </nav>
+    <div class="contact">
+        <span>Contáctanos:</span>
+        <a href="https://twitter.com" target="_blank">🐦</a>
+        <a href="https://instagram.com" target="_blank">📸</a>
+        <a href="https://facebook.com" target="_blank">📘</a>
+    </div>
+</footer>
+
+<script>
+    function toggleForm() {
+        var enBD = document.getElementById("enBD").value;
+        var bookForm = document.getElementById("bookForm");
+        var bookSelection = document.getElementById("bookSelection");
+
+        if (enBD === "No") {
+            bookForm.style.display = "block";       // Show form if book is NOT in the library
+            bookSelection.style.display = "none";   // Hide book selection question
+        } else if (enBD === "Sí") {
+            bookForm.style.display = "none";        // Hide form if book IS in the library
+            bookSelection.style.display = "block";  // Show book selection question
+        } else {
+            bookForm.style.display = "none";        // Hide both if no option selected
+            bookSelection.style.display = "none";
+        }
+    }
+</script>
