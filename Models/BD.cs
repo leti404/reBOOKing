@@ -26,6 +26,16 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
         return _ListadoPublicaciones;
     }
+    public static List<Publicacion> _ListadoCarrito = new List<Publicacion>();
+    public static List<Publicacion> ListarCarrito()
+    {
+        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "SELECT * FROM Carrito";
+            _ListadoCarrito = TP_REBOOKING.Query<Publicacion>(sql).ToList(); 
+        }
+        return _ListadoCarrito;
+    }
 
     public static void AgregarPublicacion(int idLibro, int precioLibro, int UsuarioId, DateTime Fecha)
     {
