@@ -44,11 +44,7 @@ public class HomeController : Controller
         Publicacion publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
 
         ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(id);
-        ViewBag.precio = publicacion.precio;
-        ViewBag.usuario = publicacion.id_usuario;
-        ViewBag.fecha = publicacion.fecha;
-        ViewBag.imagen = publicacion.imagen;
-
+        ViewBag.publicacion = publicacion;
         return View();
     }
     public IActionResult SobreNosotros()
