@@ -55,11 +55,11 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult Donar()
+    
+    public IActionResult Carrito()
     {
         return View();
     }
-    
     public IActionResult CrearPublicacion()
     {
         return View();
