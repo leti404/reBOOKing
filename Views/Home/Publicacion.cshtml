@@ -9,10 +9,10 @@
         </div>
         <div class="col-md-8">
             <h2>@ViewBag.nombreLibro</h2>
-            <p class="price text-primary">@ViewBag.precio.ToString("C")</p>
+            <p class="price text-primary">@ViewBag.publicacion.precio</p>
             <p><strong>Estado:</strong> <span class="estado">Excelente</span></p>
-            <p><strong>Usuario:</strong> @ViewBag.usuario</p>
-            <p><strong>Fecha:</strong> @ViewBag.fecha</p>
+            <p><strong>Usuario:</strong> @ViewBag.publicacion.usuario</p>
+            <p><strong>Fecha:</strong> @ViewBag.publicacion.fecha</p>
             
             <div class="d-flex">
                 <button class="btn btn-primary me-2">COMPRAR</button>
