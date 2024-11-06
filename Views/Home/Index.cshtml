@@ -59,7 +59,7 @@
     @foreach (Publicacion publicacion in ViewBag.listaPublicaciones)
     {
         <div class="col-md-3">
-            <a href='@Url.Action("Publicacion", "Home", new { id = publicacion.id_libro })' class="card-rebooking">
+            <a href='@Url.Action("Publicacion", "Home", new { id = @publicacion.id_libro })' class="card-rebooking">
                 <div class="card-rebooking">
                     <img class="card-img-top-rebooking" src="@publicacion.imagen" alt="@publicacion.id_libro" />
                     <div class="card-body-rebooking">

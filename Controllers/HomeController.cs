@@ -47,6 +47,9 @@ public class HomeController : Controller
         ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(id);
         ViewBag.publicacion = publicacion;
         ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(id);
+        ViewBag.descripcion = BD.ObtenerDescripcionPublicacion(id);
+        int numIdUsuario = ViewBag.publicacion.id_usuario;
+        ViewBag.nombreUsuario = "@" + BD.ObtenerNombreUsuario(numIdUsuario);
         return View();
     }
     public IActionResult SobreNosotros()
@@ -55,6 +58,10 @@ public class HomeController : Controller
     }
     
     public IActionResult Carrito()
+    {
+        return View();
+    }
+    public IActionResult Usuario()
     {
         return View();
     }
