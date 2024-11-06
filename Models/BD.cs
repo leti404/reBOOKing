@@ -80,7 +80,25 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
             return etiqueta;
         }
     }
-
+    
+    public static string ObtenerDescripcionPublicacion(int publicacionID)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "SELECT l.descripcion FROM Publicacion p JOIN Libro l ON p.id_libro = l.id WHERE p.id = @PublicacionID;";
+            string descripcion = TP_REBOOKING.QueryFirstOrDefault<string>(sql, new { PublicacionID = publicacionID });
+            return descripcion;
+        }
+    }
+    public static string ObtenerNombreUsuario(int usuarioID)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "SELECT nombre_usuario FROM Usuario WHERE id = @UsuarioID;";
+            string nombreUsuario = TP_REBOOKING.QueryFirstOrDefault<string>(sql, new { UsuarioID = usuarioID });
+            return nombreUsuario;
+        }
+    }
     public static void AgregarLibro(string nombre, string materia, string descripcion, int anio, int autorId, int editorialId, int categoriaId)
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
