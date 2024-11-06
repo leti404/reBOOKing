@@ -13,7 +13,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f8f8f8;
+  background-color: #f3edfc;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: relative;
   padding-top: .5rem;
@@ -203,4 +203,12 @@ footer {
   width: 40px;
   height: 40px;
 }
-
+.btn-outline-success {
+  color: #d3b4f5;
+  border-color: #d3b4f5;
+}
+.btn-outline-success:hover {
+  background-color: #d3b4f5;
+  color: white;
+  border-color: #d3b4f5;
+}

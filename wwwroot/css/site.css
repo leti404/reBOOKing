@@ -29,6 +29,7 @@
     color: #333;
 }
 
+
 .img-libro {
     max-width: 150px;
     height: auto;
@@ -114,4 +115,47 @@
     color: #6c63ff;
     font-weight: bold;
     margin: 3px;
+}
+
+.estado1{
+    color: #70E000;
+    font-weight:normal;
+}
+.estado2{
+    color: #C6FF37;
+    font-weight:normal;
+}
+.estado3{
+    color: #FFEA00;
+    font-weight:normal;
+}
+.estado4{
+    color: #FF3B3B;
+    font-weight:normal;
+
+}
+.estado5{
+    color: #FF3B3B;
+    font-weight: normal;
+}
+.carritoimg{
+    height: 40px;
+    width: 40px;
+}
+.card-img-top-rebooking2 {
+    border-radius: 10px;
+    object-fit: cover; 
+    height: 600px; 
+    width: 100%;
+}
+.price{
+    font-weight: bold;
+    font-size:xx-large;
+}
+.datos{
+    font-weight: bold;
+    font-size:x-large;
+}
+.informacion{
+    font-weight: normal;
 }

@@ -45,6 +45,7 @@ public class HomeController : Controller
 
         ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(id);
         ViewBag.publicacion = publicacion;
+        ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(id);
         return View();
     }
     public IActionResult SobreNosotros()
