@@ -14,20 +14,19 @@ public class HomeController : Controller
     }
     //HACER QUE EL BUTTON DE FILTROS TE TRAIGA ACA(A UNA VIEW NUEVA), AGARRE LOS FILTROS Y LO LLEVE A LA VIEW
 
-   public IActionResult Index(int? materia, int? año, int? precio, int? estado)
+   public IActionResult Index(int? materia, int? anio, int? precio, int? estado)
     {
         int precioMin = 0;
         int precioMax = precio.HasValue ? precio.Value : int.MaxValue;
 
-        if (materia.HasValue || año.HasValue || estado.HasValue || precio.HasValue)
+        if (materia.HasValue || anio.HasValue || estado.HasValue || precio.HasValue)
         {
             ViewBag.listaPublicaciones = BD.FiltrarLibros(
                 materia ?? 0,
-                año ?? 0,
+                anio ?? 0,
                 precioMin,
                 precioMax,
                 estado ?? 0
-                
             );
         }
         else
