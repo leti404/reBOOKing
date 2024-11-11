@@ -21,19 +21,19 @@
     <option value="No">No</option>
 </select>
 
-<!-- Additional question for selecting the book if the answer is "Sí" -->
-<div id="bookSelection" style="display: none; margin-top: 10px;">
+
+<div id="bookSelection">
     <label for="selectBook">¿Cuál es el libro?</label>
     <select id="selectBook">
         <option value="" selected>Seleccione un libro</option>
-        <option value="Libro1">Libro 1</option>
-        <option value="Libro2">Libro 2</option>
-        <option value="Libro3">Libro 3</option>
-        <!-- Add more book options as needed -->
+          @foreach (libro Libro in ViewBag.)
+            {
+                <option class="dropdown-button" value="@libro">@libro.Nombre</option>
+            }
     </select>
 </div>
 
-<!-- Form that appears if the answer is "No" -->
+
 <div id="bookForm" style="display: none; margin-top: 10px;">
     <form method="post" action="/Publicaciones/Crear">
         <div>
@@ -82,19 +82,6 @@
     </form>
 </div>
 
-<footer>
-    <nav>
-        <a href="/Publicaciones">Publicaciones</a>
-        <a href="/CrearCuenta">Crear Cuenta</a>
-        <a href="/IniciarSesion">Iniciar Sesión</a>
-    </nav>
-    <div class="contact">
-        <span>Contáctanos:</span>
-        <a href="https://twitter.com" target="_blank">🐦</a>
-        <a href="https://instagram.com" target="_blank">📸</a>
-        <a href="https://facebook.com" target="_blank">📘</a>
-    </div>
-</footer>
 
 <script>
     function toggleForm() {
@@ -103,13 +90,13 @@
         var bookSelection = document.getElementById("bookSelection");
 
         if (enBD === "No") {
-            bookForm.style.display = "block";       // Show form if book is NOT in the library
-            bookSelection.style.display = "none";   // Hide book selection question
+            bookForm.style.display = "block";       
+            bookSelection.style.display = "none";
         } else if (enBD === "Sí") {
-            bookForm.style.display = "none";        // Hide form if book IS in the library
-            bookSelection.style.display = "block";  // Show book selection question
+            bookForm.style.display = "none";        
+            bookSelection.style.display = "block";  
         } else {
-            bookForm.style.display = "none";        // Hide both if no option selected
+            bookForm.style.display = "none";        
             bookSelection.style.display = "none";
         }
     }
