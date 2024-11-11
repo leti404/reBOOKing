@@ -16,8 +16,7 @@
 
 <label for="enBD">¿El libro está en nuestra biblioteca?</label>
 <select id="enBD" onchange="toggleForm()">
-    <option value="" selected>Seleccione una opción</option>
-    <option value="Sí">Sí</option>
+    <option value="Sí" selected>Sí</option>
     <option value="No">No</option>
 </select>
 
@@ -26,11 +25,13 @@
     <label for="selectBook">¿Cuál es el libro?</label>
     <select id="selectBook">
         <option value="" selected>Seleccione un libro</option>
-          @foreach (libro Libro in ViewBag.)
+          @foreach (string Libro in ViewBag.ListaNombresLibros)
             {
-                <option class="dropdown-button" value="@libro">@libro.Nombre</option>
+                <option class="dropdown-button" value="libro">@Libro</option>
             }
     </select>
+
+      <button type="submit" class="publish-button">PUBLICAR</button>
 </div>
 
 

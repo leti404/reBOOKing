@@ -64,6 +64,7 @@ public class HomeController : Controller
     }
     public IActionResult CrearPublicacion()
     {
+        ViewBag.ListaNombresLibros = BD.ObtenerNombresLibros();
         return View();
     }
     public IActionResult TusFavoritos()
