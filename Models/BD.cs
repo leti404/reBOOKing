@@ -178,15 +178,15 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
 
     }
 
-    public static List<string> _ListadoNombreLibros = new List<string>();
-    public static List<string> ObtenerNombresLibros()
+    public static List<Libro> _ListadoLibros = new List<Libro>();
+    public static List<Libro> ListarLibros()
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "exec ListarNombresLibros";
-            _ListadoNombreLibros = TP_REBOOKING.Query<string>(sql).ToList(); 
+            string sql = "exec ListarLibros";
+            _ListadoLibros = TP_REBOOKING.Query<Libro>(sql).ToList(); 
         }
-        return _ListadoNombreLibros;
+        return _ListadoLibros;
     }
 
 }

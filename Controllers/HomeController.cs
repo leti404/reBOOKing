@@ -64,7 +64,7 @@ public class HomeController : Controller
     }
     public IActionResult CrearPublicacion()
     {
-        ViewBag.ListaNombresLibros = BD.ObtenerNombresLibros();
+        ViewBag.ListaLibros = BD.ListarLibros();
         return View();
     }
     public IActionResult TusFavoritos()
@@ -93,5 +93,11 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public IActionResult PublicacionExitosa()
+    {
+        
+        return View();
     }
 }

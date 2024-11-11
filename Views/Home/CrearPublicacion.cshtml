@@ -25,40 +25,40 @@
     <label for="selectBook">¿Cuál es el libro?</label>
     <select id="selectBook">
         <option value="" selected>Seleccione un libro</option>
-          @foreach (string Libro in ViewBag.ListaNombresLibros)
+          @foreach (Libro libro in ViewBag.ListaLibros)
             {
-                <option class="dropdown-button" value="libro">@Libro</option>
+                <option class="dropdown-button" value="libro">@libro.nombre</option>
             }
     </select>
 
-      <button type="submit" class="publish-button">PUBLICAR</button>
+      <a href='@Url.Action("PublicacionExitosa", "Home")' class="card-rebooking">  <button type="submit" class="publish-button">PUBLICAR</button> <a>
 </div>
 
 
 <div id="bookForm" style="display: none; margin-top: 10px;">
-    <form method="post" action="/Publicaciones/Crear">
+    <form method="get" action='@Url.Action("PublicacionExitosa", "Home")'>
         <div>
             <label for="nombreLibro">Nombre del libro:</label>
-            <input type="text" id="nombreLibro" placeholder="Texto Previo Ingreso">
+            <input type="text" name="nombreLibro" id="nombreLibro" placeholder="Texto Previo Ingreso">
         </div>
         <div>
             <label for="anio">Año:</label>
-            <select id="anio">
+            <select name="anio" id="anio">
                 <option value="" selected>Seleccione año</option>
-                <option>Primer año</option>
-                <option>Segundo año</option>
-                <option>Tercer año</option>
-                <option>Cuarto año</option>
-                <option>Quinto año</option>
+                <option value="1">Primer año</option>
+                <option value="2">Segundo año</option>
+                <option value="3">Tercer año</option>
+                <option value="4">Cuarto año</option>
+                <option value="5">Quinto año</option>
             </select>
         </div>
         <div>
             <label for="precio">Ingrese precio:</label>
-            <input type="number" id="precio" placeholder="$">
+            <input type="number" name="precio" id="precio" placeholder="$">
         </div>
         <div>
             <label for="estado">Estado:</label>
-            <select id="estado">
+            <select name="estado" id="estado">
                 <option value="" selected>Seleccione estado</option>
                 <option>Excelente</option>
                 <option>Muy bueno</option>
@@ -69,7 +69,7 @@
         </div>
         <div>
             <label for="materia">Materia:</label>
-            <select id="materia">
+            <select name="materia" id="materia">
                 <option value="" selected>Seleccione materia</option>
                 <option>Historia</option>
                 <option>Literatura</option>
