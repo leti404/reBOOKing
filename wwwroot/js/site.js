@@ -1,4 +1,23 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-// Write your JavaScript code.
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    fetch('/Account/Login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username, password: password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = "/Home/Index"; // Redirect on success
+        } else {
+            document.getElementById("loginMessage").innerText = data.message; // Show error message
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
