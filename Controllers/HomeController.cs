@@ -100,4 +100,10 @@ public class HomeController : Controller
         
         return View();
     }
+
+    public IActionResult ConoceMas()
+    {
+        
+        return View();
+    }
 }

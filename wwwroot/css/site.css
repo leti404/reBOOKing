@@ -159,3 +159,11 @@
 .informacion{
     font-weight: normal;
 }
+
+.logo 
+{
+    width: 6%;
+    height: 6%;
+    border-radius: 10px;
+    margin:5%;
+}
