@@ -1,102 +1,102 @@
 @{
     ViewData["Title"] = "Crear Publicación";
 }
+<script src="~/js/site.js"></script>
 
 <h2>Crear publicación</h2>
-
-<div class="upload-container">
+<section class="venta">
+  <div class="upload-container">
     <label class="upload-label">
-        <div class="image-placeholder">
-            <span>📷</span>
-        </div>
+      <div class="image-placeholder" id="image-preview">
+        <span>📷</span>
+      </div>
     </label>
-    <input type="file" class="image-upload" style="display: none;" id="file-input">
+    <input type="file" class="image-upload" style="display: none;" id="file-input" accept="image/*" onchange="previewImage(event)">
     <button type="button" onclick="document.getElementById('file-input').click();">Cargar Imagen</button>
-</div>
+  </div>
 
-
-<label for="enBD">¿El libro está en nuestra biblioteca?</label>
-<select id="enBD" onchange="toggleForm()">
-    <option value="Sí" selected>Sí</option>
-    <option value="No">No</option>
-</select>
-
-
-<div id="bookSelection">
-    <label for="selectBook">¿Cuál es el libro?</label>
-    <select id="selectBook">
-        <option value="" selected>Seleccione un libro</option>
-          @foreach (Libro libro in ViewBag.ListaLibros)
-            {
-                <option class="dropdown-button" value="libro">@libro.nombre</option>
-            }
+  <div class="caracteristicas">
+    <label for="enBD">¿El libro está en nuestra biblioteca?</label>
+    <select class="inputdatos" id="enBD" onchange="toggleForm()">
+      <option value="Sí" selected >Sí</option>
+      <option value="No">No</option>
     </select>
-          <label for="precio">Ingrese precio:</label>
-          <input type="number" name="precio" id="precio" placeholder="$">
 
-          <label for="materia">Materia:</label>
-            <select name="materia" id="materia">
-                <option value="" selected>Seleccione materia</option>
-                <option>Historia</option>
-                <option>Literatura</option>
-                <option>Lengua</option>
-                <option>Ciencias Sociales</option>
-                <option>Ficción</option>
-                <option>Cómic</option>
-            </select>
-
-      <a href='@Url.Action("PublicacionExitosa", "Home")' class="card-rebooking">  <button type="submit" class="publish-button">PUBLICAR</button> <a>
-</div>
-
-
-<div id="bookForm" style="display: none; margin-top: 10px;">
-    <form method="get" action='@Url.Action("PublicacionExitosa", "Home")'>
-        <div>
-            <label for="nombreLibro">Nombre del libro:</label>
-            <input type="text" name="nombreLibro" id="nombreLibro" placeholder="Texto Previo Ingreso">
-        </div>
-        <div>
-            <label for="anio">Año:</label>
-            <select name="anio" id="anio">
-                <option value="" selected>Seleccione año</option>
-                <option value="1">Primer año</option>
-                <option value="2">Segundo año</option>
-                <option value="3">Tercer año</option>
-                <option value="4">Cuarto año</option>
-                <option value="5">Quinto año</option>
-            </select>
-        </div>
-        <div>
-            <label for="precio">Ingrese precio:</label>
-            <input type="number" name="precio" id="precio" placeholder="$">
-        </div>
-        <div>
-            <label for="estado">Estado:</label>
-            <select name="estado" id="estado">
-                <option value="" selected>Seleccione estado</option>
-                <option>Excelente</option>
-                <option>Muy bueno</option>
-                <option>Bueno</option>
-                <option>Regular</option>
-                <option>Muy usado</option>
-            </select>
-        </div>
-        <div>
-            <label for="materia">Materia:</label>
-            <select name="materia" id="materia">
-                <option value="" selected>Seleccione materia</option>
-                <option>Historia</option>
-                <option>Literatura</option>
-                <option>Lengua</option>
-                <option>Ciencias Sociales</option>
-                <option>Ficción</option>
-                <option>Cómic</option>
-            </select>
-        </div>
+    <div class="seleccion" id="bookSelection">
+      <label for="selectBook">¿Cuál es el libro?</label>
+      <select class="inputdatos" id="selectBook">
+        <option value="" selected >Seleccione un libro</option>
+        @foreach (Libro libro in ViewBag.ListaLibros)
+        {
+          <option class="dropdown-button" value="libro">@libro.nombre</option>
+        }
+      </select>
+      <label for="precio">Ingrese precio:</label>
+      <input class="inputdatos" type="number" name="precio"  min="0" id="precio" placeholder="$">
+      <label for="materia">Materia:</label>
+      <select class="inputdatos"name="materia" id="materia">
+        <option value="" selected>Seleccione materia</option>
+        <option>Historia</option>
+        <option>Literatura</option>
+        <option>Lengua</option>
+        <option>Ciencias Sociales</option>
+        <option>Ficción</option>
+        <option>Cómic</option>
+      </select>
+      <a href='@Url.Action("PublicacionExitosa", "Home")' class="card-rebooking">
         <button type="submit" class="publish-button">PUBLICAR</button>
-    </form>
-</div>
+      </a>
+    </div>
+  </div>
 
+  <div class= "nuevolibro"id="bookForm" style="display: none;">
+    <form method="get" action='@Url.Action("PublicacionExitosa", "Home")'>
+      <div>
+        <label for="nombreLibro">Nombre del libro:</label>
+        <input type="text" class="inputdatos" name="nombreLibro" id="nombreLibro" placeholder="ingrese nombre">
+      </div>
+      <div>
+        <label for="anio">Año:</label>
+        <select class="inputdatos"name="anio" id="anio">
+          <option value="" selected >Seleccione año</option>
+          <option value="1">Primer año</option>
+          <option value="2">Segundo año</option>
+          <option value="3">Tercer año</option>
+          <option value="4">Cuarto año</option>
+          <option value="5">Quinto año</option>
+        </select>
+      </div>
+      <div>
+        <label for="precio">Ingrese precio:</label>
+        <input class="inputdatos"type="number" min="0" name="precio" id="precio" placeholder="$">
+      </div>
+      <div>
+        <label for="estado">Estado:</label>
+        <select class="inputdatos"name="estado" id="estado">
+          <option value="" selected Seleccione estado></option>
+          <option>Excelente</option>
+          <option>Muy bueno</option>
+          <option>Bueno</option>
+          <option>Regular</option>
+          <option>Muy usado</option>
+        </select>
+      </div>
+      <div>
+        <label for="materia">Materia:</label>
+        <select class="inputdatos" name="materia" id="materia">
+          <option value="" selected >Seleccione materia</option>
+          <option>Historia</option>
+          <option>Literatura</option>
+          <option>Lengua</option>
+          <option>Ciencias Sociales</option>
+          <option>Ficción</option>
+          <option>Cómic</option>
+        </select>
+      </div>
+      <button type="submit" class="publish-button">PUBLICAR</button>
+    </form>
+  </div>
+</section>
 
 <script>
     function toggleForm() {

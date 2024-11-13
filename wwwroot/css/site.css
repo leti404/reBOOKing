@@ -81,6 +81,8 @@
     transition: transform 0.3s ease-in-out;
     background-color: white;
     text-decoration: none;
+    width: fit-content;
+
 }
 
 .card-rebooking:hover {
@@ -167,3 +169,64 @@
     border-radius: 10px;
     margin:5%;
 }
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 20%;
+  }
+  .venta{
+    display: flex;
+  }
+  
+  .image-placeholder {
+    width: 200px;
+    height: 200px;
+    background-color: #ccc; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: #666;
+    border-radius: 10px;
+    overflow: hidden; 
+  }
+  .caracteristicas{
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .seleccion{
+    display: flex;
+    flex-direction: column;
+  }
+  .nuevolibro{
+    margin-left: 30px;
+  }
+  .inputdatos{
+    margin:5px;
+    background-color:#EDE7F6;
+    border:none;
+  }
+  .publish-button{
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+  }
