@@ -9,10 +9,11 @@
         <div class="image-placeholder">
             <span>📷</span>
         </div>
-        <input type="file" class="image-upload" style="display: none;">
-        <button type="button">Cargar Imagen</button>
     </label>
+    <input type="file" class="image-upload" style="display: none;" id="file-input">
+    <button type="button" onclick="document.getElementById('file-input').click();">Cargar Imagen</button>
 </div>
+
 
 <label for="enBD">¿El libro está en nuestra biblioteca?</label>
 <select id="enBD" onchange="toggleForm()">
