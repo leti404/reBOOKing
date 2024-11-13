@@ -31,6 +31,19 @@
                 <option class="dropdown-button" value="libro">@libro.nombre</option>
             }
     </select>
+          <label for="precio">Ingrese precio:</label>
+          <input type="number" name="precio" id="precio" placeholder="$">
+
+          <label for="materia">Materia:</label>
+            <select name="materia" id="materia">
+                <option value="" selected>Seleccione materia</option>
+                <option>Historia</option>
+                <option>Literatura</option>
+                <option>Lengua</option>
+                <option>Ciencias Sociales</option>
+                <option>Ficción</option>
+                <option>Cómic</option>
+            </select>
 
       <a href='@Url.Action("PublicacionExitosa", "Home")' class="card-rebooking">  <button type="submit" class="publish-button">PUBLICAR</button> <a>
 </div>
