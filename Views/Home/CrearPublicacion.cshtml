@@ -34,17 +34,17 @@
           <label for="precio">Ingrese precio:</label>
           <input type="number" name="precio" id="precio" placeholder="$">
 
-          <label for="materia">Materia:</label>
-            <select name="materia" id="materia">
-                <option value="" selected>Seleccione materia</option>
-                <option>Historia</option>
-                <option>Literatura</option>
-                <option>Lengua</option>
-                <option>Ciencias Sociales</option>
-                <option>Ficción</option>
-                <option>Cómic</option>
+           <div>
+            <label for="estado">Estado:</label>
+            <select name="estado" id="estado">
+                <option value="" selected>Seleccione estado</option>
+                <option>Excelente</option>
+                <option>Muy bueno</option>
+                <option>Bueno</option>
+                <option>Regular</option>
+                <option>Muy usado</option>
             </select>
-
+        </div>
       <a href='@Url.Action("PublicacionExitosa", "Home")' class="card-rebooking">  <button type="submit" class="publish-button">PUBLICAR</button> <a>
 </div>
 
