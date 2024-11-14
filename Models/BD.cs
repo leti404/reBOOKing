@@ -177,15 +177,18 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoPublicacionesConFiltro;
 
     }
+
     public static Usuario usuarioIniciado;
+
     public static Usuario Login(string gmail)
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
             string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail;";
             usuarioIniciado = TP_REBOOKING.Query<Usuario>(sql, new { Gmail = gmail }).FirstOrDefault();
+            return usuarioIniciado;
         }
-        return usuarioIniciado;
+        
     }
     public static List<Libro> _ListadoLibros = new List<Libro>();
     public static List<Libro> ListarLibros()

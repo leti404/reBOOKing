@@ -6,45 +6,29 @@ namespace reBOOKing.Controllers;
 using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using reBOOKing.Models;
 
 public class AuthController : Controller
 {
-    private readonly ILogger<AuthController> _logger;
 
-    public AuthController(ILogger<AuthController> logger)
+    [HttpPost]
+    public IActionResult Login(string email, string password)
     {
-        _logger = logger;
-    }
-
-    public IActionResult Login()
-    {
-        if (HttpContext.Session.GetString("user") != null)
+        Usuario usuario = BD.Login(email);
+        if (usuario != null && usuario.contraseña == password)
         {
-            return RedirectToAction("Index", "Home");
+            HttpContext.Session.SetString("user", usuario.ToString()); 
+            return RedirectToAction("Index", "Home"); 
         }
+        ViewBag.Error = "Usuario o contraseña incorrectos";
         return View();
     }
 
-    [HttpPost]
-    public IActionResult VerificarLogin(string gmail, string contraseña)
-    {
-        Usuario user = BD.Login(gmail);
-
-        if (user.gmail == gmail && user.contraseña == contraseña)
-        {
-            HttpContext.Session.SetString("user", new Usuario(user.id, user.nombre_usuario, contraseña, gmail, user.fecha_nacimiento, user.id_publicacion).ToString());
-            return RedirectToAction("Index", "Home");
-        }
-        else
-        {
-            ViewBag.Error = "Email o contraseña incorrectos.";
-            return View("Login");
-        }
-    }
     public IActionResult Logout()
     {
         HttpContext.Session.Remove("user");
-        return RedirectToAction("Login");
+        return RedirectToAction("Index", "Home");
     }
-
 }

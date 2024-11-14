@@ -1,9 +1,29 @@
 @{
     
 }
-<form id="loginForm">
-    <input type="text" id="username" placeholder="Username" required />
-    <input type="password" id="password" placeholder="Password" required />
-    <button type="submit">Login</button>
-    <div id="loginMessage"></div>
-</form>
+ <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+    Login
+</button>
+  
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+            <div class="modal-body">
+                <form id="loginForm" method="post" action="#">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
+                    </div>
+                    <a href='@Url.Action("Register", "Home")' class="register-link">Registrarse</a>
+                    <button type="submit" class="btn-login">Iniciar Sesión</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
