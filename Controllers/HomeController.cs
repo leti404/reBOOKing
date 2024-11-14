@@ -19,6 +19,8 @@ public class HomeController : Controller
         int precioMin = 0;
         int precioMax = precio.HasValue ? precio.Value : int.MaxValue;
 
+        ViewBag.ListaMaterias = BD.ListarMaterias();
+        
         if (materia.HasValue || anio.HasValue || estado.HasValue || precio.HasValue)
         {
             ViewBag.listaPublicaciones = BD.FiltrarLibros(
