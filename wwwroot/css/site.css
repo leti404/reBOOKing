@@ -33,7 +33,6 @@
 .img-libro {
     max-width: 150px;
     height: auto;
-    display: block;
 }
 
 .filters-rebooking {
@@ -81,12 +80,14 @@
     transition: transform 0.3s ease-in-out;
     background-color: white;
     text-decoration: none;
-    width: fit-content;
-
+    width: fit-content; 
 }
 
 .card-rebooking:hover {
     transform: scale(1.02);
+}
+.boton{
+    position:absolute;
 }
 
 .card-img-top-rebooking {
@@ -162,8 +163,7 @@
     font-weight: normal;
 }
 
-.logo 
-{
+.logo{
     width: 6%;
     height: 6%;
     border-radius: 10px;
@@ -172,61 +172,101 @@
 .upload-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    width: 20%;
-  }
-  .venta{
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+}
+.upload-button {
+    font-size: 1rem;
+    padding: 8px 12px;
+    background-color: #0d6efd;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; 
+}
+.button-container {
     display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 20px;
   }
-  
-  .image-placeholder {
-    width: 200px;
-    height: 200px;
-    background-color: #ccc; 
+.venta{
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.image-placeholder {
+    width: 250px;
+    height: 250px;
+    background-color: #ccc;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 50px;
     color: #666;
     border-radius: 10px;
-    overflow: hidden; 
-  }
-  .caracteristicas{
+    margin-bottom: 10px;
+}
+
+.caracteristicas, .seleccion, .nuevolibro {
     display: flex;
     flex-direction: column;
-    
-  }
-  .seleccion{
-    display: flex;
-    flex-direction: column;
-  }
-  .nuevolibro{
-    margin-left: 30px;
-  }
-  .inputdatos{
-    margin:5px;
-    background-color:#EDE7F6;
-    border:none;
-  }
-  .publish-button{
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    color: #fff;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.inputdatos {
+    padding: 8px;
+    background-color: #EDE7F6;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    transition: border-color .15s ease-in-out;
+}
+
+.inputdatos:focus {
+    border-color: #6c63ff;
+    outline: none;
+}
+
+.publish-button {
+    /*font-size: 1rem;
+    padding: 10px 20px;
     background-color: #0d6efd;
-    border-color: #0d6efd;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;*/
   }
+
+.publish-button:hover {
+    background-color: #0b5ed7;
+    transform: scale(1.05);
+}
+
+.marginSpace{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.btn-filter-rebooking {
+    padding: .375rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #d3b4f5;
+    border: none;
+    border-radius: .25rem;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out, transform .3s;
+}
+
+.btn-filter-rebooking:hover {
+    background-color: #b3a0e6;
+    transform: scale(1.05);
+}
+.general{
+    display: flex;
+    flex-direction: row;
+}

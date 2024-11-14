@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿  function previewImage(event) {
+  function previewImage(event) {
     const file = event.target.files[0];
     const preview = document.getElementById('image-preview');
     
@@ -14,8 +13,7 @@
       reader.readAsDataURL(file);
     }
   }
-=======
-﻿document.getElementById("loginForm").addEventListener("submit", function(event) {
+document.getElementById("loginForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
     let username = document.getElementById("username").value;
@@ -38,4 +36,20 @@
     })
     .catch(error => console.error('Error:', error));
 });
->>>>>>> a852af922b337383ee5e913b60275423930202cc
+
+function toggleForm() {
+    var enBD = document.getElementById("enBD").value;
+    var bookForm = document.getElementById("bookForm");
+    var bookSelection = document.getElementById("bookSelection");
+
+    if (enBD === "No") {
+        bookForm.style.display = "block";       
+        bookSelection.style.display = "none";
+    } else if (enBD === "Sí") {
+        bookForm.style.display = "none";        
+        bookSelection.style.display = "block";  
+    } else {
+        bookForm.style.display = "none";        
+        bookSelection.style.display = "none";
+    }
+}
