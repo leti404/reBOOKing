@@ -210,5 +210,18 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
         return _ListadoMaterias;
     }
+
+    public static List<Etiqueta> _ListadoEtiquetas = new List<Etiqueta>();
+    
+    public static List<Etiqueta> ListarEtiquetas()
+    {
+        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "exec ObtenerEtiquetas";
+            _ListadoEtiquetas = TP_REBOOKING.Query<Etiqueta>(sql).ToList(); 
+        }
+        return _ListadoEtiquetas;
+    }
+
 }
 
