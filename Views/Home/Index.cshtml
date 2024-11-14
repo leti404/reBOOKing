@@ -18,23 +18,22 @@
     
     <div class="filters-rebooking">
         <form asp-action="Index" method="get">
-            <select name="estado" class="form-select-rebooking">
-                <option value="">Estado</option>
-                <option value="5">Excelente</option>
-                <option value="4">Muy Bueno</option>
-                <option value="3">Bueno</option>
-                <option value="2">Regular</option>
-                <option value="1">Muy usado</option>
+                <select name="estado" class="form-select-rebooking">
+                <option value="" selected disabled>Estado</option>
+                @foreach (Etiqueta etiqueta in ViewBag.ListaEtiquetas)
+                {
+                    <option class="dropdown-button" value="@etiqueta.id">@etiqueta.nombre</option>
+                }
             </select>
+
             <select name="materia" class="form-select-rebooking">
-                <option value="">Materia</option>
-                <option value="1">Historia</option>
-                <option value="2">Literatura</option>
-                <option value="3">Lengua</option>
-                <option value="4">Ciencias Sociales</option>
-                <option value="5">Ficción</option>
-                <option value="6">Cómic</option>
+                <option value="" selected disabled>Materia</option>
+                @foreach (Materia materia in ViewBag.ListaMaterias)
+                {
+                    <option class="dropdown-button" value="@materia.id">@materia.nombre</option>
+                }
             </select>
+
             <select name="precio" class="form-select-rebooking">
                 <option value="">Precio</option>
                 <option value="5000">Hasta $5.000</option>

@@ -10,7 +10,7 @@
         <div class= "informacionLibro">
             <h1>@ViewBag.nombreLibro</h1>
             <p class="price text-primary" class= "datos">$@ViewBag.publicacion.precio</p>
-            <p><span class="informacion">Usuario: @BD.ObtenerNombreUsuario(@ViewBag.publicacion.id_usuario)</span></p>
+            <p><span class="datos">Usuario:<span><span class = informacion> @BD.ObtenerNombreUsuario(@ViewBag.publicacion.id_usuario)</span></p>
             @switch(@ViewBag.estado){
                 case "Excelente":
                  <p class= "datos">Estado: <span class="estado1">@ViewBag.estado</span></p>
@@ -34,7 +34,6 @@
             }
 
             <p class="datos">Descripción: <span class="informacion"> @ViewBag.descripcion </span></p>
-            <p class="datos">Fecha: <span class="informacion">@ViewBag.publicacion.fecha.ToString("dd/MM/yyyy")</span></p>
             
             <div class="d-flex">
                 <button class="btn btn-primary me-2">COMPRAR</button>

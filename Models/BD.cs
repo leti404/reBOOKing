@@ -191,6 +191,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         
     }
     public static List<Libro> _ListadoLibros = new List<Libro>();
+    
     public static List<Libro> ListarLibros()
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
@@ -199,6 +200,30 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
             _ListadoLibros = TP_REBOOKING.Query<Libro>(sql).ToList(); 
         }
         return _ListadoLibros;
+    }
+
+    public static List<Materia> _ListadoMaterias = new List<Materia>();
+    
+    public static List<Materia> ListarMaterias()
+    {
+        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "exec ObtenerMaterias";
+            _ListadoMaterias = TP_REBOOKING.Query<Materia>(sql).ToList(); 
+        }
+        return _ListadoMaterias;
+    }
+
+    public static List<Etiqueta> _ListadoEtiquetas = new List<Etiqueta>();
+    
+    public static List<Etiqueta> ListarEtiquetas()
+    {
+        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "exec ObtenerEtiquetas";
+            _ListadoEtiquetas = TP_REBOOKING.Query<Etiqueta>(sql).ToList(); 
+        }
+        return _ListadoEtiquetas;
     }
 
 }
