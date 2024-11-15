@@ -14,31 +14,26 @@ public class HomeController : Controller
     }
     //HACER QUE EL BUTTON DE FILTROS TE TRAIGA ACA(A UNA VIEW NUEVA), AGARRE LOS FILTROS Y LO LLEVE A LA VIEW
 
-   public IActionResult Index(int? materia, int? anio, int? precio, int? estado)
+   public IActionResult Index(int materia, int anio, int precio, int estado)
     {
         int precioMin = 0;
-        int precioMax = precio.HasValue ? precio.Value : int.MaxValue;
+        int precioMax = precio > 0 ? precio : int.MaxValue;
 
         ViewBag.ListaMaterias = BD.ListarMaterias();
         ViewBag.ListaEtiquetas = BD.ListarEtiquetas();
         
-        if (materia.HasValue || anio.HasValue || estado.HasValue || precio.HasValue)
-        {
-            ViewBag.listaPublicaciones = BD.FiltrarLibros(
-                materia ?? 0,
-                anio ?? 0,
+       ViewBag.listaPublicaciones = BD.FiltrarLibros(
+                materia,
+                anio,
                 precioMin,
                 precioMax,
-                estado ?? 0
+                estado
             );
-        }
-        else
-        {
-            ViewBag.listaPublicaciones = BD.ListarPublicaciones();
-        }
+        
 
         return View();
     }
+
 
 
     public IActionResult Publicacion(int id)
