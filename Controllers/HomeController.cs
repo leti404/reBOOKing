@@ -108,10 +108,10 @@ public class HomeController : Controller
     public IActionResult Login()
     {
         // ViewBag.User = Usuario.FromString(HttpContext.Session.GetString("user"));
-        if(ViewBag.User is null)
+        /*if(ViewBag.User is null)
         {
             return RedirectToAction("Login", "Auth");
-        }
+        }*/
         return View();
     }
     
