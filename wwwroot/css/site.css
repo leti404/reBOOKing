@@ -80,7 +80,8 @@
     transition: transform 0.3s ease-in-out;
     background-color: white;
     text-decoration: none;
-    width: fit-content; 
+    width: 375px;
+    height: 550px;
 }
 
 .card-rebooking:hover {
@@ -103,6 +104,7 @@
     background-color: #fff;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    height: 10%
 }
 
 .card-title-rebooking {
