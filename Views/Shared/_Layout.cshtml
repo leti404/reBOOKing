@@ -19,7 +19,18 @@
             </div>
             
             <ul class="navbar-links">
-                <li><a href='@Url.Action("CrearPublicacion")'>Publicar</a></li>
+                <li>
+                    @if (ViewBag.User == null)
+                    {
+                        <a href data-bs-toggle="modal" data-bs-target="#loginModal">Publicar</a>
+                    }
+                    else
+                    {
+                        <a href='@Url.Action("CrearPublicacion")'>Publicar</a>
+                    }
+                        
+                        
+                </li>
                 <li><a href='@Url.Action("SobreNosotros")'>Sobre Nosotros</a></li>
                 <li><a href='@Url.Action("Index")'>Publicaciones</a></li> 
             </ul>

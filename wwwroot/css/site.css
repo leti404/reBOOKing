@@ -328,4 +328,14 @@
 .btn-register:hover {
     background-color: #b48be0;
 }
+.nuevolibro div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.formLibro{
+    width: 75%;
+}
+
+
 
