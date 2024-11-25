@@ -135,9 +135,12 @@ public class HomeController : Controller
         return View("Index", "Home");
     }
     
-    public IActionResult BuscarLibro()
+    public IActionResult BuscarLibro(string query)
     {
-        
+        ViewBag.listaPublicaciones = BD.FiltrarLibrosPorBusquedaTexto(query);
+        ViewBag.ListaMaterias = BD.ListarMaterias();
+        ViewBag.ListaEtiquetas = BD.ListarEtiquetas();
+        return View("Index");
     }
    
 }

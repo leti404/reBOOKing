@@ -228,7 +228,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
 
     public static List<Publicacion> _ListadoPublicacionesConFiltroBusqueda = new List<Publicacion>();
     
-    public static List<Publicacion> FiltrarLibros(string busquedaTexto)
+    public static List<Publicacion> FiltrarLibrosPorBusquedaTexto(string busquedaTexto)
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
