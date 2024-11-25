@@ -52,4 +52,11 @@ function toggleForm() {
         bookForm.style.display = "none";        
         bookSelection.style.display = "none";
     }
+
+    $('#loginForm').submit(function(event) {
+        event.preventDefault();
+        // Código que podría bloquear el envío del formulario sin redirigir
+    });
+    
 }
+

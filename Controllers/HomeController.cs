@@ -114,6 +114,19 @@ public class HomeController : Controller
         }*/
         return View();
     }
+
+    public IActionResult IniciarSesion(string email, string password)
+    {
+        Console.WriteLine("hola");
+        Usuario usuario = BD.IniciarSesion(email, password);
+        if (usuario != null)
+        {
+            HttpContext.Session.SetString("user", usuario.ToString()); 
+            return RedirectToAction("Home", "Index"); 
+        }
+        ViewBag.Error = "Usuario o contraseña incorrectos";
+        return View("Index", "Home");
+    }
     
    
 }

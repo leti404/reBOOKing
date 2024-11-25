@@ -180,16 +180,16 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
 
     public static Usuario usuarioIniciado;
 
-    public static Usuario Login(string gmail)
+    public static Usuario IniciarSesion(string gmail, string contrasena)
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail;";
-            usuarioIniciado = TP_REBOOKING.Query<Usuario>(sql, new { Gmail = gmail }).FirstOrDefault();
+            string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail AND contrasena = @Contrasena;";
+            usuarioIniciado = TP_REBOOKING.Query<Usuario>(sql, new { Gmail = gmail, Contrasena = contrasena }).FirstOrDefault();
             return usuarioIniciado;
         }
-        
     }
+
     public static List<Libro> _ListadoLibros = new List<Libro>();
     
     public static List<Libro> ListarLibros()
