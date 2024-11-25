@@ -135,5 +135,9 @@ public class HomeController : Controller
         return View("Index", "Home");
     }
     
+    public IActionResult BuscarLibro()
+    {
+        
+    }
    
 }
