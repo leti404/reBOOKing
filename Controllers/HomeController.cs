@@ -12,7 +12,6 @@ public class HomeController : Controller
     {
         _logger = logger;
     }
-    //HACER QUE EL BUTTON DE FILTROS TE TRAIGA ACA(A UNA VIEW NUEVA), AGARRE LOS FILTROS Y LO LLEVE A LA VIEW
 
    public IActionResult Index(int materia, int anio, int precio, int estado)
     {
