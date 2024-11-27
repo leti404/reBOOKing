@@ -237,7 +237,17 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoEtiquetas;
     }
 
+    public static List<Publicacion> _ListadoPublicacionesConFiltroBusqueda = new List<Publicacion>();
     
+    public static List<Publicacion> FiltrarLibrosPorBusquedaTexto(string busquedaTexto)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "exec FiltrarPublicacionesPorNombreLibro @BusquedaTexto";
+            _ListadoPublicacionesConFiltroBusqueda = TP_REBOOKING.Query<Publicacion>(sql, new {BusquedaTexto = busquedaTexto}).ToList();
+        }
+        return _ListadoPublicacionesConFiltroBusqueda;
+    }
 
 }
 
