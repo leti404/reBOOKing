@@ -22,7 +22,8 @@
                 <li>
                     @if (ViewBag.User == null)
                     {
-                       <a href data-bs-toggle="modal" data-bs-target="#loginModal">Publicar</a>  
+                       /*<a href data-bs-toggle="modal" data-bs-target="#loginModal">Publicar</a>*/ 
+                       <a href='@Url.Action("CrearPublicacion")'>Publicar</a> 
                     }
                     else
                     {

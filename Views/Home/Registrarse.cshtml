@@ -4,7 +4,7 @@
 
 <h2>Registrarse</h2>
 
-<form id="registerForm" method="post" action='@Url.Action("RegistroExito", "Home")'>
+<form id="registerForm" method="post" action='@Url.Action("Registrarse", "Home")'>
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre:</label>
         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
@@ -14,21 +14,20 @@
         <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese su apellido" required>
     </div>
     <div class="mb-3">
-        <label for="nombreUsuario" class="form-label">Nombre Usuario:</label>
-        <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" placeholder="Ingrese su nombre de usuario" required>
+        <label for="nombre_usuario" class="form-label">Nombre Usuario:</label>
+        <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" placeholder="Ingrese su nombre de usuario" required>
     </div>
     <div class="mb-3">
-        <label for="escuela" class="form-label">Escuela:</label>
-        <input type="text" class="form-control" id="escuela" name="escuela" placeholder="Ingrese su escuela">
+        <label for="nombre_escuela" class="form-label">Escuela:</label>
+        <input type="text" class="form-control" id="nombre_escuela" name="nombre_escuela" placeholder="Ingrese su escuela">
     </div>
         <div class="mb-3">
         <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
         <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="Ingrese su fecha de nacimiento">
     </div>
     <div class="mb-3">
-
-            <label for="anioEscolar">Año</label>
-            <select id="anioEscolar" name="anioEscolar" >
+            <label for="año_escolar">Año</label>
+            <select id="año_escolar" name="año_escolar" >
               <option value="" selected>Seleccione su año escolar</option>
               <option value="1">Primer año</option>
               <option value="2">Segundo año</option>
@@ -38,12 +37,12 @@
             </select>
     </div>
     <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required>
+        <label for="gmail" class="form-label">Email:</label>
+        <input type="gmail" class="form-control" id="gmail" name="gmail" placeholder="Ingrese su email" required>
     </div>
     <div class="mb-3">
-        <label for="password" class="form-label">Contraseña:</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
+        <label for="contraseña" class="form-label">Contraseña:</label>
+        <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" required>
     </div>
     
     <button type="submit" class="btn btn-primary">Registrarse</button>

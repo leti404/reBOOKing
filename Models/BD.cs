@@ -15,17 +15,58 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
      
     }
-    public static void RegistrarUsuario(Usuario usua)
+    public static bool RegistrarUsuario(Usuario usua)
     {
-        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        Console.WriteLine(usua);
+        bool exito = false;
+        if(usua != null)
         {
-            string SQL = "INSERT INTO Usuario(nombre, apellido, nombre_usuario, contraseña, gmail, fecha_nacimiento, nombre_escuela, año_escolar) VALUES (@pnombre, @papellido, @pnombre_usuario, @pcontraseña, @pgmail, @pfecha_nacimiento, @pnombre_escuela, @paño_escolar )";
-            using(SqlConnection db = new SqlConnection(_connectionString)){
-            db.Execute(SQL, new{pnombre = usua.nombre, papellido = usua.nombre, pnombre_usuario = usua.nombre_usuario, pcontraseña = usua.contraseña, pgmail = usua.gmail, pfecha_nacimiento = usua.fecha_nacimiento, pnombre_escuela = usua.nombre_escuela, paño_escolar = usua.año_escolar});
+                using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+            {
+                string SQL = "INSERT INTO Usuario(nombre, apellido, nombre_usuario, contraseña, gmail, fecha_nacimiento, nombre_escuela, año_escolar) VALUES (@pnombre, @papellido, @pnombre_usuario, @pcontraseña, @pgmail, @pfecha_nacimiento, @pnombre_escuela, @paño_escolar )";
+                using(SqlConnection db = new SqlConnection(_connectionString)){
+                db.Execute(SQL, new{pnombre = usua.nombre, papellido = usua.nombre, pnombre_usuario = usua.nombre_usuario, pcontraseña = usua.contraseña, pgmail = usua.gmail, pfecha_nacimiento = usua.fecha_nacimiento, pnombre_escuela = usua.nombre_escuela, paño_escolar = usua.año_escolar});
+                }
             }
+            exito=true;
         }
-     
+        return exito;
     }
+
+    public static int RegistrarLibro(Libro libro)
+    {
+        using(SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string sql = "INSERT INTO Libro (nombre, descripcion, año, id_materia, id_editorial, id_autor) OUTPUT INSERTED.ID VALUES (@nombre, @descripcion, @año, @id_materia, @id_editorial, @id_autor)";
+            int newId = connection.QuerySingle<int>(sql, new
+            {
+                nombre = libro.nombre,
+                descripcion = libro.descripcion,
+                año = libro.año,
+                id_materia = libro.id_materia,
+                id_editorial = libro.id_editorial,
+                id_autor = libro.id_autor
+            });
+            return newId;
+        }
+    }
+
+    public static void RegistrarPublicacion(Publicacion publicacion)
+    {
+        using(SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string sql = "INSERT INTO Publicacion (id_libro, precio, id_usuario, fecha, imagen) VALUES (@id_libro, @precio, @id_usuario, @fecha, @imagen)";
+            connection.Execute(sql, new
+            {
+                id_libro = publicacion.id_libro,
+                precio = publicacion.precio,
+                id_usuario = publicacion.id_usuario,
+                fecha = publicacion.fecha,
+                imagen = publicacion.imagen
+            });
+        }
+    }
+
 
     public static List<Publicacion> _ListadoPublicaciones = new List<Publicacion>();
     public static List<Publicacion> ListarPublicaciones()

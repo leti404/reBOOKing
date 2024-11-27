@@ -55,10 +55,67 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult Registrarse(Usuario usua)
+    [HttpGet]
+    public IActionResult Registrarse()
     {
         return View();
     }
+
+    [HttpPost]
+    public IActionResult Registrarse(Usuario usua)
+    {
+        if(BD.RegistrarUsuario(usua))
+        {
+            return RedirectToAction("RegistroExito");
+        }
+        else
+        {
+            return View(); // Podrías redirigir a una vista de error aquí si es necesario
+        }
+    }
+
+    [HttpPost]
+    public IActionResult CrearPublicacion(PublicacionViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            // Primero, registrar el libro si no está en la base de datos
+            int libroId;
+            if (model.EnBiblioteca == "No")
+            {
+                libroId = BD.RegistrarLibro(new Libro
+                {
+                    nombre = model.NombreLibro,
+                    año = model.Anio,
+                    descripcion = model.Descripcion,
+                    id_materia = model.IdMateria
+                });
+            }
+            else
+            {
+                libroId = model.LibroSeleccionadoId;
+            }
+
+            // Registrar la publicación
+            BD.RegistrarPublicacion(new Publicacion
+            {
+                id_libro = libroId,
+                precio = model.Precio,
+                id_usuario = model.IdUsuario,
+                fecha = DateTime.Now,
+                imagen = model.Imagen
+            });
+
+            return RedirectToAction("PublicacionExitosa");
+        }
+        return View(model);
+    }
+
+    public IActionResult PublicacionExitosa()
+    {
+        return View();
+    }
+
     public IActionResult RegistroExito()
     {
         return View();
@@ -67,6 +124,7 @@ public class HomeController : Controller
     {
         return View();
     }
+    [HttpGet]
     public IActionResult CrearPublicacion()
     {
         ViewBag.ListaLibros = BD.ListarLibros();
@@ -101,13 +159,6 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-
-    public IActionResult PublicacionExitosa()
-    {
-        
-        return View();
-    }
-
     public IActionResult ConoceMas()
     {
         
