@@ -180,15 +180,20 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
 
     public static Usuario usuarioIniciado;
 
-    public static Usuario IniciarSesion(string gmail, string contrasena)
+    public static Usuario IniciarSesion(string gmail, string contraseña)
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail AND contrasena = @Contrasena;";
-            usuarioIniciado = TP_REBOOKING.Query<Usuario>(sql, new { Gmail = gmail, Contrasena = contrasena }).FirstOrDefault();
+            string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail AND contraseña = @Contraseña;";
+            
+            // Usa QueryFirstOrDefault para obtener un único objeto Usuario o null si no hay coincidencia.
+            Usuario usuarioIniciado = TP_REBOOKING.QueryFirstOrDefault<Usuario>(sql, new { Gmail = gmail, Contraseña = contraseña });
+            
             return usuarioIniciado;
         }
     }
+
+
 
     public static List<Libro> _ListadoLibros = new List<Libro>();
     
