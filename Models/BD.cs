@@ -15,6 +15,17 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
      
     }
+    public static void RegistrarUsuario(Usuario usua)
+    {
+        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string SQL = "INSERT INTO Usuario(nombre, apellido, nombre_usuario, contraseña, gmail, fecha_nacimiento, nombre_escuela, año_escolar) VALUES (@pnombre, @papellido, @pnombre_usuario, @pcontraseña, @pgmail, @pfecha_nacimiento, @pnombre_escuela, @paño_escolar )";
+            using(SqlConnection db = new SqlConnection(_connectionString)){
+            db.Execute(SQL, new{pnombre = usua.nombre, papellido = usua.nombre, pnombre_usuario = usua.nombre_usuario, pcontraseña = usua.contraseña, pgmail = usua.gmail, pfecha_nacimiento = usua.fecha_nacimiento, pnombre_escuela = usua.nombre_escuela, paño_escolar = usua.año_escolar});
+            }
+        }
+     
+    }
 
     public static List<Publicacion> _ListadoPublicaciones = new List<Publicacion>();
     public static List<Publicacion> ListarPublicaciones()
