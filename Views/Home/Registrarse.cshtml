@@ -19,11 +19,23 @@
     </div>
     <div class="mb-3">
         <label for="escuela" class="form-label">Escuela:</label>
-        <input type="text" class="form-control" id="escuela" name="escuela" placeholder="Ingrese su escuela" required>
+        <input type="text" class="form-control" id="escuela" name="escuela" placeholder="Ingrese su escuela">
+    </div>
+        <div class="mb-3">
+        <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
+        <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="Ingrese su fecha de nacimiento">
     </div>
     <div class="mb-3">
-        <label for="anioEscolar" class="form-label">Año Escolar:</label>
-        <input type="text" class="form-control" id="anioEscolar" name="anioEscolar" placeholder="Ingrese su año escolar" required>
+
+            <label for="anioEscolar">Año</label>
+            <select id="anioEscolar" name="anioEscolar" >
+              <option value="" selected>Seleccione su año escolar</option>
+              <option value="1">Primer año</option>
+              <option value="2">Segundo año</option>
+              <option value="3">Tercer año</option>
+              <option value="4">Cuarto año</option>
+              <option value="5">Quinto año</option>
+            </select>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Email:</label>

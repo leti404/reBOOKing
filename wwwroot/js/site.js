@@ -13,7 +13,7 @@
       reader.readAsDataURL(file);
     }
   }
-document.getElementById("loginForm").addEventListener("submit", function(event) {
+/*document.getElementById("loginForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
     let username = document.getElementById("username").value;
@@ -35,7 +35,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         }
     })
     .catch(error => console.error('Error:', error));
-});
+});*/
 
 function toggleForm() {
     var enBD = document.getElementById("enBD").value;

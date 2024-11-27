@@ -55,7 +55,7 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult Registrarse()
+    public IActionResult Registrarse(Usuario usua)
     {
         return View();
     }
@@ -70,6 +70,8 @@ public class HomeController : Controller
     public IActionResult CrearPublicacion()
     {
         ViewBag.ListaLibros = BD.ListarLibros();
+        ViewBag.ListaEstados = BD.ListarEtiquetas();
+        ViewBag.ListaMaterias = BD.ListarMaterias();
         return View();
     }
     public IActionResult TusFavoritos()
