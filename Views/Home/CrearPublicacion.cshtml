@@ -1,101 +1,98 @@
 @{
     ViewData["Title"] = "Crear Publicación";
 }
+@model PublicacionViewModel
 <div class="marginSpace">
 
-  <h2>Crear publicación</h2>
-  
-  <section class="general">
-    
-    <!-- Sección para cargar imagen -->
-    <div class="upload-container">
-      <label class="upload-label">
-        <div class="image-placeholder" id="image-preview">
-          <span>📷</span>
-        </div>
-      </label>
-      <button type="button" class="upload-button" onclick="document.getElementById('file-input').click();">Cargar Imagen</button>
-      <input type="file" class="image-upload" style="display: none;" id="file-input" accept="image/*" onchange="previewImage(event)">
-    </div>
-    
-    <!-- Formulario de publicación -->
-    <form method="get" action='@Url.Action("PublicacionExitosa", "Home")'>
-      <div class="venta">
-        <div class="caracteristicas">
-          <label for="enBD">¿El libro está en nuestra biblioteca?</label>
-          <select class="inputdatos" id="enBD" onchange="toggleForm()">
-            <option value="Sí" selected>Sí</option>
-            <option value="No">No</option>
-          </select>
+    <h2>Crear publicación</h2>
 
-          <div class="seleccion" id="bookSelection">
-            <label for="selectBook">¿Cuál es el libro?</label>
-            <select class="inputdatos" id="selectBook">
-              <option value="" selected>Seleccione un libro</option>
-              @foreach (Libro libro in ViewBag.ListaLibros)
-              {
-                <option class="dropdown-button" value="libro">@libro.nombre</option>
-              }
-            </select>
-            <label for="precio">Ingrese precio:</label>
-            <input class="inputdatos" type="number" name="precio" min="0" id="precio" placeholder="$">
-          </div>
-          
+    <section class="general">
+
+        <!-- Sección para cargar imagen -->
+        <div class="upload-container">
+            <label class="upload-label">
+                <div class="image-placeholder" id="image-preview">
+                    <span>📷</span>
+                </div>
+            </label>
+            <button type="button" class="upload-button" onclick="document.getElementById('file-input').click();">Cargar Imagen</button>
+            <input type="file" class="image-upload" style="display: none;" id="file-input" accept="image/*" onchange="previewImage(event)" required>
         </div>
+
+        <!-- Formulario de publicación -->
+        <form asp-action="CrearPublicacion" method="post">
+            <div class="seleccion" id="bookSelection">
+                <label for="selectBook">Seleccioná tu libro en nuestra biblioteca</label>
+                <select asp-for="LibroSeleccionadoId" class="inputdatos" id="selectBook">
+                    <option value="" selected>Seleccione un libro</option>
+                    @foreach (Libro libro in ViewBag.ListaLibros)
+                    {
+                        <option class="dropdown-button" value="@libro.id">@libro.nombre</option>
+                    }
+                </select>
+                <div class="caracteristicas">
+                    <label for="enBD">¿El libro está en nuestra biblioteca?</label>
+                    <select asp-for="EnBiblioteca" class="inputdatos" id="enBD" onchange="toggleForm()" required>
+                        <option value="Sí" selected>Sí</option>
+                        <option value="No">No</option>
+                    </select>
+
+                    <label for="precio">Ingrese precio:</label>
+                    <input asp-for="Precio" class="inputdatos" type="number" min="0" id="precio" placeholder="$" required>
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="publish-button">PUBLICAR</button>
+                </div>
+            </div>
+        </form>
 
         <!-- Formulario para nuevo libro (oculto por defecto) -->
         <div class="nuevolibro" id="bookForm" style="display: none;">
-          <div>
-            <label for="nombreLibro">Nombre del libro:</label>
-            <input type="text" class="inputdatos" name="nombreLibro" id="nombreLibro" placeholder="Ingrese nombre">
-          </div>
-          <div>
-            <label for="anio">Año:</label>
-            <select class="inputdatos" name="anio" id="anio">
-              <option value="" selected>Seleccione año</option>
-              <option value="1">Primer año</option>
-              <option value="2">Segundo año</option>
-              <option value="3">Tercer año</option>
-              <option value="4">Cuarto año</option>
-              <option value="5">Quinto año</option>
-            </select>
-          </div>
-          <div>
-            <label for="nuevoPrecio">Ingrese precio:</label>
-            <input class="inputdatos" type="number" min="0" name="precio" id="nuevoPrecio" placeholder="$">
-          </div>
-          <div>
-            <label for="estado">Estado:</label>
-            <select class="inputdatos" name="estado" id="estado">
-              <option value="" selected>Seleccione estado</option>
-              <option>Excelente</option>
-              <option>Muy bueno</option>
-              <option>Bueno</option>
-              <option>Regular</option>
-              <option>Muy usado</option>
-            </select>
-          </div>
-          <div>
-            <label for="materia">Materia:</label>
-            <select class="inputdatos" name="materia" id="materia">
-              <option value="" selected>Seleccione materia</option>
-              <option>Historia</option>
-              <option>Literatura</option>
-              <option>Lengua</option>
-              <option>Ciencias Sociales</option>
-              <option>Ficción</option>
-              <option>Cómic</option>
-            </select>
-          </div>
+            <form asp-action="CrearPublicacion" method="post">
+                <div>
+                    <label for="nombreLibro">Nombre del libro</label>
+                    <input asp-for="NombreLibro" type="text" class="inputdatos" id="nombreLibro" placeholder="Ingrese nombre" required>
+                </div>
+                <div>
+                    <label for="anio">Año</label>
+                    <select asp-for="Anio" class="inputdatos" id="anio" required>
+                        <option value="" selected>Seleccione año</option>
+                        <option value="1">Primer año</option>
+                        <option value="2">Segundo año</option>
+                        <option value="3">Tercer año</option>
+                        <option value="4">Cuarto año</option>
+                        <option value="5">Quinto año</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="nuevoPrecio">Ingrese precio</label>
+                    <input asp-for="Precio" class="inputdatos" type="number" min="0" id="nuevoPrecio" placeholder="$" required>
+                </div>
+                <div>
+                    <label for="estado">Estado</label>
+                    <select asp-for="Estado" class="inputdatos" id="estado" required>
+                        <option value="" selected>Seleccione estado</option>
+                        @foreach (Etiqueta eti in ViewBag.ListaEstados)
+                        {
+                            <option class="dropdown-button" value="@eti.id">@eti.nombre</option>
+                        }
+                    </select>
+                </div>
+                <div>
+                    <label for="materia">Materia</label>
+                    <select asp-for="IdMateria" class="inputdatos" id="materia" required>
+                        <option value="" selected>Seleccione materia</option>
+                        @foreach (Materia mat in ViewBag.ListaMaterias)
+                        {
+                            <option class="dropdown-button" value="@mat.id">@mat.nombre</option>
+                        }
+                    </select>
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="publish-button">PUBLICAR</button>
+                </div>
+            </form>
         </div>
-        
-        <!-- Botón de publicación dentro del formulario -->
-        <div class="button-container">
-          <button type="submit" class="publish-button">PUBLICAR</button>
-        </div>
-        
-        
-      </div>
-    </form>
-  </section>
+
+    </section>
 </div>

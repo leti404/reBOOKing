@@ -12,33 +12,27 @@ public class HomeController : Controller
     {
         _logger = logger;
     }
-    //HACER QUE EL BUTTON DE FILTROS TE TRAIGA ACA(A UNA VIEW NUEVA), AGARRE LOS FILTROS Y LO LLEVE A LA VIEW
 
-   public IActionResult Index(int? materia, int? anio, int? precio, int? estado)
+   public IActionResult Index(int materia, int anio, int precio, int estado)
     {
         int precioMin = 0;
-        int precioMax = precio.HasValue ? precio.Value : int.MaxValue;
+        int precioMax = precio > 0 ? precio : int.MaxValue;
 
         ViewBag.ListaMaterias = BD.ListarMaterias();
         ViewBag.ListaEtiquetas = BD.ListarEtiquetas();
         
-        if (materia.HasValue || anio.HasValue || estado.HasValue || precio.HasValue)
-        {
-            ViewBag.listaPublicaciones = BD.FiltrarLibros(
-                materia ?? 0,
-                anio ?? 0,
+       ViewBag.listaPublicaciones = BD.FiltrarLibros(
+                materia,
+                anio,
                 precioMin,
                 precioMax,
-                estado ?? 0
+                estado
             );
-        }
-        else
-        {
-            ViewBag.listaPublicaciones = BD.ListarPublicaciones();
-        }
+        
 
         return View();
     }
+
 
 
     public IActionResult Publicacion(int id)
@@ -61,13 +55,81 @@ public class HomeController : Controller
     {
         return View();
     }
+    [HttpGet]
+    public IActionResult Registrarse()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Registrarse(Usuario usua)
+    {
+        if(BD.RegistrarUsuario(usua))
+        {
+            return RedirectToAction("RegistroExito");
+        }
+        else
+        {
+            return View(); // Podrías redirigir a una vista de error aquí si es necesario
+        }
+    }
+
+    [HttpPost]
+    public IActionResult CrearPublicacion(PublicacionViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            // Primero, registrar el libro si no está en la base de datos
+            int libroId;
+            if (model.EnBiblioteca == "No")
+            {
+                libroId = BD.RegistrarLibro(new Libro
+                {
+                    nombre = model.NombreLibro,
+                    año = model.Anio,
+                    descripcion = model.Descripcion,
+                    id_materia = model.IdMateria
+                });
+            }
+            else
+            {
+                libroId = model.LibroSeleccionadoId;
+            }
+
+            // Registrar la publicación
+            BD.RegistrarPublicacion(new Publicacion
+            {
+                id_libro = libroId,
+                precio = model.Precio,
+                id_usuario = model.IdUsuario,
+                fecha = DateTime.Now,
+                imagen = model.Imagen
+            });
+
+            return RedirectToAction("PublicacionExitosa");
+        }
+        return View(model);
+    }
+
+    public IActionResult PublicacionExitosa()
+    {
+        return View();
+    }
+
+    public IActionResult RegistroExito()
+    {
+        return View();
+    }
     public IActionResult Usuario()
     {
         return View();
     }
+    [HttpGet]
     public IActionResult CrearPublicacion()
     {
         ViewBag.ListaLibros = BD.ListarLibros();
+        ViewBag.ListaEstados = BD.ListarEtiquetas();
+        ViewBag.ListaMaterias = BD.ListarMaterias();
         return View();
     }
     public IActionResult TusFavoritos()
@@ -97,13 +159,6 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-
-    public IActionResult PublicacionExitosa()
-    {
-        
-        return View();
-    }
-
     public IActionResult ConoceMas()
     {
         
@@ -113,12 +168,32 @@ public class HomeController : Controller
     public IActionResult Login()
     {
         // ViewBag.User = Usuario.FromString(HttpContext.Session.GetString("user"));
-        if(ViewBag.User is null)
+        /*if(ViewBag.User is null)
         {
             return RedirectToAction("Login", "Auth");
-        }
+        }*/
         return View();
     }
+
+    public IActionResult IniciarSesion(string email, string password)
+    {
+        Console.WriteLine("hola");
+        Usuario usuario = BD.IniciarSesion(email, password);
+        if (usuario != null)
+        {
+            HttpContext.Session.SetString("user", usuario.ToString()); 
+            return RedirectToAction("Home", "Index"); 
+        }
+        ViewBag.Error = "Usuario o contraseña incorrectos";
+        return View("Index", "Home");
+    }
     
+    public IActionResult BuscarLibro(string query)
+    {
+        ViewBag.listaPublicaciones = BD.FiltrarLibrosPorBusquedaTexto(query);
+        ViewBag.ListaMaterias = BD.ListarMaterias();
+        ViewBag.ListaEtiquetas = BD.ListarEtiquetas();
+        return View("Index");
+    }
    
 }

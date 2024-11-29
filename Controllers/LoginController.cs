@@ -14,16 +14,17 @@ public class AuthController : Controller
 {
 
     [HttpPost]
-    public IActionResult Login(string email, string password)
+    public IActionResult IniciarSesion(string email, string password)
     {
-        Usuario usuario = BD.Login(email);
-        if (usuario != null && usuario.contraseña == password)
+        Console.WriteLine("hola");
+        Usuario usuario = BD.IniciarSesion(email, password);
+        if (usuario != null)
         {
             HttpContext.Session.SetString("user", usuario.ToString()); 
-            return RedirectToAction("Index", "Home"); 
+            return RedirectToAction("Home", "Index"); 
         }
         ViewBag.Error = "Usuario o contraseña incorrectos";
-        return View();
+        return View("Index", "Home");
     }
 
     public IActionResult Logout()
