@@ -9,17 +9,6 @@ public class Usuario
     public DateTime fecha_nacimiento { get; set; }
     public int id_publicacion { get; set; }
 
-    // Constructor con 6 parámetros
-    public Usuario(int id, string nombre_usuario, string? contraseña, string? gmail, DateTime fecha_nacimiento, int id_publicacion)
-    {
-        this.id = id;
-        this.nombre_usuario = nombre_usuario;
-        this.contraseña = contraseña;
-        this.gmail = gmail;
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.id_publicacion = id_publicacion;
-    }
-
     public override string ToString()
     {
         return JsonSerializer.Serialize(this);

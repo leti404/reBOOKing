@@ -37,11 +37,17 @@
         </div>
 
             <!-- Icono de Usuario -->
-                @if (ViewBag.User == null)
+                @if (LoginController.Usuario == null)
                 {
                     <div class="navbar-user">
                         <a href='@Url.Action("Login", "Home")' ><img src="/img/usuario.png" alt="Usuario" class="user-icon" ></a>
                     </div>
+
+                    <a href='@Url.Action("Login", "Home")' data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <div class="navbar-user">
+                            <img src="/img/usuario.png" alt="Usuario" class="user-icon">
+                        </div>
+                    </a>
                 }
                 else
                 {
