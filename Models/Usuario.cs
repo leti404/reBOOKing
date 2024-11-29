@@ -9,7 +9,7 @@ public class Usuario
     public string nombre_usuario { get; set; }
     public string contraseña { get; set; }
     public string gmail { get; set; }
-    public Date fecha_nacimiento { get; set; }
+    public DateTime fecha_nacimiento { get; set; }
     public string nombre_escuela { get; set; }
     public int año_escolar { get; set; }
 
