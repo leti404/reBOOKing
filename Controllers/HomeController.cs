@@ -79,7 +79,6 @@ public class HomeController : Controller
     {
         if (ModelState.IsValid)
         {
-            // Primero, registrar el libro si no está en la base de datos
             int libroId;
             if (model.EnBiblioteca == "No")
             {
