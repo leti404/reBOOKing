@@ -1,9 +1,9 @@
 @{
     ViewData["Title"] = "Tus Favoritos";
 }
-
+<h1>Tus Favoritos</h1>
  <div class="row publicaciones-row"> 
-        @foreach (Publicacion publicacion in ViewBag.listaPublicaciones)
+        @foreach (Publicacion publicacion in ViewBag.Listafavortios)
         {
             <div class="col-md-3">
                 <a href='@Url.Action("Publicacion", "Home")'  class="card-rebooking">

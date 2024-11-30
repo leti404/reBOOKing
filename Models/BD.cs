@@ -38,15 +38,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         using(SqlConnection connection = new SqlConnection(_connectionString))
         {
             string sql = "INSERT INTO Libro (nombre, descripcion, año, id_materia, id_editorial, id_autor) OUTPUT INSERTED.ID VALUES (@nombre, @descripcion, @año, @id_materia, @id_editorial, @id_autor)";
-            int newId = connection.QuerySingle<int>(sql, new
-            {
-                nombre = libro.nombre,
-                descripcion = libro.descripcion,
-                año = libro.año,
-                id_materia = libro.id_materia,
-                id_editorial = libro.id_editorial,
-                id_autor = libro.id_autor
-            });
+            int newId = connection.QuerySingle<int>(sql, new {nombre = libro.nombre, descripcion = libro.descripcion, año = libro.año, id_materia = libro.id_materia, id_editorial = libro.id_editorial, id_autor = libro.id_autor});
             return newId;
         }
     }
@@ -56,18 +48,21 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         using(SqlConnection connection = new SqlConnection(_connectionString))
         {
             string sql = "INSERT INTO Publicacion (id_libro, precio, id_usuario, fecha, imagen) VALUES (@id_libro, @precio, @id_usuario, @fecha, @imagen)";
-            connection.Execute(sql, new
-            {
-                id_libro = publicacion.id_libro,
-                precio = publicacion.precio,
-                id_usuario = publicacion.id_usuario,
-                fecha = publicacion.fecha,
-                imagen = publicacion.imagen
-            });
+            connection.Execute(sql, new {id_libro = publicacion.id_libro, precio = publicacion.precio, id_usuario = publicacion.id_usuario, fecha = publicacion.fecha, imagen = publicacion.imagen});
         }
     }
 
 
+    public static List<Publicacion> _ListadoFavortios = new List<Publicacion>();
+    public static List<Publicacion> ListarFavoritos(int idUsuario)
+    {
+        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "SELECT Favorito.id_publicacion AS PublicacionID, Libro.nombre AS NombreLibro, Publicacion.precio AS Precio, Publicacion.fecha AS FechaPublicacion, Publicacion.imagen AS Imagen, Usuario.nombre_usuario AS UsuarioPublicador FROM Favorito JOIN Publicacion ON Favorito.id_publicacion = Publicacion.id JOIN Libro ON Publicacion.id_libro = Libro.id JOIN Usuario ON Publicacion.id_usuario = Usuario.id WHERE Favorito.id_usuario = @IdUsuario;";
+            _ListadoFavortios = TP_REBOOKING.Query<Publicacion>(sql, new {IdUsuario = idUsuario}).ToList(); 
+        }
+        return _ListadoFavortios;
+    }
     public static List<Publicacion> _ListadoPublicaciones = new List<Publicacion>();
     public static List<Publicacion> ListarPublicaciones()
     {
@@ -79,12 +74,12 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoPublicaciones;
     }
     public static List<Publicacion> _ListadoCarrito = new List<Publicacion>();
-    public static List<Publicacion> ListarCarrito()
+    public static List<Publicacion> ListarCarrito(int IdUsuario)
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM Carrito";
-            _ListadoCarrito = TP_REBOOKING.Query<Publicacion>(sql).ToList(); 
+            string sql = "SELECT * FROM Carrito WHERE Carrito.id_usuario = @idUsuario ";
+            _ListadoCarrito = TP_REBOOKING.Query<Publicacion>(sql, new { idUsuario = IdUsuario }).ToList(); 
         }
         return _ListadoCarrito;
     }
@@ -294,6 +289,39 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
         return _ListadoPublicacionesConFiltroBusqueda;
     }
+    public static decimal CalcularTotalCarrito(int IdUsuario)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = @" SELECT SUM(Publicacion.precio * Carrito.cantidad) AS TotalCost FROM Carrito JOIN Publicacion ON Carrito.id_publicacion = Publicacion.id WHERE Carrito.id_usuario = @idUsuario";
+            return TP_REBOOKING.QuerySingleOrDefault<decimal>(sql, new { idUsuario = IdUsuario });
+        }
+    }
+
+public static bool EliminarItemCarrito(int userId, int publicacionId)
+{
+    using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+    {
+        string sqlDelete = @"
+            DELETE FROM Carrito
+            WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
+
+        string sqlCheck = @"
+            SELECT COUNT(*) 
+            FROM Carrito 
+            WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
+
+        TP_REBOOKING.Execute(sqlDelete, new { UserId = userId, PublicacionId = publicacionId });
+
+        int count = TP_REBOOKING.QuerySingle<int>(sqlCheck, new { UserId = userId, PublicacionId = publicacionId });
+        bool exito == false;
+        if (count == 0)
+        {
+            exito = true;
+        }
+        return exito;
+    }
+}
 
 }
 

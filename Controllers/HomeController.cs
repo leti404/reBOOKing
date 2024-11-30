@@ -51,8 +51,10 @@ public class HomeController : Controller
         return View();
     }
     
-    public IActionResult Carrito()
+    public IActionResult Carrito(int IdUsuario)
     {
+        ViewBag.ListaCarrito = BD.ListarCarrito(IdUsuario);
+        ViewBag.TotalCarrtio = BD.CalcularTotalCarrito(IdUsuario);
         return View();
     }
     [HttpGet]
@@ -131,8 +133,9 @@ public class HomeController : Controller
         ViewBag.ListaMaterias = BD.ListarMaterias();
         return View();
     }
-    public IActionResult TusFavoritos()
+    public IActionResult TusFavoritos(int idUsuario)
     {
+        ViewBag.Listafavortios = BD.ListarFavoritos(idUsuario);
         return View();
     }
 
@@ -193,6 +196,24 @@ public class HomeController : Controller
         ViewBag.ListaMaterias = BD.ListarMaterias();
         ViewBag.ListaEtiquetas = BD.ListarEtiquetas();
         return View("Index");
+    }
+
+    [HttpPost]
+    public IActionResult RemoveItem([FromBody] int id)
+    {
+        try
+        {
+            bool isDeleted = BD.EliminarItemCarrito(int userId, int id);
+            
+            if (isDeleted)
+            {
+                return Ok(); 
+            }
+            else
+            {
+                return BadRequest("El libro no puedo ser eliminado"); 
+            }
+        }
     }
    
 }
