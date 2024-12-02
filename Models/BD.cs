@@ -15,18 +15,54 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
      
     }
-    public static void RegistrarUsuario(Usuario usua)
+    public static bool RegistrarUsuario(Usuario usua)
+    {
+        Console.WriteLine(usua);
+        bool exito = false;
+        if(usua != null)
+        {
+                using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+            {
+                string SQL = "INSERT INTO Usuario(nombre, apellido, nombre_usuario, contraseña, gmail, fecha_nacimiento, nombre_escuela, año_escolar) VALUES (@pnombre, @papellido, @pnombre_usuario, @pcontraseña, @pgmail, @pfecha_nacimiento, @pnombre_escuela, @paño_escolar )";
+                using(SqlConnection db = new SqlConnection(_connectionString)){
+                db.Execute(SQL, new{pnombre = usua.nombre, papellido = usua.apellido, pnombre_usuario = usua.nombre_usuario, pcontraseña = usua.contraseña, pgmail = usua.gmail, pfecha_nacimiento = usua.fecha_nacimiento, pnombre_escuela = usua.nombre_escuela, paño_escolar = usua.año_escolar});
+                }
+            }
+            exito=true;
+        }
+        return exito;
+    }
+
+    public static int RegistrarLibro(Libro libro)
+    {
+        using(SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string sql = "INSERT INTO Libro (nombre, descripcion, año, id_materia, id_editorial, id_autor) OUTPUT INSERTED.ID VALUES (@nombre, @descripcion, @año, @id_materia, @id_editorial, @id_autor)";
+            int newId = connection.QuerySingle<int>(sql, new {nombre = libro.nombre, descripcion = libro.descripcion, año = libro.año, id_materia = libro.id_materia, id_editorial = libro.id_editorial, id_autor = libro.id_autor});
+            return newId;
+        }
+    }
+
+    public static void RegistrarPublicacion(Publicacion publicacion)
+    {
+        using(SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string sql = "INSERT INTO Publicacion (id_libro, precio, id_usuario, fecha, imagen) VALUES (@id_libro, @precio, @id_usuario, @fecha, @imagen)";
+            connection.Execute(sql, new {id_libro = publicacion.id_libro, precio = publicacion.precio, id_usuario = publicacion.id_usuario, fecha = publicacion.fecha, imagen = publicacion.imagen});
+        }
+    }
+
+
+    public static List<Publicacion> _ListadoFavortios = new List<Publicacion>();
+    public static List<Publicacion> ListarFavoritos(int idUsuario)
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string SQL = "INSERT INTO Usuario(nombre, apellido, nombre_usuario, contraseña, gmail, fecha_nacimiento, nombre_escuela, año_escolar) VALUES (@pnombre, @papellido, @pnombre_usuario, @pcontraseña, @pgmail, @pfecha_nacimiento, @pnombre_escuela, @paño_escolar )";
-            using(SqlConnection db = new SqlConnection(_connectionString)){
-            db.Execute(SQL, new{pnombre = usua.nombre, papellido = usua.nombre, pnombre_usuario = usua.nombre_usuario, pcontraseña = usua.contraseña, pgmail = usua.gmail, pfecha_nacimiento = usua.fecha_nacimiento, pnombre_escuela = usua.nombre_escuela, paño_escolar = usua.año_escolar});
-            }
+            string sql = "SELECT Favorito.id_publicacion AS PublicacionID, Libro.nombre AS NombreLibro, Publicacion.precio AS Precio, Publicacion.fecha AS FechaPublicacion, Publicacion.imagen AS Imagen, Usuario.nombre_usuario AS UsuarioPublicador FROM Favorito JOIN Publicacion ON Favorito.id_publicacion = Publicacion.id JOIN Libro ON Publicacion.id_libro = Libro.id JOIN Usuario ON Publicacion.id_usuario = Usuario.id WHERE Favorito.id_usuario = @IdUsuario;";
+            _ListadoFavortios = TP_REBOOKING.Query<Publicacion>(sql, new {IdUsuario = idUsuario}).ToList(); 
         }
-     
+        return _ListadoFavortios;
     }
-
     public static List<Publicacion> _ListadoPublicaciones = new List<Publicacion>();
     public static List<Publicacion> ListarPublicaciones()
     {
@@ -38,12 +74,12 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoPublicaciones;
     }
     public static List<Publicacion> _ListadoCarrito = new List<Publicacion>();
-    public static List<Publicacion> ListarCarrito()
+    public static List<Publicacion> ListarCarrito(int IdUsuario)
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM Carrito";
-            _ListadoCarrito = TP_REBOOKING.Query<Publicacion>(sql).ToList(); 
+            string sql = "SELECT * FROM Carrito WHERE Carrito.id_usuario = @idUsuario ";
+            _ListadoCarrito = TP_REBOOKING.Query<Publicacion>(sql, new { idUsuario = IdUsuario }).ToList(); 
         }
         return _ListadoCarrito;
     }
@@ -189,18 +225,23 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
 
     }
 
-    
+    public static Usuario usuarioIniciado;
 
     public static Usuario IniciarSesion(string gmail, string contraseña)
     {
         Usuario usuarioIniciado;
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail AND contraseña = @contraseña;";
-            usuarioIniciado = TP_REBOOKING.Query<Usuario>(sql, new { Gmail = gmail, contraseña = contraseña }).FirstOrDefault();
+            string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail AND contraseña = @Contraseña;";
+            
+            // Usa QueryFirstOrDefault para obtener un único objeto Usuario o null si no hay coincidencia.
+            Usuario usuarioIniciado = TP_REBOOKING.QueryFirstOrDefault<Usuario>(sql, new { Gmail = gmail, Contraseña = contraseña });
+            
             return usuarioIniciado;
         }
     }
+
+
 
     public static List<Libro> _ListadoLibros = new List<Libro>();
     
@@ -238,7 +279,50 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoEtiquetas;
     }
 
+    public static List<Publicacion> _ListadoPublicacionesConFiltroBusqueda = new List<Publicacion>();
     
+    public static List<Publicacion> FiltrarLibrosPorBusquedaTexto(string busquedaTexto)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "exec FiltrarPublicacionesPorNombreLibro @BusquedaTexto";
+            _ListadoPublicacionesConFiltroBusqueda = TP_REBOOKING.Query<Publicacion>(sql, new {BusquedaTexto = busquedaTexto}).ToList();
+        }
+        return _ListadoPublicacionesConFiltroBusqueda;
+    }
+    public static decimal CalcularTotalCarrito(int IdUsuario)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = @" SELECT SUM(Publicacion.precio * Carrito.cantidad) AS TotalCost FROM Carrito JOIN Publicacion ON Carrito.id_publicacion = Publicacion.id WHERE Carrito.id_usuario = @idUsuario";
+            return TP_REBOOKING.QuerySingleOrDefault<decimal>(sql, new { idUsuario = IdUsuario });
+        }
+    }
+
+public static bool EliminarItemCarrito(int userId, int publicacionId)
+{
+    using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+    {
+        string sqlDelete = @"
+            DELETE FROM Carrito
+            WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
+
+        string sqlCheck = @"
+            SELECT COUNT(*) 
+            FROM Carrito 
+            WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
+
+        TP_REBOOKING.Execute(sqlDelete, new { UserId = userId, PublicacionId = publicacionId });
+
+        int count = TP_REBOOKING.QuerySingle<int>(sqlCheck, new { UserId = userId, PublicacionId = publicacionId });
+        bool exito == false;
+        if (count == 0)
+        {
+            exito = true;
+        }
+        return exito;
+    }
+}
 
 }
 

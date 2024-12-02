@@ -6,8 +6,8 @@ public class Usuario
     public string nombre { get; set; }
     public string apellido { get; set; }
     public string nombre_usuario { get; set; }
-    public string? contraseña { get; set; }
-    public string? gmail { get; set; }
+    public string contraseña { get; set; }
+    public string gmail { get; set; }
     public DateTime fecha_nacimiento { get; set; }
     public string nombre_escuela { get; set; }
     public string año_escolar { get; set; }
@@ -27,19 +27,5 @@ public class Usuario
         this.gmail = gmail;
         this.fecha_nacimiento = fecha_nacimiento;
         this.id_publicacion = id_publicacion;
-    }
-
-    public override string ToString()
-    {
-        return JsonSerializer.Serialize(this);
-    }
-
-    public static Usuario? FromString(string? json)
-    {
-        if (json is null)
-        {
-            return null;
-        }
-        return JsonSerializer.Deserialize<Usuario>(json);
     }
 }

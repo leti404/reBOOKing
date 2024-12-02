@@ -53,16 +53,73 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Carrito()
+    public IActionResult Carrito(int IdUsuario)
+    {
+        ViewBag.ListaCarrito = BD.ListarCarrito(IdUsuario);
+        ViewBag.TotalCarrtio = BD.CalcularTotalCarrito(IdUsuario);
+        return View();
+    }
+    public IActionResult Registrarse()
     {
         ViewBag.usuario1 = User;
         return View();
     }
+
+    [HttpPost]
     public IActionResult Registrarse(Usuario usua)
     {
+        if(BD.RegistrarUsuario(usua))
+        {
+            return RedirectToAction("RegistroExito");
+        }
+        else
+        {
+            return View(); // Podrías redirigir a una vista de error aquí si es necesario
+        }
+    }
+
+    [HttpPost]
+    public IActionResult CrearPublicacion(PublicacionViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            int libroId;
+            if (model.EnBiblioteca == "No")
+            {
+                libroId = BD.RegistrarLibro(new Libro
+                {
+                    nombre = model.NombreLibro,
+                    año = model.Anio,
+                    descripcion = model.Descripcion,
+                    id_materia = model.IdMateria
+                });
+            }
+            else
+            {
+                libroId = model.LibroSeleccionadoId;
+            }
+
+            // Registrar la publicación
+            BD.RegistrarPublicacion(new Publicacion
+            {
+                id_libro = libroId,
+                precio = model.Precio,
+                id_usuario = model.IdUsuario,
+                fecha = DateTime.Now,
+                imagen = model.Imagen
+            });
+
+            return RedirectToAction("PublicacionExitosa");
+        }
+        return View(model);
+    }
+
+    public IActionResult PublicacionExitosa()
+    {
         ViewBag.usuario1 = User;
         return View();
     }
+
     public IActionResult RegistroExito()
     {
         ViewBag.usuario1 = User;
@@ -73,16 +130,20 @@ public class HomeController : Controller
         ViewBag.usuario1 = User;
         return View();
     }
+    [HttpGet]
     public IActionResult CrearPublicacion()
     {
         ViewBag.ListaLibros = BD.ListarLibros();
         ViewBag.ListaEstados = BD.ListarEtiquetas();
         ViewBag.ListaMaterias = BD.ListarMaterias();
+        ViewBag.ListaEstados = BD.ListarEtiquetas();
+        ViewBag.ListaMaterias = BD.ListarMaterias();
         ViewBag.usuario1 = User;
         return View();
     }
-    public IActionResult TusFavoritos()
+    public IActionResult TusFavoritos(int idUsuario)
     {
+        ViewBag.Listafavortios = BD.ListarFavoritos(idUsuario);
         ViewBag.usuario1 = User;
         return View();
     }
@@ -139,6 +200,21 @@ public class HomeController : Controller
             return View();
         }
 
+    public IActionResult IniciarSesion(string email, string password)
+    {
+        Console.WriteLine("hola");
+        Usuario usuario = BD.IniciarSesion(email, password);
+        if (usuario != null)
+        {
+            HttpContext.Session.SetString("user", usuario.ToString()); 
+            return RedirectToAction("Home", "Index"); 
+        }
+        else
+        {
+            ViewBag.Error = "Usuario y/o contraseña incorrectos";
+            return View();
+        }
+
         ViewBag.usuario1 = User;
     }
 
@@ -147,5 +223,31 @@ public class HomeController : Controller
         User = null;
         return RedirectToAction("Index", "Home");
     }
+    
+    public IActionResult BuscarLibro(string query)
+    {
+        ViewBag.listaPublicaciones = BD.FiltrarLibrosPorBusquedaTexto(query);
+        ViewBag.ListaMaterias = BD.ListarMaterias();
+        ViewBag.ListaEtiquetas = BD.ListarEtiquetas();
+        return View("Index");
+    }
 
+    [HttpPost]
+    public IActionResult RemoveItem([FromBody] int id)
+    {
+        try
+        {
+            bool isDeleted = BD.EliminarItemCarrito(int userId, int id);
+            
+            if (isDeleted)
+            {
+                return Ok(); 
+            }
+            else
+            {
+                return BadRequest("El libro no puedo ser eliminado"); 
+            }
+        }
+    }
+   
 }
