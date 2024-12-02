@@ -64,11 +64,7 @@
                     <div class="navbar-user">
                         <img src="/img/usuario.png" alt="Usuario" class="user-icon" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUserMenu" aria-controls="offcanvasUserMenu">
                    </div>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalIniciarSesion" onclick="IniciarSesion()">
-                        <div class="navbar-user">
-                            <img src="/img/usuario.png" alt="Usuario" class="user-icon" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUserMenu" aria-controls="offcanvasUserMenu">
-                        </div>
-                    </button>
+
                     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUserMenu" aria-labelledby="offcanvasUserMenuLabel">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="offcanvasUserMenuLabel">Menú de Usuario</h5>
@@ -93,7 +89,7 @@
                                     <a class="nav-link active" aria-current="page" href='@Url.Action("TusFavoritos")'>Tus Reviews</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href='@Url.Action("CerrarSesion")'>Cerrar Sesion</a>
+                                    <a class="nav-link active" aria-current="page" href='@Url.Action("Logout")'>Cerrar Sesion</a>
                                 </li>
                             </ul>
                         </div>
