@@ -224,12 +224,10 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoPublicacionesConFiltro;
 
     }
-
-    public static Usuario usuarioIniciado;
-
+    Usuario usuarioIniciado;
     public static Usuario IniciarSesion(string gmail, string contraseña)
     {
-        Usuario usuarioIniciado;
+        
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
             string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail AND contraseña = @Contraseña;";
@@ -298,31 +296,31 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
             return TP_REBOOKING.QuerySingleOrDefault<decimal>(sql, new { idUsuario = IdUsuario });
         }
     }
-
-public static bool EliminarItemCarrito(int userId, int publicacionId)
-{
-    using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+    static int count;
+    public static bool EliminarItemCarrito(int userId, int publicacionId)
     {
-        string sqlDelete = @"
-            DELETE FROM Carrito
-            WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sqlDelete = @"
+                DELETE FROM Carrito
+                WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
 
-        string sqlCheck = @"
-            SELECT COUNT(*) 
-            FROM Carrito 
-            WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
+            string sqlCheck = @"
+                SELECT COUNT(*) 
+                FROM Carrito 
+                WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
 
-        TP_REBOOKING.Execute(sqlDelete, new { UserId = userId, PublicacionId = publicacionId });
+            TP_REBOOKING.Execute(sqlDelete, new { UserId = userId, PublicacionId = publicacionId });
 
-        int count = TP_REBOOKING.QuerySingle<int>(sqlCheck, new { UserId = userId, PublicacionId = publicacionId });
-        bool exito == false;
+            count = TP_REBOOKING.QuerySingle<int>(sqlCheck, new { UserId = userId, PublicacionId = publicacionId });
+        }
+        bool exito = false;
         if (count == 0)
         {
             exito = true;
         }
         return exito;
     }
-}
 
 }
 

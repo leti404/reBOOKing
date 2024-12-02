@@ -22,8 +22,8 @@
                 <li>
                     @if (ViewBag.usuario1 == null)
                     {
-                       /*<a href data-bs-toggle="modal" data-bs-target="#loginModal">Publicar</a>*/ 
-                       <a href='@Url.Action("CrearPublicacion")'>Publicar</a> 
+                       <a href data-bs-toggle="modal" data-bs-target="#loginModal">Publicar</a>
+                       
                     }
                     else
                     {
@@ -53,10 +53,6 @@
             <!-- Icono de Usuario -->
                 @if (ViewBag.usuario1 == null)
                 {
-                    <div class="navbar-user">
-                        <a href='@Url.Action("Login", "Home")' ><img src="/img/usuario.png" alt="Usuario" class="user-icon" ></a>
-                    </div>
-
                     <a href='@Url.Action("Login", "Home")' data-bs-toggle="modal" data-bs-target="#loginModal">
                         <div class="navbar-user">
                             <img src="/img/usuario.png" alt="Usuario" class="user-icon">

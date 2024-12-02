@@ -13,9 +13,9 @@
                 <div class="item-details">
                     <h3> @BD.ObtenerNombreLibroPorPublicacion(publicacion.id_libro)</h3>
                     <p class="item-price">$@publicacion.precio.ToString("C")</p>
-                    <!--<p class="item-status">Estado: <span>@item.Status</span></p> -->
+                <p class="item-status">Estado: <span>@publicacion.precio</span></p>
                 </div>
-                <button class="delete-button" onclick="removeItem(@item.Id)">🗑️</button>
+                <button class="delete-button" onclick="removeItem(@publicacion.id)">🗑️</button>
             </div>
         }
     </div>

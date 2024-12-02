@@ -176,11 +176,6 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-    public IActionResult PublicacionExitosa()
-    {
-        ViewBag.usuario1 = User;
-        return View();
-    }
 
     public IActionResult ConoceMas()
     {
@@ -201,26 +196,10 @@ public class HomeController : Controller
             ViewBag.Error = "Usuario y/o contraseña incorrectos";
             return View();
         }
-    }
-
-    [HttpGet]
-    public IActionResult IniciarSesion(string email, string password)
-    {
-        Console.WriteLine("hola");
-        Usuario usuario = BD.IniciarSesion(email, password);
-        if (usuario != null)
-        {
-            HttpContext.Session.SetString("user", usuario.ToString()); 
-            return RedirectToAction("Home", "Index"); 
-        }
-        else
-        {
-            ViewBag.Error = "Usuario y/o contraseña incorrectos";
-            return View();
-        }
-
         ViewBag.usuario1 = User;
     }
+
+  
 
     public IActionResult Logout()
     {
@@ -239,8 +218,8 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult RemoveItem([FromBody] int id)
     {
-
-        bool isDeleted = BD.EliminarItemCarrito(userId, id);
+        ViewBag.usuario1 = User;
+        bool isDeleted = BD.EliminarItemCarrito(User.id, id);
         
         if (isDeleted)
         {
