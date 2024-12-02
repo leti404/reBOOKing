@@ -57,6 +57,7 @@ public class HomeController : Controller
     {
         ViewBag.ListaCarrito = BD.ListarCarrito(IdUsuario);
         ViewBag.TotalCarrtio = BD.CalcularTotalCarrito(IdUsuario);
+        ViewBag.usuario1 = User;
         return View();
     }
     public IActionResult Registrarse()
@@ -81,6 +82,7 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult CrearPublicacion(PublicacionViewModel model)
     {
+        ViewBag.usuario1 = User;
         if (ModelState.IsValid)
         {
             int libroId;
@@ -199,7 +201,9 @@ public class HomeController : Controller
             ViewBag.Error = "Usuario y/o contraseña incorrectos";
             return View();
         }
+    }
 
+    [HttpGet]
     public IActionResult IniciarSesion(string email, string password)
     {
         Console.WriteLine("hola");
@@ -235,19 +239,18 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult RemoveItem([FromBody] int id)
     {
-        try
+
+        bool isDeleted = BD.EliminarItemCarrito(userId, id);
+        
+        if (isDeleted)
         {
-            bool isDeleted = BD.EliminarItemCarrito(int userId, int id);
-            
-            if (isDeleted)
-            {
-                return Ok(); 
-            }
-            else
-            {
-                return BadRequest("El libro no puedo ser eliminado"); 
-            }
+            return Ok(); 
         }
+        else
+        {
+            return BadRequest("El libro no puedo ser eliminado"); 
+        }
+
     }
    
 }
