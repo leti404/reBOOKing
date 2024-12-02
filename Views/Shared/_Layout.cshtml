@@ -20,9 +20,9 @@
             
             <ul class="navbar-links">
                 <li>
-                    @if (ViewBag.User == null)
+                    @if (ViewBag.usuario1 == null)
                     {
-                        <a href data-bs-toggle="modal" data-bs-target="#loginModal">Publicar</a>
+                       <a href data-bs-toggle="modal" data-bs-target="#loginModal">Publicar</a>  
                     }
                     else
                     {
@@ -50,7 +50,7 @@
         </div>
 
             <!-- Icono de Usuario -->
-                @if (ViewBag.User == null)
+                @if (ViewBag.usuario1 == null)
                 {
                     <div class="navbar-user">
                         <img src="/img/usuario.png" alt="Usuario" class="user-icon" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -113,17 +113,17 @@
             <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
             <div class="modal-body">
                 <!-- Actualizando la acción del formulario a la acción "Login" en el controlador "Login" -->
-                <form id="loginForm" method="get" action='@Url.Action("IniciarSesion", "Home")'>
+                <form id="loginForm" method="post" action='@Url.Action("IniciarSesion", "Home")'>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña:</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
+                        <label for="contraseña" class="form-label">Contraseña:</label>
+                        <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" required>
                     </div>
-
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Registrarse</a><br>
+                    <p>@ViewBag.Error</p>
+                    <a href='@Url.Action("Registrarse")'>Registrarse</a>
 
                     <button type="submit" class="btn-login">Iniciar Sesión</button>
                 </form>
@@ -132,48 +132,6 @@
     </div>
 </div> 
 
-    <!-- Modal Registrarse-->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <h5 class="modal-title" id="registerModalLabel">Registrarse</h5>
-            <div class="modal-body">
-                <form id="registerForm" method="post" action="#">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="apellido" class="form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese su apellido" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="apellido" class="form-label">Nombre Usuario:</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese su nombre usuario" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="apellido" class="form-label">Escuela:</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese su eliga" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="apellido" class="form-label">Año Escolar:</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese su año escolar" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña:</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
-                    </div>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#LoginModal">Login</a>
-                    <button type="submit" class="btn-register">Registrarse</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
    <footer>
     <div class="footer-container">

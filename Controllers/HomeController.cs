@@ -29,7 +29,7 @@ public class HomeController : Controller
                 estado
             );
         
-
+        ViewBag.usuario1 = User;
         return View();
     }
 
@@ -44,46 +44,58 @@ public class HomeController : Controller
         ViewBag.publicacion = publicacion;
         ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(id);
         ViewBag.descripcion = BD.ObtenerDescripcionPublicacion(id);
+        ViewBag.usuario1 = User;
         return View();
     }
     public IActionResult SobreNosotros()
     {
+        ViewBag.usuario1 = User;
         return View();
     }
-    
+
     public IActionResult Carrito()
     {
+        ViewBag.usuario1 = User;
         return View();
     }
-    public IActionResult Registrarse()
+    public IActionResult Registrarse(Usuario usua)
     {
+        ViewBag.usuario1 = User;
         return View();
     }
     public IActionResult RegistroExito()
     {
+        ViewBag.usuario1 = User;
         return View();
     }
     public IActionResult Usuario()
     {
+        ViewBag.usuario1 = User;
         return View();
     }
     public IActionResult CrearPublicacion()
     {
         ViewBag.ListaLibros = BD.ListarLibros();
+        ViewBag.ListaEstados = BD.ListarEtiquetas();
+        ViewBag.ListaMaterias = BD.ListarMaterias();
+        ViewBag.usuario1 = User;
         return View();
     }
     public IActionResult TusFavoritos()
     {
+        ViewBag.usuario1 = User;
         return View();
     }
 
     public IActionResult TusPublicaciones()
     {
+        ViewBag.usuario1 = User;
         return View();
     }
 
     public IActionResult TusReviews()
     {
+        ViewBag.usuario1 = User;
         return View();
     }
 
@@ -91,6 +103,7 @@ public class HomeController : Controller
 
     public IActionResult Privacy()
     {
+        ViewBag.usuario1 = User;
         return View();
     }
 
@@ -102,38 +115,37 @@ public class HomeController : Controller
 
     public IActionResult PublicacionExitosa()
     {
-        
+        ViewBag.usuario1 = User;
         return View();
     }
 
     public IActionResult ConoceMas()
     {
-        
+        ViewBag.usuario1 = User;
         return View();
     }
-
-    public IActionResult Login()
+    public static Usuario User = null;
+    [HttpPost]
+    public IActionResult IniciarSesion(string email, string contraseña)
     {
-        // ViewBag.User = Usuario.FromString(HttpContext.Session.GetString("user"));
-        /*if(ViewBag.User is null)
+        User = BD.IniciarSesion(email, contraseña);
+        if (User != null)
         {
-            return RedirectToAction("Login", "Auth");
-        }*/
-        return View();
-    }
-
-    public IActionResult IniciarSesion(string email, string password)
-    {
-        Console.WriteLine("hola");
-        Usuario usuario = BD.IniciarSesion(email, password);
-        if (usuario != null)
-        {
-            HttpContext.Session.SetString("user", usuario.ToString()); 
-            return RedirectToAction("Home", "Index"); 
+            return RedirectToAction( "Index", "Home"); 
         }
-        ViewBag.Error = "Usuario o contraseña incorrectos";
-        return View("Index", "Home");
+        else
+        {
+            ViewBag.Error = "Usuario y/o contraseña incorrectos";
+            return View();
+        }
+
+        ViewBag.usuario1 = User;
     }
-    
-   
+
+    public IActionResult Logout()
+    {
+        User = null;
+        return RedirectToAction("Index", "Home");
+    }
+
 }

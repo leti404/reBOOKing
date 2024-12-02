@@ -1,3 +1,4 @@
+// No esta queriendo andar 
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
@@ -13,23 +14,27 @@ using reBOOKing.Models;
 public class AuthController : Controller
 {
 
+    public static Usuario User = null;
     [HttpPost]
     public IActionResult IniciarSesion(string email, string password)
     {
         Console.WriteLine("hola");
-        Usuario usuario = BD.IniciarSesion(email, password);
-        if (usuario != null)
+
+        User = BD.IniciarSesion(email, password);
+        if (User != null)
         {
-            HttpContext.Session.SetString("user", usuario.ToString()); 
             return RedirectToAction("Home", "Index"); 
         }
-        ViewBag.Error = "Usuario o contraseña incorrectos";
-        return View("Index", "Home");
+        else
+        {
+            ViewBag.Error = "Usuario y/o contraseña incorrectos";
+            return View();
+        }
     }
 
     public IActionResult Logout()
     {
-        HttpContext.Session.Remove("user");
+        User = null;
         return RedirectToAction("Index", "Home");
     }
 }

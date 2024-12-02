@@ -15,6 +15,17 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
      
     }
+    public static void RegistrarUsuario(Usuario usua)
+    {
+        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string SQL = "INSERT INTO Usuario(nombre, apellido, nombre_usuario, contraseña, gmail, fecha_nacimiento, nombre_escuela, año_escolar) VALUES (@pnombre, @papellido, @pnombre_usuario, @pcontraseña, @pgmail, @pfecha_nacimiento, @pnombre_escuela, @paño_escolar )";
+            using(SqlConnection db = new SqlConnection(_connectionString)){
+            db.Execute(SQL, new{pnombre = usua.nombre, papellido = usua.nombre, pnombre_usuario = usua.nombre_usuario, pcontraseña = usua.contraseña, pgmail = usua.gmail, pfecha_nacimiento = usua.fecha_nacimiento, pnombre_escuela = usua.nombre_escuela, paño_escolar = usua.año_escolar});
+            }
+        }
+     
+    }
 
     public static List<Publicacion> _ListadoPublicaciones = new List<Publicacion>();
     public static List<Publicacion> ListarPublicaciones()
@@ -178,14 +189,15 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
 
     }
 
-    public static Usuario usuarioIniciado;
+    
 
-    public static Usuario IniciarSesion(string gmail, string contrasena)
+    public static Usuario IniciarSesion(string gmail, string contraseña)
     {
+        Usuario usuarioIniciado;
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail AND contrasena = @Contrasena;";
-            usuarioIniciado = TP_REBOOKING.Query<Usuario>(sql, new { Gmail = gmail, Contrasena = contrasena }).FirstOrDefault();
+            string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail AND contraseña = @contraseña;";
+            usuarioIniciado = TP_REBOOKING.Query<Usuario>(sql, new { Gmail = gmail, contraseña = contraseña }).FirstOrDefault();
             return usuarioIniciado;
         }
     }
