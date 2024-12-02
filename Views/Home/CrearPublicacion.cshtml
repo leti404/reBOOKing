@@ -32,7 +32,7 @@
                 </select>
                 <div class="caracteristicas">
                     <label for="enBD">¿El libro está en nuestra biblioteca?</label>
-                    <select asp-for="EnBiblioteca" class="inputdatos" id="enBD" onchange="toggleForm()" required>
+                    <select asp-for="EnBiblioteca" class="inputdatos" name="EnBiblioteca" id="enBD" onchange="toggleForm()" required>
                         <option value="Sí" selected>Sí</option>
                         <option value="No">No</option>
                     </select>
@@ -53,6 +53,7 @@
                     <label for="nombreLibro">Nombre del libro</label>
                     <input asp-for="NombreLibro" type="text" class="inputdatos" id="nombreLibro" placeholder="Ingrese nombre" required>
                 </div>
+                <input type="hidden" name="EnBiblioteca" value="No">
                 <div>
                     <label for="anio">Año</label>
                     <select asp-for="Anio" class="inputdatos" id="anio" required>

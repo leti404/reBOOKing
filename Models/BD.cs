@@ -38,7 +38,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         using(SqlConnection connection = new SqlConnection(_connectionString))
         {
             string sql = "INSERT INTO Libro (nombre, descripcion, año, id_materia, id_editorial, id_autor) OUTPUT INSERTED.ID VALUES (@nombre, @descripcion, @año, @id_materia, @id_editorial, @id_autor)";
-            int newId = connection.QuerySingle<int>(sql, new {nombre = libro.nombre, descripcion = libro.descripcion, año = libro.año, id_materia = libro.id_materia, id_editorial = libro.id_editorial, id_autor = libro.id_autor});
+            int newId = connection.QuerySingle<int>(sql, new {nombre = libro.nombre, descripcion = libro.descripcion, año = libro.año, id_materia = libro.id_materia, id_editorial = 6, id_autor = 9});
             return newId;
         }
     }

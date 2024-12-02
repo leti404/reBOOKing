@@ -83,37 +83,33 @@ public class HomeController : Controller
     public IActionResult CrearPublicacion(PublicacionViewModel model)
     {
         ViewBag.usuario1 = User;
-        if (ModelState.IsValid)
+        int libroId;
+        if (model.EnBiblioteca == "No")
         {
-            int libroId;
-            if (model.EnBiblioteca == "No")
+            libroId = BD.RegistrarLibro(new Libro
             {
-                libroId = BD.RegistrarLibro(new Libro
-                {
-                    nombre = model.NombreLibro,
-                    año = model.Anio,
-                    descripcion = model.Descripcion,
-                    id_materia = model.IdMateria
-                });
-            }
-            else
-            {
-                libroId = model.LibroSeleccionadoId;
-            }
-
-            // Registrar la publicación
-            BD.RegistrarPublicacion(new Publicacion
-            {
-                id_libro = libroId,
-                precio = model.Precio,
-                id_usuario = model.IdUsuario,
-                fecha = DateTime.Now,
-                imagen = model.Imagen
+                nombre = model.NombreLibro,
+                año = model.Anio,
+                descripcion = model.Descripcion,
+                id_materia = model.IdMateria
             });
-
-            return RedirectToAction("PublicacionExitosa");
         }
-        return View(model);
+        else
+        {
+            libroId = model.LibroSeleccionadoId;
+        }
+
+        // Registrar la publicación
+        BD.RegistrarPublicacion(new Publicacion
+        {
+            id_libro = libroId,
+            precio = model.Precio,
+            id_usuario = User.id,
+            fecha = DateTime.Now,
+            imagen = model.Imagen
+        });
+
+        return RedirectToAction("PublicacionExitosa");
     }
 
     public IActionResult PublicacionExitosa()
