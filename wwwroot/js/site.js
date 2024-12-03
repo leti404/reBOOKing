@@ -32,29 +32,14 @@ function toggleForm() {
       event.preventDefault();
   });
 }
-
-function removeItem(itemId) {
-    if (confirm("¿Estás seguro de que deseas eliminar este artículo del carrito?")) {
-        fetch('/Home/RemoveItem', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: itemId }),
-        })
-        .then(response => {
-            if (response.ok) {
-                document.querySelector(`.cart-item[data-id="${itemId}"]`).remove();
-                alert("Artículo eliminado del carrito.");
-            } else {
-                alert("No se pudo eliminar el artículo. Inténtalo de nuevo.");
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert("Ocurrió un error al intentar eliminar el artículo.");
-        });
+$.ajax({
+    url: '@Url.Action("Carrito", "Home")',
+    type: 'GET',
+    success: function(response) {
+        alert(response.message);
     }
-}
+});
+
+
 
 

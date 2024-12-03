@@ -218,18 +218,19 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult RemoveItem([FromBody] int id)
+    public IActionResult EliminarPubliCarrito(int idPublicacion)
     {
         ViewBag.usuario1 = User;
-        bool isDeleted = BD.EliminarItemCarrito(User.id, id);
+        bool isDeleted = BD.EliminarItemCarrito(User.id, idPublicacion);
         
         if (isDeleted)
         {
-            return Ok(); 
+            return RedirectToAction("Carrito");
         }
         else
         {
-            return BadRequest("El libro no puedo ser eliminado"); 
+            TempData["AlertMessage"] = "Hubo un error al eliminar el item del carrito, por favor intente nuevamente";
+            return RedirectToAction("Carrito");
         }
 
     }

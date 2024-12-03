@@ -1,24 +1,36 @@
 @{
     ViewData["Title"] = "Tus Carrito de Compra";
 }
-
+@if (TempData["AlertMessage"] != null)
+{
+    <script type="text/javascript">
+        alert('@TempData["AlertMessage"]');
+    </script>
+}
 <div class="shopping-cart">
     <h2>Carrito de compras</h2>
-    
-    <div class="cart-items">
-        @foreach (Publicacion publicacion in ViewBag.ListaCarrito)
-        {
-            <div class="cart-item" data-id="@publicacion.id">
-                <img src="@publicacion.imagen" alt="@publicacion.id_libro" class="item-image" />
-                <div class="item-details">
-                    <h3> @BD.ObtenerNombreLibroPorPublicacion(publicacion.id_libro)</h3>
-                    <p class="item-price">$@publicacion.precio.ToString("C")</p>
-                <p class="item-status">Estado: <span>@publicacion.precio</span></p>
+    @if(ViewBag.ListaCarrito != null)
+    {
+        <div class="cart-items">
+            @foreach (Publicacion publicacion in ViewBag.ListaCarrito)
+            {
+                <div class="cart-item" data-id="@publicacion.id">
+                    <img src="@publicacion.imagen" alt="@publicacion.id_libro" class="item-image" />
+                    <div class="item-details">
+                        <h3> @BD.ObtenerNombreLibroPorPublicacion(publicacion.id_libro)</h3>
+                        <p class="item-price">$@publicacion.precio.ToString("C")</p>
+                    <p class="item-status">Estado: <span>@publicacion.precio</span></p>
+                    </div>
+
+                    <form action='@Url.Action("EliminarPubliCarrito")' method="post" class="m-0">
+                        <input type="hidden" name="idPublicacion" value="@ViewBag.publicacion.id" />
+                        <button class="delete-button">🗑️</button>
+                    </form>
+                    
                 </div>
-                <button class="delete-button" onclick="removeItem(@publicacion.id)">🗑️</button>
-            </div>
-        }
-    </div>
+            }
+        </div>
+
 
         <div class="cart-summary">
             <h3>Resumen de compra:</h3>
