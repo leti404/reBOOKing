@@ -14,16 +14,16 @@
         <div class="cart-items">
             @foreach (Publicacion publicacion in ViewBag.ListaCarrito)
             {
-                <div class="cart-item" data-id="@publicacion.id">
-                    <img src="@publicacion.imagen" alt="@publicacion.id_libro" class="item-image" />
+                <div class="cart-item">
+                    <img src="@publicacion.imagen" alt="" class="item-image" />
                     <div class="item-details">
-                        <h3> @BD.ObtenerNombreLibroPorPublicacion(publicacion.id_libro)</h3>
-                        <p class="item-price">$@publicacion.precio.ToString("C")</p>
-                    <p class="item-status">Estado: <span>@publicacion.precio</span></p>
+                        <h3>@ViewBag.nombreLibro</h3>
+                        <p class="item-price">@publicacion.precio.ToString("C")</p>
+                    <p class="item-status">Estado: <span>@ViewBag.estado</span></p>
                     </div>
 
-                    <form action='@Url.Action("EliminarPubliCarrito")' method="post" class="m-0">
-                        <input type="hidden" name="idPublicacion" value="@ViewBag.publicacion.id" />
+                    <form action='@Url.Action("EliminarPubliCarrito")' method="post">
+                        <input type="hidden" name="idPublicacion" value="@publicacion.id" />
                         <button class="delete-button">🗑️</button>
                     </form>
                     

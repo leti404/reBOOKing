@@ -231,10 +231,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
             string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail AND contraseña = @Contraseña;";
-            
-            // Usa QueryFirstOrDefault para obtener un único objeto Usuario o null si no hay coincidencia.
             Usuario usuarioIniciado = TP_REBOOKING.QueryFirstOrDefault<Usuario>(sql, new { Gmail = gmail, Contraseña = contraseña });
-            
             return usuarioIniciado;
         }
     }
@@ -292,11 +289,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = @"
-                SELECT SUM(Publicacion.precio) AS TotalCost
-                FROM Carrito
-                JOIN Publicacion ON Carrito.id_publicacion = Publicacion.id
-                WHERE Carrito.id_usuario = @idUsuario";
+            string sql = @"SELECT SUM(Publicacion.precio) AS TotalCost FROM Carrito JOIN Publicacion ON Carrito.id_publicacion = Publicacion.id WHERE Carrito.id_usuario = @idUsuario";
             return TP_REBOOKING.QuerySingleOrDefault<decimal?>(sql, new { idUsuario = IdUsuario });
         }
     }
@@ -306,17 +299,9 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sqlDelete = @"
-                DELETE FROM Carrito
-                WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
-
-            string sqlCheck = @"
-                SELECT COUNT(*) 
-                FROM Carrito 
-                WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
-
+            string sqlDelete = @"DELETE FROM Carrito WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
+            string sqlCheck = @"SELECT COUNT(*) FROM Carrito WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
             TP_REBOOKING.Execute(sqlDelete, new { UserId = userId, PublicacionId = publicacionId });
-
             count = TP_REBOOKING.QuerySingle<int>(sqlCheck, new { UserId = userId, PublicacionId = publicacionId });
         }
         bool exito = false;

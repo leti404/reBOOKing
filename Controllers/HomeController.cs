@@ -52,8 +52,13 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Carrito()
+    public IActionResult Carrito(int idPublicacion)
     {
+        List<Publicacion> listaPublicaciones = BD.ListarPublicaciones();
+        Publicacion publicacion = listaPublicaciones.FirstOrDefault(p => p.id == idPublicacion);
+        ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(idPublicacion);
+        ViewBag.publicacion = publicacion;
+        ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(idPublicacion);
         ViewBag.ListaCarrito = BD.ListarCarrito(User.id);
         ViewBag.TotalCarrtio = BD.CalcularTotalCarrito(User.id);
         ViewBag.usuario1 = User;
@@ -62,9 +67,15 @@ public class HomeController : Controller
 
     public IActionResult AgregarCarrito(int idPublicacion)
     {
+        List<Publicacion> listaPublicaciones = BD.ListarPublicaciones();
+        Publicacion publicacion = listaPublicaciones.FirstOrDefault(p => p.id == idPublicacion);
+        ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(idPublicacion);
+        ViewBag.publicacion = publicacion;
+        ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(idPublicacion);
+        ViewBag.descripcion = BD.ObtenerDescripcionPublicacion(idPublicacion);
         BD.AgregarAlCarrito(User.id, idPublicacion);
         ViewBag.usuario1 = User;
-        return RedirectToAction("Carrito");
+        return RedirectToAction("Carrito", "Home", new {idPublicacion = idPublicacion});
     }
     public IActionResult Registrarse()
     {
