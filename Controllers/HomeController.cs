@@ -227,5 +227,12 @@ public class HomeController : Controller
         }
 
     }
+
+    public IActionResult AgregarAfavoritos(int idUsuario, int idPublicacion)
+    {
+        ViewBag.ListaFavoritos = BD.SP_AgregarAFavoritos(idUsuario, idPublicacion);
+        return RedirectToAction("Publicacion", "Home", new { id = idPublicacion });
+    }
+    
    
 }

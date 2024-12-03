@@ -321,6 +321,21 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
         return exito;
     }
+    
+    public static List<Favorito> _ListadoPublicacionesFavorito = new List<Favorito>();
+    
+    public static List<Favorito> SP_AgregarAFavoritos(int idUsuario, int idPublicacion)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "exec SP_AgregarAFavoritos @idUsuario, @idPublicacion";
+            _ListadoPublicacionesFavorito = TP_REBOOKING.Query<Favorito>(sql, new {id_usuario = idUsuario, id_publicacion = idPublicacion}).ToList();
+        }
+ 
+        return _ListadoPublicacionesFavorito;
+
+    }
+
 
 }
 
