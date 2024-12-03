@@ -8,7 +8,7 @@
     <div class="cart-items">
         @foreach (Publicacion publicacion in ViewBag.ListaCarrito)
         {
-            <div class="cart-item">
+            <div class="cart-item" data-id="@publicacion.id">
                 <img src="@publicacion.imagen" alt="@publicacion.id_libro" class="item-image" />
                 <div class="item-details">
                     <h3> @BD.ObtenerNombreLibroPorPublicacion(publicacion.id_libro)</h3>

@@ -74,7 +74,7 @@ public class HomeController : Controller
         }
         else
         {
-            return View(); // Podrías redirigir a una vista de error aquí si es necesario
+            return View();
         }
     }
 
