@@ -59,6 +59,13 @@ public class HomeController : Controller
         ViewBag.usuario1 = User;
         return View();
     }
+
+    public IActionResult AgregarCarrito(int idPublicacion)
+    {
+        BD.AgregarAlCarrito(User.id, idPublicacion);
+        ViewBag.usuario1 = User;
+        return RedirectToAction("Carrito");
+    }
     public IActionResult Registrarse()
     {
         ViewBag.usuario1 = User;
@@ -226,5 +233,12 @@ public class HomeController : Controller
         }
 
     }
+
+    public IActionResult AgregarAfavoritos(int idUsuario, int idPublicacion)
+    {
+        ViewBag.ListaFavoritos = BD.SP_AgregarAFavoritos(idUsuario, idPublicacion);
+        return RedirectToAction("Publicacion", "Home", new { id = idPublicacion });
+    }
+    
    
 }

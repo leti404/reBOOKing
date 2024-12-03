@@ -2,7 +2,7 @@
     ViewData["Title"] = "Publicacion";
 }
 <div class="container book-detail">
-    <div class="row align-items-flex-start">
+    <div class="row align-items-flex-start"> 
         <div class="col-md-4">
             <img class="card-img-top-rebooking2" src="@ViewBag.publicacion.imagen" alt="@ViewBag.nombreLibro" />
         </div>
@@ -35,12 +35,47 @@
 
             <p class="datos">Descripción: <span class="informacion"> @ViewBag.descripcion </span></p>
             
-            <div class="d-flex">
-                <button class="btn btn-primary me-2">COMPRAR</button>
-                <button class="btn btn-outline-secondary">
-                    <i class="bi bi-cart"></i> Agregar al carrito
+
+
+            @if (ViewBag.usuario1 == null)
+            {
+               <a href data-bs-toggle="modal" data-bs-target="#loginModal">
+                    <div class="d-flex">
+                        <button class="btn btn-primary me-2">COMPRAR</button>
+                        <button class="btn btn-outline-secondary">
+                            <i class="bi bi-cart"></i> Agregar al carrito
+                        </button>
+                    </div>
+               </a>
+               
+            }
+            else
+            {
+                <div class="d-flex">
+                    <button class="btn btn-primary me-2">COMPRAR</button>
+                    <form action='@Url.Action("AgregarCarrito")' method="post" class="m-0">
+                        <input type="hidden" name="idPublicacion" value="@ViewBag.publicacion.id" />
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="bi bi-cart"></i> Agregar al carrito
+                        </button>
+                    </form>
+                </div>
+
+            }
+
+            @if()
+            {
+                <form method="post" action='@Url.Action("AgregarAfavoritos")'>
+                <input type="hidden" name="idPublicacion" value="@ViewBag.publicacion.id" />
+                <button type="submit" class="btn btn-outline-danger">
+                <i class="bi bi-heart"></i> Agregar a favoritos
                 </button>
-            </div>
+                </form>
+            }
+            else
+            {
+                <a href= "https://www.google.com/imgres?q=estrella%20png&imgurl=https%3A%2F%2Fpng.pngtree.com%2Fpng-vector%2F20190116%2Fourmid%2Fpngtree-vector-star-icon-png-image_322142.jpg&imgrefurl=https%3A%2F%2Fes.pngtree.com%2Ffree-star-vectors&docid=aUmomKEf9nqXtM&tbnid=cypImbxT_El6qM&vet=12ahUKEwjI2qq-lomKAxVsELkGHeBnE50QM3oECBkQAA..i&w=360&h=360&hcb=2&ved=2ahUKEwjI2qq-lomKAxVsELkGHeBnE50QM3oECBkQAA"></a>
+            }
         </div>
 
         </div>

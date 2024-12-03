@@ -20,9 +20,14 @@
         }
     </div>
 
-    <div class="cart-summary">
-        <h3>Resumen de compra:</h3>
-        <p>TOTAL: <span>$@ViewBag.TotalCarrtio</span></p>
-        <button class="purchase-button">COMPRAR</button>
-    </div>
+        <div class="cart-summary">
+            <h3>Resumen de compra:</h3>
+            <p>TOTAL: <span>$@ViewBag.TotalCarrtio</span></p>
+            <button class="purchase-button">COMPRAR</button>
+        </div>
+    }
+    else
+    {
+        <p>Tu carrito esta vacio! </p>
+    }
 </div>
