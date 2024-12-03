@@ -87,6 +87,8 @@ body {
 }
 .container-fluid{
   width: 20%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .offcanvas-body {
@@ -211,4 +213,9 @@ footer {
   background-color: #d3b4f5;
   color: white;
   border-color: #d3b4f5;
+}
+a i {
+  font-size: 34px; 
+  color: #000; 
+  transition: color 0.3s, transform 0.3s; 
 }

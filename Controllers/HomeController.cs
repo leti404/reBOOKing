@@ -39,7 +39,6 @@ public class HomeController : Controller
     {
         List<Publicacion> listaPublicaciones = BD.ListarPublicaciones();
         Publicacion publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
-
         ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(id);
         ViewBag.publicacion = publicacion;
         ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(id);
@@ -53,10 +52,10 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Carrito(int IdUsuario)
+    public IActionResult Carrito()
     {
-        ViewBag.ListaCarrito = BD.ListarCarrito(IdUsuario);
-        ViewBag.TotalCarrtio = BD.CalcularTotalCarrito(IdUsuario);
+        ViewBag.ListaCarrito = BD.ListarCarrito(User.id);
+        ViewBag.TotalCarrtio = BD.CalcularTotalCarrito(User.id);
         ViewBag.usuario1 = User;
         return View();
     }
