@@ -4,25 +4,31 @@
 
 <div class="shopping-cart">
     <h2>Carrito de compras</h2>
-    
-    <div class="cart-items">
-        @foreach (Publicacion publicacion in ViewBag.ListaCarrito)
-        {
-            <div class="cart-item">
-                <img src="@publicacion.imagen" alt="@publicacion.id_libro" class="item-image" />
-                <div class="item-details">
-                    <h3> @BD.ObtenerNombreLibroPorPublicacion(publicacion.id_libro)</h3>
-                    <p class="item-price">$@publicacion.precio.ToString("C")</p>
-                <p class="item-status">Estado: <span>@publicacion.precio</span></p>
+    @if (ViewBag.ListaCarrito != null && ViewBag.ListaCarrito.Count > 0)
+    {
+        <div class="cart-items">
+            @foreach (Publicacion publicacion in ViewBag.ListaCarrito)
+            {
+                <div class="cart-item">
+                    <img src="@publicacion.imagen" alt="@publicacion.id_libro" class="item-image" />
+                    <div class="item-details">
+                        <h3> @BD.ObtenerNombreLibroPorPublicacion(publicacion.id_libro)</h3>
+                        <p class="item-price">@publicacion.precio.ToString("C")</p>
+                    <p class="item-status">Estado: <span>@publicacion.precio</span></p>
+                    </div>
+                    <button class="delete-button" onclick="removeItem(@publicacion.id)">🗑️</button>
                 </div>
-                <button class="delete-button" onclick="removeItem(@publicacion.id)">🗑️</button>
-            </div>
-        }
-    </div>
+            }
+        </div>
 
-    <div class="cart-summary">
-        <h3>Resumen de compra:</h3>
-        <p>TOTAL: <span>$@ViewBag.TotalCarrtio</span></p>
-        <button class="purchase-button">COMPRAR</button>
-    </div>
+        <div class="cart-summary">
+            <h3>Resumen de compra:</h3>
+            <p>TOTAL: <span>$@ViewBag.TotalCarrtio</span></p>
+            <button class="purchase-button">COMPRAR</button>
+        </div>
+    }
+    else
+    {
+        <p>Tu carrito esta vacio! </p>
+    }
 </div>

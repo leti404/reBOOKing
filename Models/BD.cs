@@ -288,14 +288,19 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
         return _ListadoPublicacionesConFiltroBusqueda;
     }
-    public static decimal CalcularTotalCarrito(int IdUsuario)
+    public static decimal? CalcularTotalCarrito(int IdUsuario)
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = @" SELECT SUM(Publicacion.precio * Carrito.cantidad) AS TotalCost FROM Carrito JOIN Publicacion ON Carrito.id_publicacion = Publicacion.id WHERE Carrito.id_usuario = @idUsuario";
-            return TP_REBOOKING.QuerySingleOrDefault<decimal>(sql, new { idUsuario = IdUsuario });
+            string sql = @"
+                SELECT SUM(Publicacion.precio) AS TotalCost
+                FROM Carrito
+                JOIN Publicacion ON Carrito.id_publicacion = Publicacion.id
+                WHERE Carrito.id_usuario = @idUsuario";
+            return TP_REBOOKING.QuerySingleOrDefault<decimal?>(sql, new { idUsuario = IdUsuario });
         }
     }
+
     static int count;
     public static bool EliminarItemCarrito(int userId, int publicacionId)
     {
@@ -335,6 +340,16 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoPublicacionesFavorito;
 
     }
+
+    public static void AgregarAlCarrito(int idUsuario, int idPublicacion)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = @"INSERT INTO Carrito (id_usuario, id_publicacion) VALUES (@idUsuario, @idPublicacion);";
+            TP_REBOOKING.Execute(sql, new { idUsuario, idPublicacion });
+        }
+    }
+
 
 
 }
