@@ -164,12 +164,14 @@ public class HomeController : Controller
 
     public IActionResult TusPublicaciones()
     {
+        ViewBag.ListaPubliUsua = BD.ListarPublicacionesUsuario(User.id);
         ViewBag.usuario1 = User;
         return View();
     }
 
     public IActionResult TusReviews()
     {
+        ViewBag.Reviews = BD.ListarReviewsPorUser(User.id);
         ViewBag.usuario1 = User;
         return View();
     }

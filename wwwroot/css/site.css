@@ -489,3 +489,173 @@ h2 {
     font-size: 2.5rem;
     color: #333;
 }
+
+.formFav{
+    margin-left: 10px;
+}
+
+.reviews-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.review-card {
+    background-color: #f5f0f8;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.stars {
+    margin-left: auto;
+    display: flex;
+    gap: 5px;
+}
+
+.star {
+    font-size: 20px;
+    color: #ccc;
+}
+
+.star.filled {
+    color: #f5c518;
+}
+
+p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.profile-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 0 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Welcome Title */
+.profile-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+/* Profile Card */
+.profile-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+/* Profile Picture */
+.profile-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-picture img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+/* Profile Info */
+.profile-info h2 {
+    font-size: 1.4rem;
+    margin: 0 0 5px;
+}
+
+.profile-info p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Edit Button */
+.edit-button button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.edit-button button:hover {
+    background-color: #0056b3;
+}
+
+.edit-button img {
+    width: 16px;
+    height: 16px;
+}
+
+/* Additional Info */
+.additional-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Contact and Education Info Boxes */
+.contact-info, .education-info {
+    flex: 1;
+    background-color: #f5f3ff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h3, .education-info h3 {
+    margin: 0 0 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.contact-info p, .education-info p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #555;
+}

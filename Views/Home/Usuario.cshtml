@@ -1,4 +1,35 @@
 @{
     ViewData["Title"] = "Usuario";
 }
-<h1>¡Bienvendido de vuelta!</h1>
+
+<div class="profile-container">
+    <h1>¡Bienvenido de vuelta!</h1>
+    <div class="profile-card">
+        <div class="profile-left">
+            <div class="profile-picture">
+                <img src="..\img\usuario.png" alt="Profile Picture">
+            </div>
+            <div class="profile-info">
+                <h2>@ViewBag.usuario1.nombre @ViewBag.usuario1.apellido</h2>
+                <p>@ViewBag.usuario1.nombre_usuario</p>
+            </div>
+        </div>
+        <div class="edit-button">
+            <button>
+                Editar perfil
+            </button>
+        </div>
+    </div>
+    <div class="additional-info">
+        <div class="contact-info">
+            <h3>Contacto</h3>
+            <p>Mail: @ViewBag.usuario1.gmail</p>
+        </div>
+        <div class="education-info">
+            <h3>Estudios</h3>
+            <p>Año escolar: @ViewBag.usuario1.año_escolar</p>
+            <p>Escuela: @ViewBag.usuario1.nombre_escuela</p>
+        </div>
+    </div>
+</div>
+

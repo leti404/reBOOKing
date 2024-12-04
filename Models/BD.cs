@@ -65,6 +65,19 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoFavoritos;
     }
 
+    public static List<Publicacion> _ListadoPubliUs = new List<Publicacion>();
+
+    public static List<Publicacion> ListarPublicacionesUsuario(int idUsuario)
+    {
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = @"SELECT Publicacion.id, Publicacion.id_libro, Publicacion.precio, Publicacion.fecha, Publicacion.imagen FROM Publicacion WHERE Publicacion.id_usuario = @IdUsuario;";
+            
+            _ListadoPubliUs = TP_REBOOKING.Query<Publicacion>(sql, new { IdUsuario = idUsuario }).ToList();
+        }
+        return _ListadoPubliUs;
+    }
+
     public static List<Publicacion> _ListadoPublicaciones = new List<Publicacion>();
     public static List<Publicacion> ListarPublicaciones()
     {
@@ -251,6 +264,19 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
         return _ListadoLibros;
     }
+
+    public static List<Reviews> _ListadoReviews = new List<Reviews>();
+    
+    public static List<Reviews> ListarReviewsPorUser(int userId)
+    {
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string sql = @"SELECT r.id, r.id_publicacion, r.usuario_escritor, r.usuario_recibidor, r.estrellas, r.descripcion FROM Review r WHERE r.usuario_escritor = @UserId";
+            _ListadoReviews = connection.Query<Reviews>(sql, new { UserId = userId }).ToList();
+        }
+        return _ListadoReviews;
+    }
+
 
     public static List<Materia> _ListadoMaterias = new List<Materia>();
     

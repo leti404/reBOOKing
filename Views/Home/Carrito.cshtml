@@ -19,7 +19,27 @@
                     <div class="item-details">
                         <h3>@ViewBag.nombreLibro</h3>
                         <p class="item-price">@publicacion.precio.ToString("C")</p>
-                    <p class="item-status">Estado: <span>@ViewBag.estado</span></p>
+                    @switch(@ViewBag.estado){
+                    case "Excelente":
+                    <p class= "datos">Estado: <span class="estado1">@ViewBag.estado</span></p>
+                    break;
+
+                    case "Muy Bueno":
+                    <p class= "datos">Estado: <span class="estado2">@ViewBag.estado</span></p>
+                    break;
+
+                    case "Bueno":
+                    <p class= "datos">Estado: <span class="estado3">@ViewBag.estado</span></p>
+                    break;
+
+                    case "Regular":
+                    <p class= "datos">Estado: <span class="estado4">@ViewBag.estado</span></p>
+                    break;
+
+                    case "Muy Usado":
+                    <p class= "datos">Estado: <span class="estado5">@ViewBag.estado</span></p>
+                    break;                
+            }
                     </div>
 
                     <form action='@Url.Action("EliminarPubliCarrito")' method="post">
