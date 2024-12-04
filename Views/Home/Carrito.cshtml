@@ -24,14 +24,12 @@
 
                     <form action='@Url.Action("EliminarPubliCarrito")' method="post">
                         <input type="hidden" name="idPublicacion" value="@publicacion.id" />
-                        <button class="delete-button">🗑️</button>
+                        <button class="delete-button"> <i class="bi bi-trash3"></i> </button>
                     </form>
                     
                 </div>
             }
         </div>
-
-
         <div class="cart-summary">
             <h3>Resumen de compra:</h3>
             <p>TOTAL: <span>$@ViewBag.TotalCarrtio</span></p>

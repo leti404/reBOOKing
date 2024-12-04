@@ -57,7 +57,6 @@ public class HomeController : Controller
         List<Publicacion> listaPublicaciones = BD.ListarPublicaciones();
         Publicacion publicacion = listaPublicaciones.FirstOrDefault(p => p.id == idPublicacion);
         ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(idPublicacion);
-        ViewBag.publicacion = publicacion;
         ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(idPublicacion);
         ViewBag.ListaCarrito = BD.ListarCarrito(User.id);
         ViewBag.TotalCarrtio = BD.CalcularTotalCarrito(User.id);
@@ -156,9 +155,9 @@ public class HomeController : Controller
         ViewBag.usuario1 = User;
         return View();
     }
-    public IActionResult TusFavoritos(int idUsuario)
+    public IActionResult TusFavoritos()
     {
-        ViewBag.Listafavortios = BD.ListarFavoritos(idUsuario);
+        ViewBag.Listafavortios = BD.ListarFavoritos(User.id);
         ViewBag.usuario1 = User;
         return View();
     }
@@ -246,9 +245,10 @@ public class HomeController : Controller
 
     }
 
-    public IActionResult AgregarAfavoritos(int idUsuario, int idPublicacion)
+    public IActionResult AgregarAfavoritos(int idPublicacion)
     {
-        ViewBag.ListaFavoritos = BD.SP_AgregarAFavoritos(idUsuario, idPublicacion);
+        ViewBag.usuario1 = User;
+        ViewBag.ListaFavoritos = BD.SP_AgregarAFavoritos(User.id, idPublicacion);
         return RedirectToAction("Publicacion", "Home", new { id = idPublicacion });
     }
     

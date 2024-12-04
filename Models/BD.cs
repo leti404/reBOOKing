@@ -53,16 +53,18 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
     }
 
 
-    public static List<Publicacion> _ListadoFavortios = new List<Publicacion>();
+    public static List<Publicacion> _ListadoFavoritos = new List<Publicacion>();
+
     public static List<Publicacion> ListarFavoritos(int idUsuario)
     {
-        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT Favorito.id_publicacion AS PublicacionID, Libro.nombre AS NombreLibro, Publicacion.precio AS Precio, Publicacion.fecha AS FechaPublicacion, Publicacion.imagen AS Imagen, Usuario.nombre_usuario AS UsuarioPublicador FROM Favorito JOIN Publicacion ON Favorito.id_publicacion = Publicacion.id JOIN Libro ON Publicacion.id_libro = Libro.id JOIN Usuario ON Publicacion.id_usuario = Usuario.id WHERE Favorito.id_usuario = @IdUsuario;";
-            _ListadoFavortios = TP_REBOOKING.Query<Publicacion>(sql, new {IdUsuario = idUsuario}).ToList(); 
+            string sql = "SELECT Favorito.id_publicacion, Publicacion.id_libro, Publicacion.precio, Publicacion.fecha, Publicacion.imagen FROM Favorito JOIN Publicacion ON Favorito.id_publicacion = Publicacion.id WHERE Favorito.id_usuario = @IdUsuario;";
+            _ListadoFavoritos = TP_REBOOKING.Query<Publicacion>(sql, new { IdUsuario = idUsuario }).ToList();
         }
-        return _ListadoFavortios;
+        return _ListadoFavoritos;
     }
+
     public static List<Publicacion> _ListadoPublicaciones = new List<Publicacion>();
     public static List<Publicacion> ListarPublicaciones()
     {
@@ -78,7 +80,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM Carrito WHERE Carrito.id_usuario = @idUsuario ";
+            string sql = @"SELECT p.* FROM Carrito c INNER JOIN Publicacion p ON c.id_publicacion = p.id WHERE c.id_usuario = @idUsuario";
             _ListadoCarrito = TP_REBOOKING.Query<Publicacion>(sql, new { idUsuario = IdUsuario }).ToList(); 
         }
         return _ListadoCarrito;
@@ -113,8 +115,8 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-            string sql = "exec ObtenerNombreLibroPorPublicacionID @publicacionID";
-            string nombreLibro = TP_REBOOKING.QueryFirstOrDefault<string>(sql, new { PublicacionID = publicacionID });
+            string sql = "exec ObtenerNombreLibroPorPublicacionID @PublicacionID";
+            string nombreLibro = TP_REBOOKING.QueryFirstOrDefault<string>(sql, new { publicacionID });
             return nombreLibro;
         }
     }
@@ -319,7 +321,7 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
             string sql = "exec SP_AgregarAFavoritos @idUsuario, @idPublicacion";
-            _ListadoPublicacionesFavorito = TP_REBOOKING.Query<Favorito>(sql, new {id_usuario = idUsuario, id_publicacion = idPublicacion}).ToList();
+            _ListadoPublicacionesFavorito = TP_REBOOKING.Query<Favorito>(sql, new { idUsuario, idPublicacion }).ToList();
         }
  
         return _ListadoPublicacionesFavorito;
