@@ -44,6 +44,8 @@ public class HomeController : Controller
         ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(id);
         ViewBag.descripcion = BD.ObtenerDescripcionPublicacion(id);
         ViewBag.usuario1 = User;
+        int hola = User;
+        ViewBag.ListaFavoritos = BD.ListarFavoritos(hola);
         return View();
     }
     public IActionResult SobreNosotros()
@@ -176,8 +178,6 @@ public class HomeController : Controller
         return View();
     }
 
-
-
     public IActionResult Privacy()
     {
         ViewBag.usuario1 = User;
@@ -213,7 +213,11 @@ public class HomeController : Controller
         ViewBag.usuario1 = User;
     }
 
-  
+    public IActionResult VerPerfil(int id_usuario)
+    {
+        ViewBag.UsuarioAjeno = BD.ObtenerUsuarioPorId(id_usuario);
+        return View();
+    }
 
     public IActionResult Logout()
     {
@@ -247,12 +251,18 @@ public class HomeController : Controller
 
     }
 
+    
     public IActionResult AgregarAfavoritos(int idPublicacion)
     {
         ViewBag.usuario1 = User;
         ViewBag.ListaFavoritos = BD.SP_AgregarAFavoritos(User.id, idPublicacion);
         return RedirectToAction("Publicacion", "Home", new { id = idPublicacion });
     }
-    
+    public IActionResult EliminarFavoritos(int idPublicacion)
+    {
+        ViewBag.usuario1 = User;
+        BD.EliminarFavoritos(User.id, idPublicacion);
+        return RedirectToAction("Publicacion", "Home", new { id = idPublicacion });
+    }
    
 }

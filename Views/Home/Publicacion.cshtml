@@ -10,7 +10,7 @@
         <div class= "informacionLibro">
             <h1>@ViewBag.nombreLibro</h1>
             <p class="price text-primary" class= "datos">$@ViewBag.publicacion.precio</p>
-            <p><span class="datos">Usuario:<span><span class = informacion> @BD.ObtenerNombreUsuario(@ViewBag.publicacion.id_usuario)</span></p>
+            <p><span class="datos">Usuario:</span> <a href='@Url.Action("VerPerfil", "Home", new { id = ViewBag.publicacion.id_usuario })' class="informacion"> @BD.ObtenerNombreUsuario(@ViewBag.publicacion.id_usuario)</a></p>
             @switch(@ViewBag.estado){
                 case "Excelente":
                  <p class= "datos">Estado: <span class="estado1">@ViewBag.estado</span></p>
@@ -59,9 +59,11 @@
                             <i class="bi bi-cart"></i> Agregar al carrito
                         </button>
                     </form>
-                    @if(ViewBag.Favoritos != null && ViewBag.Listafavortios.Contains(ViewBag.publicacion.id))
+                    @if(ViewBag.Favoritos != null && ViewBag.ListaFavoritos.Contains(ViewBag.publicacion.id))
                     {
-                        <a href= "https://www.google.com/imgres?q=estrella%20png&imgurl=https%3A%2F%2Fpng.pngtree.com%2Fpng-vector%2F20190116%2Fourmid%2Fpngtree-vector-star-icon-png-image_322142.jpg&imgrefurl=https%3A%2F%2Fes.pngtree.com%2Ffree-star-vectors&docid=aUmomKEf9nqXtM&tbnid=cypImbxT_El6qM&vet=12ahUKEwjI2qq-lomKAxVsELkGHeBnE50QM3oECBkQAA..i&w=360&h=360&hcb=2&ved=2ahUKEwjI2qq-lomKAxVsELkGHeBnE50QM3oECBkQAA"></a>
+                        <a href='@Url.Action("EliminarFavoritos")'>
+                            <img src="https://png.pngtree.com/png-vector/20190116/ourmid/pngtree-vector-star-icon-png-image_322142.jpg" alt="Eliminar de favoritos" width="30" height="30">
+                        </a>
                     }
                     else
                     {

@@ -265,14 +265,14 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoLibros;
     }
 
-    public static List<Reviews> _ListadoReviews = new List<Reviews>();
+    public static List<Review> _ListadoReviews = new List<Review>();
     
-    public static List<Reviews> ListarReviewsPorUser(int userId)
+    public static List<Review> ListarReviewsPorUser(int userId)
     {
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
             string sql = @"SELECT r.id, r.id_publicacion, r.usuario_escritor, r.usuario_recibidor, r.estrellas, r.descripcion FROM Review r WHERE r.usuario_escritor = @UserId";
-            _ListadoReviews = connection.Query<Reviews>(sql, new { UserId = userId }).ToList();
+            _ListadoReviews = connection.Query<Review>(sql, new { UserId = userId }).ToList();
         }
         return _ListadoReviews;
     }
@@ -354,6 +354,15 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
 
     }
 
+    public static void EliminarFavoritos(int userId, int publicacionId)
+    {
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string sqlDelete = "DELETE FROM Favorito WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
+            connection.Execute(sqlDelete, new { UserId = userId, PublicacionId = publicacionId });
+        }
+    }
+
     public static void AgregarAlCarrito(int idUsuario, int idPublicacion)
     {
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
@@ -363,6 +372,18 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
     }
 
+    public static Usuario ObtenerUsuarioPorId(int idUsuario)
+{
+    using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+    {
+        string sql = "EXEC ObtenerUsuarioPorId @IdUsuario";
+
+        // Ejecutamos el procedimiento almacenado y obtenemos el usuario
+        Usuario usuario = TP_REBOOKING.QueryFirstOrDefault<Usuario>(sql, new { IdUsuario = idUsuario });
+
+        return usuario; // Devuelve el usuario encontrado o null si no existe
+    }
+}
 
 
 }
