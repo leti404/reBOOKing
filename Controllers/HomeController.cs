@@ -255,7 +255,8 @@ public class HomeController : Controller
     public IActionResult AgregarAfavoritos(int id)
     {
         ViewBag.usuario1 = User;
-        ViewBag.ListaFavoritos = BD.SP_AgregarAFavoritos(User.id, id);
+        Console.WriteLine(User.apellido);
+        BD.AgregarPublicacionAFavoritos(User.id, id);
 
         List<Publicacion> listaPublicaciones = BD.ListarPublicaciones();
         ViewBag.publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
