@@ -373,15 +373,15 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
     }
 
     public static Usuario ObtenerUsuarioPorId(int idUsuario)
-{
-    using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
     {
-        string sql = "EXEC ObtenerUsuarioPorId @IdUsuario";
-        Usuario usuario = TP_REBOOKING.QueryFirstOrDefault<Usuario>(sql, new { IdUsuario = idUsuario });
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+        {
+            string sql = "EXEC ObtenerUsuarioPorId @IdUsuario";
+            Usuario usuario = TP_REBOOKING.QueryFirstOrDefault<Usuario>(sql, new { IdUsuario = idUsuario });
 
-        return usuario;
+            return usuario;
+        }
     }
-}
 
 public static bool VerificarFavorito(int idUsuario, int idPublicacion)
 {

@@ -252,22 +252,38 @@ public class HomeController : Controller
     }
 
     
-    public IActionResult AgregarAfavoritos(int idPublicacion)
+    public IActionResult AgregarAfavoritos(int id)
     {
         ViewBag.usuario1 = User;
-        ViewBag.ListaFavoritos = BD.SP_AgregarAFavoritos(User.id, idPublicacion);
-        return RedirectToAction("Publicacion", "Home", new { id = idPublicacion });
+        ViewBag.ListaFavoritos = BD.SP_AgregarAFavoritos(User.id, id);
+
+        List<Publicacion> listaPublicaciones = BD.ListarPublicaciones();
+        ViewBag.publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
+        ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(id);
+        ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(id);
+        ViewBag.descripcion = BD.ObtenerDescripcionPublicacion(id);
+        ViewBag.usuario1 = User;
+
+        return RedirectToAction("Publicacion", "Home", new { id = id });
     }
-    public IActionResult EliminarFavoritos(int idPublicacion)
+    public IActionResult EliminarFavoritos(int id)
     {
         ViewBag.usuario1 = User;
-        BD.EliminarFavoritos(User.id, idPublicacion);
-        return RedirectToAction("Publicacion", "Home", new { id = idPublicacion });
+        BD.EliminarFavoritos(User.id, id);
+
+        List<Publicacion> listaPublicaciones = BD.ListarPublicaciones();
+        ViewBag.publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
+        ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(id);
+        ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(id);
+        ViewBag.descripcion = BD.ObtenerDescripcionPublicacion(id);
+        ViewBag.usuario1 = User;
+
+        return RedirectToAction("Publicacion", "Home", new { id = id });
     }
     public IActionResult VerUsuario(int idUsuario)
     {
-        ViewBag.usuario1 = BD.
-        return View();
+        ViewBag.usuario1 = BD.ObtenerUsuarioPorId(idUsuario);
+        return RedirectToAction("Usuario");
     }
    
 }

@@ -68,7 +68,7 @@
                     }
                     else
                     {
-                        <form method="post" action='@Url.Action("AgregarAfavoritos")' class="formFav">
+                        <form method="post" action='@Url.Action("AgregarAfavoritos", "Home", new { id = ViewBag.publicacion.id })' class="formFav">
                         <input type="hidden" name="idPublicacion" value="@ViewBag.publicacion.id" />
                         <button type="submit" class="btn btn-outline-danger">
                         <i class="bi bi-heart"></i> Agregar a favoritos
