@@ -59,8 +59,9 @@
                             <i class="bi bi-cart"></i> Agregar al carrito
                         </button>
                     </form>
-                    @if(ViewBag.Favoritos != null && ViewBag.ListaFavoritos.Contains(ViewBag.publicacion.id))
+                    @if(@BD.VerificarFavorito(@ViewBag.usuario1.id, @ViewBag.publicacion.id))
                     {
+                        //ViewBag.ListaFavoritos != null && ViewBag.ListaFavoritos.Contains(ViewBag.publicacion.id)
                         <a href='@Url.Action("EliminarFavoritos")'>
                             <img src="https://png.pngtree.com/png-vector/20190116/ourmid/pngtree-vector-star-icon-png-image_322142.jpg" alt="Eliminar de favoritos" width="30" height="30">
                         </a>
@@ -78,7 +79,11 @@
                 </div>
   
             }
-      
+
+            <a href='@Url.Action("VerUsuario", new { usuario = @ViewBag.usuario1.id})'>
+                <p>@ViewBag.usuario1 </p>
+            </a>
+                
             </div>
 
         </div>

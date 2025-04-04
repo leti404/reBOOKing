@@ -38,14 +38,14 @@ public class HomeController : Controller
     public IActionResult Publicacion(int id)
     {
         List<Publicacion> listaPublicaciones = BD.ListarPublicaciones();
-        Publicacion publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
+        ViewBag.publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
         ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(id);
-        ViewBag.publicacion = publicacion;
         ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(id);
         ViewBag.descripcion = BD.ObtenerDescripcionPublicacion(id);
         ViewBag.usuario1 = User;
-        int hola = User;
-        ViewBag.ListaFavoritos = BD.ListarFavoritos(hola);
+        /*Usuario hola = User;
+        ViewBag.usuario1 = User;*/
+       // ViewBag.ListaFavoritos = BD.ListarFavoritos(hola.id);
         return View();
     }
     public IActionResult SobreNosotros()
@@ -213,9 +213,9 @@ public class HomeController : Controller
         ViewBag.usuario1 = User;
     }
 
-    public IActionResult VerPerfil(int id_usuario)
+    public IActionResult VerPerfil(int id)
     {
-        ViewBag.UsuarioAjeno = BD.ObtenerUsuarioPorId(id_usuario);
+        ViewBag.UsuarioAjeno = BD.ObtenerUsuarioPorId(id);
         return View();
     }
 
@@ -263,6 +263,11 @@ public class HomeController : Controller
         ViewBag.usuario1 = User;
         BD.EliminarFavoritos(User.id, idPublicacion);
         return RedirectToAction("Publicacion", "Home", new { id = idPublicacion });
+    }
+    public IActionResult VerUsuario(int idUsuario)
+    {
+        ViewBag.usuario1 = BD.
+        return View();
     }
    
 }

@@ -9,7 +9,7 @@
 }
 <div class="shopping-cart">
     <h2>Carrito de compras</h2>
-    @if(ViewBag.ListaCarrito != null)
+    @if(ViewBag.ListaCarrito.Count != 0)
     {
         <div class="cart-items">
             @foreach (Publicacion publicacion in ViewBag.ListaCarrito)

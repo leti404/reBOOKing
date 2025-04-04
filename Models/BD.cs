@@ -349,19 +349,19 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
             string sql = "exec SP_AgregarAFavoritos @idUsuario, @idPublicacion";
             _ListadoPublicacionesFavorito = TP_REBOOKING.Query<Favorito>(sql, new { idUsuario, idPublicacion }).ToList();
         }
- 
         return _ListadoPublicacionesFavorito;
 
     }
 
     public static void EliminarFavoritos(int userId, int publicacionId)
     {
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
             string sqlDelete = "DELETE FROM Favorito WHERE id_usuario = @UserId AND id_publicacion = @PublicacionId";
-            connection.Execute(sqlDelete, new { UserId = userId, PublicacionId = publicacionId });
+            TP_REBOOKING.Execute(sqlDelete, new { UserId = userId, PublicacionId = publicacionId });
         }
     }
+
 
     public static void AgregarAlCarrito(int idUsuario, int idPublicacion)
     {
@@ -377,11 +377,20 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
     using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
     {
         string sql = "EXEC ObtenerUsuarioPorId @IdUsuario";
-
-        // Ejecutamos el procedimiento almacenado y obtenemos el usuario
         Usuario usuario = TP_REBOOKING.QueryFirstOrDefault<Usuario>(sql, new { IdUsuario = idUsuario });
 
-        return usuario; // Devuelve el usuario encontrado o null si no existe
+        return usuario;
+    }
+}
+
+public static bool VerificarFavorito(int idUsuario, int idPublicacion)
+{
+    using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+    {
+        string sql = "EXEC VerificarFavorito @id_usuario, @id_publicacion";
+        bool estaEnFavoritos = TP_REBOOKING.QueryFirstOrDefault<bool>(sql, new { id_usuario = idUsuario, id_publicacion = idPublicacion });
+
+        return estaEnFavoritos;
     }
 }
 
