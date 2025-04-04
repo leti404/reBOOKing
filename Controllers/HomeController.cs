@@ -261,6 +261,7 @@ public class HomeController : Controller
         List<Publicacion> listaPublicaciones = BD.ListarPublicaciones();
         ViewBag.publicacion = listaPublicaciones.FirstOrDefault(p => p.id == id);
         ViewBag.nombreLibro = BD.ObtenerNombreLibroPorPublicacion(id);
+        Console.WriteLine(ViewBag.nombreLibro);
         ViewBag.estado = BD.ObtenerEtiquetaXPublicacion(id);
         ViewBag.descripcion = BD.ObtenerDescripcionPublicacion(id);
         ViewBag.usuario1 = User;
