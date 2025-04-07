@@ -381,6 +381,20 @@ public static bool VerificarFavorito(int idUsuario, int idPublicacion)
     }
 }
 
+public static List<Publicacion> _ListadoPublicacionesPorUsuario = new List<Publicacion>();
+
+public static List<Publicacion> ObtenerPublicacionesPorUsuario(int id_usuario)
+{
+    using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+    {
+        string sql = "EXEC ObtenerPublicacionesPorUsuario @id_usuario";
+        _ListadoPublicacionesPorUsuario = TP_REBOOKING.Query<Publicacion>(sql, new { id_usuario }).ToList(); 
+    }
+    return _ListadoPublicacionesPorUsuario;
+}
+
+
+
 
 }
 
