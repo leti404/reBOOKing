@@ -12,13 +12,10 @@ public class Usuario
     public string nombre_escuela { get; set; }
     public string año_escolar { get; set; }
     public int id_publicacion { get; set; }
-
-    // Constructor sin parámetros
     public Usuario()
     {
     }
-
-    // Constructor con 6 parámetros
+    
     public Usuario(int id, string nombre_usuario, string? contraseña, string? gmail, DateTime fecha_nacimiento, int id_publicacion)
     {
         this.id = id;

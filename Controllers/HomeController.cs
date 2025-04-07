@@ -216,6 +216,7 @@ public class HomeController : Controller
     public IActionResult VerPerfil(int id)
     {
         ViewBag.UsuarioAjeno = BD.ObtenerUsuarioPorId(id);
+        
         return View();
     }
 
