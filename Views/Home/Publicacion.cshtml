@@ -61,9 +61,12 @@
                     </form>
                     @if(@BD.VerificarFavorito(@ViewBag.usuario1.id, @ViewBag.publicacion.id))
                     {
-                        <a href='@Url.Action("EliminarFavoritos", "Home", new { id = ViewBag.publicacion.id })'>
-                            <img src="https://png.pngtree.com/png-vector/20190116/ourmid/pngtree-vector-star-icon-png-image_322142.jpg" alt="Eliminar de favoritos" width="30" height="30">
-                        </a>
+                        <form method = post action='@Url.Action("EliminarFavoritos", "Home", new { id = ViewBag.publicacion.id })' class="formFav">
+                           <input type="hidden" name="idPublicacion" value="@ViewBag.publicacion.id" />
+                        <button type="submit" class="btn btn-outline-danger">
+                        <i class="bi bi-heart-fill"></i> Quitar de favoritos
+                        </button>
+                        </form>
                     }
                     else
                     {

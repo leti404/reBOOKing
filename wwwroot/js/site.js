@@ -41,5 +41,24 @@ $.ajax({
 });
 
 
+  let currentStep = 1;
+  const totalSteps = 3;
 
+  function showStep(step) {
+    document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+    document.getElementById(`step-${step}`).classList.add('active');
+    }
 
+  function nextStep() {
+    if (currentStep < totalSteps) {
+      currentStep++;
+      showStep(currentStep);
+    }
+    }
+
+  function prevStep() {
+      if (currentStep > 1) {
+          currentStep--;
+          showStep(currentStep);
+      }
+   }

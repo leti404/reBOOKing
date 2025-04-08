@@ -717,3 +717,15 @@ p {
     border-color: #0a66c2;
     color: #0a66c2;
 }
+
+.bi-heart-fill{ 
+    color: red !important;
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+}
