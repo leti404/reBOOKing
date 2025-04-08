@@ -2,53 +2,53 @@
     ViewData["Title"] = "Registrarse";
 }
 
-<h2>Registrarse</h2>
-<div class="espacio"> 
+<div class="register-container">
+    <h2 class="register-title">Crear cuenta</h2>
     <form id="registerForm" method="post" action='@Url.Action("Registrarse", "Home")'>
 
-        <!-- Paso 1: Nombre y Apellido -->
-        <div class="form-step active" id="step-1">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
+        <!-- Paso 1 -->
+        <div class="register-step register-step-active" id="register-step-1">
+            <label class="register-label" for="nombre">Nombre</label>
+            <input class="register-input" type="text" id="nombre" name="nombre" required>
+
+            <label class="register-label" for="apellido">Apellido</label>
+            <input class="register-input" type="text" id="apellido" name="apellido" required>
+
+            <div class="register-buttons">
+                <div></div>
+                <button type="button" class="register-btn primary" onclick="nextStep()">Siguiente</button>
             </div>
-            <div class="mb-3">
-                <label for="apellido" class="form-label">Apellido:</label>
-                <input type="text" class="form-control" id="apellido" name="apellido" required>
-            </div>
-            <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente</button>
         </div>
 
-        <!-- Paso 2: Fecha de nacimiento -->
-        <div class="form-step" id="step-2">
-            <div class="mb-3">
-                <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
-                <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
+        <!-- Paso 2 -->
+        <div class="register-step" id="register-step-2">
+            <label class="register-label" for="fecha_nacimiento">Fecha de nacimiento</label>
+            <input class="register-input" type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+
+            <div class="register-buttons">
+                <button type="button" class="register-btn secondary" onclick="prevStep()">Anterior</button>
+                <button type="button" class="register-btn primary" onclick="nextStep()">Siguiente</button>
             </div>
-            <button type="button" class="btn btn-secondary" onclick="prevStep()">Anterior</button>
-            <button type="button" class="btn btn-primary" onclick="nextStep()">Siguiente</button>
         </div>
 
-        <!-- Paso 3: Usuario, Gmail, Contraseña, Confirmar contraseña -->
-        <div class="form-step" id="step-3">
-            <div class="mb-3">
-                <label for="nombre_usuario" class="form-label">Nombre Usuario:</label>
-                <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" required>
+        <!-- Paso 3 -->
+        <div class="register-step" id="register-step-3">
+            <label class="register-label" for="nombre_usuario">Nombre de usuario</label>
+            <input class="register-input" type="text" id="nombre_usuario" name="nombre_usuario" required>
+
+            <label class="register-label" for="gmail">Email</label>
+            <input class="register-input" type="email" id="gmail" name="gmail" required>
+
+            <label class="register-label" for="contraseña">Contraseña</label>
+            <input class="register-input" type="password" id="contraseña" name="contraseña" required>
+
+            <label class="register-label" for="confirmar_contraseña">Confirmar contraseña</label>
+            <input class="register-input" type="password" id="confirmar_contraseña" name="confirmar_contraseña" required>
+
+            <div class="register-buttons">
+                <button type="button" class="register-btn secondary" onclick="prevStep()">Anterior</button>
+                <button type="submit" class="register-btn primary">Registrarse</button>
             </div>
-            <div class="mb-3">
-                <label for="gmail" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="gmail" name="gmail" required>
-            </div>
-            <div class="mb-3">
-                <label for="contraseña" class="form-label">Contraseña:</label>
-                <input type="password" class="form-control" id="contraseña" name="contraseña" required>
-            </div>
-            <div class="mb-3">
-                <label for="confirmar_contraseña" class="form-label">Confirmar Contraseña:</label>
-                <input type="password" class="form-control" id="confirmar_contraseña" name="confirmar_contraseña" required>
-            </div>
-            <button type="button" class="btn btn-secondary" onclick="prevStep()">Anterior</button>
-            <button type="submit" class="btn btn-success">Registrarse</button>
         </div>
 
     </form>

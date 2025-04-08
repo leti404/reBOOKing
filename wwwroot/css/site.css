@@ -729,3 +729,83 @@ p {
 .form-step.active {
     display: block;
 }
+
+body {
+    background-color: #f2f3f5;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal del formulario */
+.register-container {
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.register-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Pasos del formulario */
+.register-step {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.register-step-active {
+    display: block;
+}
+
+/* Inputs y labels */
+.register-label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.register-input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Botones */
+.register-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.register-btn.primary {
+    background-color: #1a73e8;
+    color: white;
+}
+
+.register-btn.secondary {
+    background-color: #ccc;
+    color: #333;
+    margin-right: 10px;
+}
+
+/* Contenedor de botones */
+.register-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}

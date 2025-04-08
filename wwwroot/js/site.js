@@ -41,24 +41,26 @@ $.ajax({
 });
 
 
-  let currentStep = 1;
-  const totalSteps = 3;
+let currentStep = 1;
+        const totalSteps = 3;
 
-  function showStep(step) {
-    document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-    document.getElementById(`step-${step}`).classList.add('active');
-    }
+        function showStep(step) {
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`register-step-${i}`).classList.remove('register-step-active');
+            }
+            document.getElementById(`register-step-${step}`).classList.add('register-step-active');
+        }
 
-  function nextStep() {
-    if (currentStep < totalSteps) {
-      currentStep++;
-      showStep(currentStep);
-    }
-    }
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
 
-  function prevStep() {
-      if (currentStep > 1) {
-          currentStep--;
-          showStep(currentStep);
-      }
-   }
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
