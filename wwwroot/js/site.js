@@ -41,26 +41,77 @@ $.ajax({
 });
 
 
+
 let currentStep = 1;
-        const totalSteps = 3;
+const totalSteps = 3;
 
-        function showStep(step) {
-            for (let i = 1; i <= totalSteps; i++) {
-                document.getElementById(`register-step-${i}`).classList.remove('register-step-active');
-            }
-            document.getElementById(`register-step-${step}`).classList.add('register-step-active');
+function showStep(step) {
+    for (let i = 1; i <= totalSteps; i++) {
+        const formStep = document.getElementById(`register-step-${i}`);
+        if (formStep) {
+            formStep.style.display = (i === step) ? "block" : "none";
+        }
+    }
+}
+
+function validateCurrentStep() {
+    const currentStepDiv = document.getElementById(`register-step-${currentStep}`);
+    const inputs = currentStepDiv.querySelectorAll("input, select");
+    for (let input of inputs) {
+        input.setCustomValidity(""); // limpia mensajes anteriores
+        if (!input.checkValidity()) {
+            input.reportValidity();
+            input.focus();
+            return false;
+        }
+    }
+    return true;
+}
+
+function nextStep() {
+    if (validateCurrentStep()) {
+        if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    }
+}
+
+function prevStep() {
+    if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+    }
+}
+
+function configurarFechaNacimiento() {
+    const fechaNacimiento = document.getElementById("fecha_nacimiento");
+    if (!fechaNacimiento) return;
+
+    const hoy = new Date();
+    const maxDate = new Date(hoy.getFullYear() - 12, hoy.getMonth(), hoy.getDate());
+    
+    const maxStr = maxDate.toISOString().split("T")[0];
+    const minStr = "1900-01-01";
+
+    fechaNacimiento.max = maxStr;
+    fechaNacimiento.min = minStr;
+
+    fechaNacimiento.addEventListener("change", () => {
+        const valor = new Date(fechaNacimiento.value);
+        fechaNacimiento.setCustomValidity(""); // limpia mensaje anterior
+
+        if (valor > hoy) {
+            fechaNacimiento.setCustomValidity("La fecha no puede ser posterior a hoy.");
+        } else if (valor > maxDate) {
+            fechaNacimiento.setCustomValidity("Debes tener al menos 12 años.");
         }
 
-        function nextStep() {
-            if (currentStep < totalSteps) {
-                currentStep++;
-                showStep(currentStep);
-            }
-        }
+        fechaNacimiento.reportValidity();
+    });
+}
 
-        function prevStep() {
-            if (currentStep > 1) {
-                currentStep--;
-                showStep(currentStep);
-            }
-        }
+document.addEventListener("DOMContentLoaded", () => {
+    showStep(currentStep);
+    configurarFechaNacimiento();
+});

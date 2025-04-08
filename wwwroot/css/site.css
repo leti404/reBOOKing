@@ -722,69 +722,91 @@ p {
     color: red !important;
 }
 
+
+/* Animación para transición suave entre pasos */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Oculta todos los pasos del formulario */
 .form-step {
     display: none;
 }
 
-.form-step.active {
+.form-step.active,
+.register-step-active {
     display: block;
 }
 
+/* Fondo general */
 body {
-    background-color: #f2f3f5;
+    background-color: #e9eef6;
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Contenedor principal del formulario */
+/* Contenedor del formulario centrado */
 .register-container {
     max-width: 450px;
     margin: 60px auto;
     padding: 40px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    animation: fadeIn 0.4s ease-in-out;
 }
 
+/* Título del formulario */
 .register-title {
     text-align: center;
     margin-bottom: 30px;
+    font-size: 26px;
+    font-weight: 600;
+    color: #1a1a1a;
 }
 
-/* Pasos del formulario */
+/* Bloque de cada paso */
 .register-step {
-    display: none;
-    animation: fadeIn 0.4s ease;
+    animation: fadeIn 0.4s ease-in-out;
 }
 
-.register-step-active {
-    display: block;
-}
-
-/* Inputs y labels */
+/* Etiquetas */
 .register-label {
     font-weight: 600;
     display: block;
     margin-bottom: 6px;
+    color: #333;
 }
 
+/* Inputs */
 .register-input {
-    margin-bottom: 20px;
-    padding: 10px;
+    margin-bottom: 18px;
+    padding: 10px 12px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 10px;
     width: 100%;
     box-sizing: border-box;
+    font-size: 15px;
+    transition: border-color 0.2s;
 }
 
-/* Botones */
+.register-input:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+/* Botones del formulario */
 .register-btn {
-    padding: 10px 20px;
+    padding: 10px 22px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
 }
 
 .register-btn.primary {
@@ -792,20 +814,23 @@ body {
     color: white;
 }
 
-.register-btn.secondary {
-    background-color: #ccc;
-    color: #333;
-    margin-right: 10px;
+.register-btn.primary:hover {
+    background-color: #0f5fd6;
 }
 
-/* Contenedor de botones */
+.register-btn.secondary {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.register-btn.secondary:hover {
+    background-color: #c6c6c6;
+}
+
+/* Contenedor de botones inferior */
 .register-buttons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 20px;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateX(10px); }
-    to { opacity: 1; transform: translateX(0); }
 }
