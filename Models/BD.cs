@@ -239,17 +239,18 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         return _ListadoPublicacionesConFiltro;
 
     }
-    Usuario usuarioIniciado;
-    public static Usuario IniciarSesion(string gmail, string contraseña)
+    public static Usuario usuarioIniciado;
+
+    public static bool IniciarSesion(string gmail, string contraseña)
     {
-        
         using (SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
             string sql = "SELECT * FROM Usuario WHERE gmail = @Gmail AND contraseña = @Contraseña;";
-            Usuario usuarioIniciado = TP_REBOOKING.QueryFirstOrDefault<Usuario>(sql, new { Gmail = gmail, Contraseña = contraseña });
-            return usuarioIniciado;
+            usuarioIniciado = TP_REBOOKING.QueryFirstOrDefault<Usuario>(sql, new { Gmail = gmail, Contraseña = contraseña });
+            return usuarioIniciado != null;
         }
     }
+
 
 
 
@@ -393,6 +394,17 @@ public static List<Publicacion> ObtenerPublicacionesPorUsuario(int id_usuario)
     return _ListadoPublicacionesPorUsuario;
 }
 
+public static List<Review> _ListadoReviewsPorUsuario = new List<Review>();
+
+public static List<Review> ObtenerReviewsPorUsuario(int usuario_recibidor)
+{
+    using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
+    {
+        string sql = "EXEC sp_ObtenerReviewsPorUsuario @usuario_recibidor";
+        _ListadoReviewsPorUsuario = TP_REBOOKING.Query<Review>(sql, new { usuario_recibidor }).ToList();
+    }
+    return _ListadoReviewsPorUsuario;
+}
 
 
 

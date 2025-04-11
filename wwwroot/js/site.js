@@ -115,3 +115,34 @@ document.addEventListener("DOMContentLoaded", () => {
     showStep(currentStep);
     configurarFechaNacimiento();
 });
+
+function mostrarSeccion(seccion) {
+    const publicaciones = document.getElementById('seccion-publicaciones');
+    const datos = document.getElementById('seccion-datos');
+    const reviews = document.getElementById('seccion-reviews');
+
+    publicaciones.style.display = 'none';
+    datos.style.display = 'none';
+    reviews.style.display = 'none';
+
+    if (seccion === 'publicaciones') {
+        publicaciones.style.display = 'block';
+    } else if (seccion === 'datos') {
+        datos.style.display = 'block';
+    } else if (seccion === 'reviews') {
+        reviews.style.display = 'block';
+    }
+
+    // --- Marcar pestaña activa visualmente ---
+    const tabs = document.querySelectorAll('.profile-tabs .tab');
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    const activeButton = Array.from(tabs).find(tab => 
+        tab.textContent.toLowerCase().includes(seccion)
+    );
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+}

@@ -200,15 +200,19 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult IniciarSesion(string email, string contraseña)
     {
-        User = BD.IniciarSesion(email, contraseña);
-        if (User != null)
+        User = BD.usuarioIniciado;
+        bool correcto = BD.IniciarSesion(email, contraseña);
+        if (correcto)
         {
+            User = BD.usuarioIniciado;
             return RedirectToAction( "Index", "Home"); 
         }
         else
         {
             ViewBag.Error = "Usuario y/o contraseña incorrectos";
-            return View();
+            TempData["Mensaje"] = "Usuario y/o contraseña incorrectos.";
+
+            return RedirectToAction( "Index", "Home");
         }
         ViewBag.usuario1 = User;
     }
@@ -217,6 +221,12 @@ public class HomeController : Controller
     {
         ViewBag.UsuarioAjeno = BD.ObtenerUsuarioPorId(id);
         ViewBag.ListaPublicaciones = BD.ObtenerPublicacionesPorUsuario(id);
+        ViewBag.ListaReviews = BD.ObtenerReviewsPorUsuario(id);
+        
+        return View();
+    }
+    public IActionResult ErrorInicioSesion()
+    {
         
         return View();
     }

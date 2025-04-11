@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="perfil.js"></script>
 </head>
 <body>
     <!-- Cabecera azul tipo banner -->
@@ -19,34 +20,55 @@
 
         <!-- Navegación tipo pestañas -->
         <div class="profile-tabs">
-            <button class="tab">Publicaciones</button>
-            <button class="tab">Reviews</button>
-            <button class="tab">Datos</button>
+            <button class="tab" onclick="mostrarSeccion('publicaciones')">Publicaciones</button>
+            <button class="tab" onclick="mostrarSeccion('reviews')">Reviews</button>
+            <button class="tab" onclick="mostrarSeccion('datos')">Datos</button>
         </div>
 
-        <!-- Info del perfil -->
-        <div class="profile-info">
+        <!-- Sección de datos del perfil -->
+        <div class="profile-info" id="seccion-datos" style="display: none;">
             <p><span class="profile-label">Fecha de Nacimiento:</span> @ViewBag.UsuarioAjeno.fecha_nacimiento</p>
             <p><span class="profile-label">Email:</span> @ViewBag.UsuarioAjeno.gmail</p>
             <p><span class="profile-label">Escuela:</span> @ViewBag.UsuarioAjeno.nombre_escuela</p>
             <p><span class="profile-label">Año Escolar:</span> @ViewBag.UsuarioAjeno.año_escolar</p>
         </div>
-    </div>
 
-     @foreach (Publicacion publicacion in ViewBag.listaPublicaciones)
-    {
-        <div class="col-md-3">
-            <a href='@Url.Action("Publicacion", "Home", new { id = @publicacion.id_libro })' class="card-rebooking">
-                <div class="card-rebooking">
-                    <img class="card-img-top-rebooking" src="@publicacion.imagen" alt="@publicacion.id_libro" />
-                    <div class="card-body-rebooking">
-                        <h5 class="card-title-rebooking">@BD.ObtenerNombreLibroPorPublicacion(publicacion.id_libro)</h5>
-                        <p class="card-price-rebooking">@publicacion.precio.ToString("C")</p>
+        <!-- Sección de reviews -->
+        <div id="seccion-reviews" style="display: none;">
+            @if (ViewBag.ListaReviews != null && ViewBag.ListaReviews.Count > 0)
+            {
+                foreach (var review in ViewBag.ListaReviews)
+                {
+                    <div class="review-card">
+                        <p><strong>✍️ Usuario:</strong> @review.usuario_escritor</p>
+                        <p><strong>⭐ Estrellas:</strong> @review.estrellas</p>
+                        <p><strong>📝 Descripción:</strong> @review.descripcion</p>
                     </div>
-                </div>
-            </a>
+                }
+            }
+            else
+            {
+                <p>Este usuario aún no tiene reviews.</p>
+            }
         </div>
-    }
 
+        <!-- Sección de publicaciones -->
+        <div id="seccion-publicaciones">
+            @foreach (Publicacion publicacion in ViewBag.listaPublicaciones)
+            {
+                <div class="col-md-3">
+                    <a href='@Url.Action("Publicacion", "Home", new { id = publicacion.id_libro })' class="card-rebooking">
+                        <div class="card-rebooking">
+                            <img class="card-img-top-rebooking" src="@publicacion.imagen" alt="@publicacion.id_libro" />
+                            <div class="card-body-rebooking">
+                                <h5 class="card-title-rebooking">@BD.ObtenerNombreLibroPorPublicacion(publicacion.id_libro)</h5>
+                                <p class="card-price-rebooking">@publicacion.precio.ToString("C")</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
 </body>
 </html>
