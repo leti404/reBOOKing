@@ -400,13 +400,11 @@ public static List<Review> ObtenerReviewsPorUsuario(int usuario_recibidor)
 {
     using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
     {
-        string sql = "EXEC sp_ObtenerReviewsPorUsuario @usuario_recibidor";
+        string sql = "EXEC ObtenerReviewsPorUsuario @usuario_recibidor";
         _ListadoReviewsPorUsuario = TP_REBOOKING.Query<Review>(sql, new { usuario_recibidor }).ToList();
     }
     return _ListadoReviewsPorUsuario;
 }
 
 
-
 }
-
