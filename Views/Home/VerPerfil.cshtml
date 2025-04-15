@@ -40,7 +40,7 @@
                 foreach (var review in ViewBag.ListaReviews)
                 {
                     <div class="review-card">
-                        <p><strong>✍️ Usuario:</strong> @review.usuario_escritor</p>
+                        <p><strong>✍️ Usuario:</strong> @BD.ObtenerUsuarioPorId(review.usuario_escritor).nombre_usuario</p>
                         <p><strong>⭐ Estrellas:</strong> @review.estrellas</p>
                         <p><strong>📝 Descripción:</strong> @review.descripcion</p>
                     </div>
