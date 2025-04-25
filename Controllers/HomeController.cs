@@ -85,9 +85,9 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult Registrarse(Usuario usua)
+    public IActionResult VerificarRegistro(string nombre, string apellido, string nombre_usuario, string contraseña, string gmail, DateTime fecha_nacimiento)
     {
-        if(BD.RegistrarUsuario(usua))
+        if(BD.RegistrarUsuario(nombre, apellido, nombre_usuario, contraseña, gmail, fecha_nacimiento, null, null))
         {
             return RedirectToAction("RegistroExito");
         }

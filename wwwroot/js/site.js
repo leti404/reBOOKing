@@ -41,7 +41,6 @@ $.ajax({
 });
 
 
-
 let currentStep = 1;
 const totalSteps = 3;
 
@@ -90,7 +89,7 @@ function configurarFechaNacimiento() {
 
     const hoy = new Date();
     const maxDate = new Date(hoy.getFullYear() - 12, hoy.getMonth(), hoy.getDate());
-    
+
     const maxStr = maxDate.toISOString().split("T")[0];
     const minStr = "1900-01-01";
 
@@ -114,6 +113,21 @@ function configurarFechaNacimiento() {
 document.addEventListener("DOMContentLoaded", () => {
     showStep(currentStep);
     configurarFechaNacimiento();
+
+    const form = document.getElementById("registerForm");
+    form.addEventListener("submit", function (e) {
+        const pass = document.getElementById("contraseña").value;
+        const confirm = document.getElementById("confirmar_contraseña").value;
+        const errorSpan = document.getElementById("error-contraseña");
+
+        if (pass !== confirm) {
+            e.preventDefault();
+            errorSpan.style.display = "block";
+            document.getElementById("confirmar_contraseña").focus();
+        } else {
+            errorSpan.style.display = "none";
+        }
+    });
 });
 
 function mostrarSeccion(seccion) {
@@ -139,7 +153,7 @@ function mostrarSeccion(seccion) {
         tab.classList.remove('active');
     });
 
-    const activeButton = Array.from(tabs).find(tab => 
+    const activeButton = Array.from(tabs).find(tab =>
         tab.textContent.toLowerCase().includes(seccion)
     );
     if (activeButton) {

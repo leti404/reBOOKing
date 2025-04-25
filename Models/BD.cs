@@ -15,22 +15,16 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
      
     }
-    public static bool RegistrarUsuario(Usuario usua)
+    public static bool RegistrarUsuario(string nombre, string apellido, string nombre_usuario, string contraseña, string gmail, DateTime fecha_nacimiento)
     {
-        Console.WriteLine(usua);
-        bool exito = false;
-        if(usua != null)
+        using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
-                using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
-            {
-                string SQL = "INSERT INTO Usuario(nombre, apellido, nombre_usuario, contraseña, gmail, fecha_nacimiento, nombre_escuela, año_escolar) VALUES (@pnombre, @papellido, @pnombre_usuario, @pcontraseña, @pgmail, @pfecha_nacimiento, @pnombre_escuela, @paño_escolar )";
-                using(SqlConnection db = new SqlConnection(_connectionString)){
-                db.Execute(SQL, new{pnombre = usua.nombre, papellido = usua.apellido, pnombre_usuario = usua.nombre_usuario, pcontraseña = usua.contraseña, pgmail = usua.gmail, pfecha_nacimiento = usua.fecha_nacimiento, pnombre_escuela = usua.nombre_escuela, paño_escolar = usua.año_escolar});
-                }
+            string SQL = "exec Registrar ()";
+            using(SqlConnection db = new SqlConnection(_connectionString)){
+            bool condicion = (SQL, new{Nombre = nombre, Apellido = apellido, NombreUsuario = nombre_usuario, Contrasena = contraseña, });
             }
-            exito=true;
         }
-        return exito;
+            return 8;
     }
 
     public static int RegistrarLibro(Libro libro)

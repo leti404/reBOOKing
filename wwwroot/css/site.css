@@ -840,3 +840,10 @@ body {
     align-items: center;
     margin-top: 20px;
 }
+
+.error-msg {
+    color: red;
+    display: none;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
