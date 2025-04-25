@@ -80,9 +80,11 @@
     transition: transform 0.2s ease-in-out;
     text-decoration: none;
     height: 100%;
+    width: 80%;
 }
 
-.custom-col-5 {
+.custom-col-5 
+{
     flex: 0 0 20%;
     max-width: 20%;
     padding: 10px;
@@ -90,7 +92,7 @@
 
 @media (max-width: 767px) {
     .col-md-3 {
-        width: 100%;
+        width: 80%;
     }
 }
 
@@ -104,13 +106,19 @@
 .card-img-top-rebooking {
     width: 100%;
     height: 300px;
-    object-fit: cover;
+    object-fit: scale-down;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border-bottom: 2px;
+    border-color: black;
 }
 
 .card-body-rebooking {
     padding: 10px;
+    background-color: #d3b4f5;
+    border-radius: 5%;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
 }
 
 .card-title-rebooking {
@@ -586,6 +594,10 @@ p {
     align-items: center;
     gap: 20px;
 }
+.profile-label
+{
+    font-weight: bold;
+}
 
 .profile-picture img {
     border-radius: 50%;
@@ -598,8 +610,17 @@ p {
 .profile-info h2 {
     font-size: 1.4rem;
     margin: 0 0 5px;
+    color: black;
 }
-
+.profile-info
+{
+    background-color: #f5f0f8;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
 .profile-info p {
     font-size: 0.9rem;
     color: #666;
@@ -608,7 +629,7 @@ p {
 
 /* Edit Button */
 .edit-button button {
-    background-color: #007bff;
+    background-color: #b48be0;
     color: #fff;
     font-size: 0.9rem;
     padding: 8px 15px;
@@ -666,7 +687,7 @@ p {
 .profile-header {
     width: 100%;
     height: 180px;
-    background: linear-gradient(135deg, #0073b1, #0a66c2); /* Azul tipo LinkedIn */
+    background: linear-gradient(135deg, #b3a0e6, #b3a0e6); /* Azul tipo LinkedIn */
     position: relative;
 }
 
@@ -738,6 +759,11 @@ p {
 /* Oculta todos los pasos del formulario */
 .form-step {
     display: none;
+}
+
+.register-container
+{
+    background-color: #b3a0e6;
 }
 
 .form-step.active,

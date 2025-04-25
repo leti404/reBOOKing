@@ -15,16 +15,15 @@ private static string _connectionString = @"Server=localhost; DataBase=TP_REBOOK
         }
      
     }
-    public static bool RegistrarUsuario(string nombre, string apellido, string nombre_usuario, string contraseña, string gmail, DateTime fecha_nacimiento)
+    public static bool RegistrarUsuario(string Nombre, string Apellido, string NombreUsuario, string Contraseña, string Gmail, DateTime FechaNacimiento)
     {
         using(SqlConnection TP_REBOOKING = new SqlConnection(_connectionString))
         {
             string SQL = "exec Registrar ()";
-            using(SqlConnection db = new SqlConnection(_connectionString)){
-            bool condicion = (SQL, new{Nombre = nombre, Apellido = apellido, NombreUsuario = nombre_usuario, Contrasena = contraseña, });
-            }
+            bool condicion = TP_REBOOKING.QueryFirstOrDefault<bool>(SQL, new{nombre = Nombre, apellido = Apellido, nombre_usuario = NombreUsuario, contrasena = Contraseña, gmail = Gmail, fecha_nacimiento = FechaNacimiento});
+            return condicion;
         }
-            return 8;
+            
     }
 
     public static int RegistrarLibro(Libro libro)
